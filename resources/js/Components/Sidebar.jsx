@@ -1,12 +1,14 @@
-import { Link } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
 import AdminLTELogo from "../../../public/dist/img/AdminLTELogo.png";
 import UserLogo from "../../../public/dist/img/user2-160x160.jpg";
 export const Sidebar = () => {
     const [toggleMaster, setToggleMaster] = useState(false);
+    const { url, component } = usePage();
 
     return (
-        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+        // <aside className="main-sidebar sidebar-dark-primary elevation-4">
+        <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
             {/* Brand Logo */}
             <a href="index3.html" className="brand-link">
                 <img
@@ -58,8 +60,13 @@ export const Sidebar = () => {
                         role="menu"
                         data-accordion="false"
                     >
-                        <li className="nav-item">
-                            <Link href="/" className="nav-link">
+                        <li className="nav-item ">
+                            <Link
+                                href="/admin/dashboard"
+                                className={`nav-link ${
+                                    url == "/admin/dashboard" && "active"
+                                }`}
+                            >
                                 <i className="nav-icon fas fa-th" />
                                 <p>Dashboard</p>
                             </Link>
@@ -72,7 +79,13 @@ export const Sidebar = () => {
                         >
                             <a
                                 href="#"
-                                className="nav-link active"
+                                className={`nav-link ${
+                                    url == "/admin/master/kelas" ||
+                                    url == "/admin/master/tahun_ajaran" ||
+                                    url == "/admin/master/mapel"
+                                        ? "active"
+                                        : ""
+                                }`}
                                 onClick={() => setToggleMaster(!toggleMaster)}
                             >
                                 <i className="nav-icon fas fa-tachometer-alt" />
@@ -85,7 +98,11 @@ export const Sidebar = () => {
                                 <li className="nav-item">
                                     <Link
                                         href="/admin/master/tahun_ajaran"
-                                        className="nav-link active"
+                                        className={`nav-link ${
+                                            url ==
+                                                "/admin/master/tahun_ajaran" &&
+                                            "active"
+                                        }`}
                                     >
                                         <i className="far fa-circle nav-icon" />
                                         <p>Tahun Ajaran</p>
@@ -94,7 +111,10 @@ export const Sidebar = () => {
                                 <li className="nav-item">
                                     <Link
                                         href="/admin/master/kelas"
-                                        className="nav-link active"
+                                        className={`nav-link ${
+                                            url == "/admin/master/kelas" &&
+                                            "active"
+                                        }`}
                                     >
                                         <i className="far fa-circle nav-icon" />
                                         <p>Kelas</p>
@@ -103,7 +123,10 @@ export const Sidebar = () => {
                                 <li className="nav-item">
                                     <Link
                                         href="/admin/master/mapel"
-                                        className="nav-link active"
+                                        className={`nav-link ${
+                                            url == "/admin/master/mapel" &&
+                                            "active"
+                                        }`}
                                     >
                                         <i className="far fa-circle nav-icon" />
                                         <p>Mapel</p>

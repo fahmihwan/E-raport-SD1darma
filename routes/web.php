@@ -18,7 +18,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin/dashboard', function () {
     // return view('welcome');
     return Inertia::render('Dashboard');
 });

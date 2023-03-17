@@ -37,3 +37,49 @@ export const InputText = ({
         </div>
     );
 };
+
+export const InputRadioButton = ({ title, name, handleChange, isError }) => {
+    const idEl = title.toLowerCase().split(" ").join("-");
+    const defaultValue = title.toLowerCase();
+
+    return (
+        <div className="form-check is-invalid mr-4">
+            <input
+                className={`form-check-input `}
+                type="radio"
+                name={name}
+                id={idEl}
+                required
+                onChange={(e) => handleChange(e)}
+                value={defaultValue}
+            />
+            <label className="form-check-label" htmlFor={idEl}>
+                {title}
+            </label>
+        </div>
+    );
+};
+
+export const InputTextArea = ({
+    title,
+    name,
+    placeholder,
+    handleChange,
+    value,
+    isError,
+}) => {
+    return (
+        <div className="form-group">
+            <label htmlFor="exampleFormControlTextarea1">{title}</label>
+            <textarea
+                name={name}
+                placeholder={placeholder}
+                onChange={handleChange}
+                className="form-control"
+                id="exampleFormControlTextarea1"
+                rows={3}
+                defaultValue={value}
+            />
+        </div>
+    );
+};

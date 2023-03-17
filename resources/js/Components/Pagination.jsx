@@ -8,7 +8,7 @@ export const Pagination = ({ links, totals }) => {
             <span>total : {totals}</span>
             <nav aria-label="...">
                 <ul className="pagination">
-                    {links.map((link, key) =>
+                    {links?.map((link, key) =>
                         link.url === null ? (
                             <li key={key} className="page-item disabled ">
                                 <Link className="page-link">{link.label}</Link>

@@ -5,8 +5,11 @@ import { Sidebar } from "../Components/Sidebar";
 export const AuthenticatedLayout = ({ children }) => {
     const [toggleSidebar, setToggleSidebar] = useState(false);
     return (
-        <div className={`sidebar-mini ${toggleSidebar && "sidebar-collapse"}`}>
-            <div className="">
+        <div
+            className={`sidebar-mini ${toggleSidebar && "sidebar-collapse"}`}
+            style={{ height: "100vh" }}
+        >
+            <div className="wrapper">
                 {/* Navbar */}
                 <Navbar
                     setToggleSidebar={setToggleSidebar}

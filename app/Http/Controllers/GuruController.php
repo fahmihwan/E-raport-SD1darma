@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class GuruController extends Controller
 {
@@ -12,7 +13,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Guru/Index');
     }
 
     /**
@@ -20,7 +21,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Guru/Create');
     }
 
     /**
