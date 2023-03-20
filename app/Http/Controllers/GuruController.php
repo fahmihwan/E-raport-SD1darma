@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class GuruController extends Controller
@@ -13,7 +15,10 @@ class GuruController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Guru/Index');
+
+        return Inertia::render('Guru/Index', [
+            'datas' => Guru::with('kelas')->latest()->paginate(5)
+        ]);
     }
 
     /**
@@ -21,7 +26,11 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Guru/Create');
+        $kelas = Kelas::latest()->orderBy('nama', 'desc')->get();
+
+        return Inertia::render('Guru/Create', [
+            'kelass' => $kelas
+        ]);
     }
 
     /**
@@ -29,7 +38,22 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nip' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
+        ]);
+
+        $validated['kelas_id'] = $request->wali_kelas;
+
+        $validated['password'] = Hash::make($request->password);
+        // return $validated;
+        Guru::create($validated);
+        return redirect('/admin/guru');
     }
 
     /**
@@ -37,7 +61,9 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        //
+
+
+        return Inertia::render('Guru/Mengajar');
     }
 
     /**

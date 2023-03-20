@@ -140,6 +140,19 @@ export const Sidebar = () => {
                                 <p>Guru</p>
                             </Link>
                         </li>
+                        <li className="nav-header">Kelola Data</li>
+                        <li className="nav-item">
+                            <Link href="/admin/guru" className="nav-link">
+                                <i className="nav-icon fas fa-th" />
+                                <p>Kelola Siswa ajaran baru</p>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link href="/admin/guru/dsd" className="nav-link">
+                                <i className="nav-icon fas fa-th" />
+                                <p>Kelola Pengampu</p>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
                 {/* /.sidebar-menu */}

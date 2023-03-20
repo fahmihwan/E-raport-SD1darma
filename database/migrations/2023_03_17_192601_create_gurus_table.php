@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('telp');
             $table->foreignIdFor(Kelas::class)->unique()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

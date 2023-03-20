@@ -61,13 +61,11 @@ const Index = () => {
                                         <th style={{ width: "10px" }}>#</th>
                                         <th>NIP</th>
                                         <th>Nama</th>
-                                        <th>Jenis_kelamin</th>
+                                        <th>gender </th>
                                         <th>Username</th>
-                                        <th>Password</th>
                                         <th>Alamat</th>
                                         <th>Telp</th>
                                         <th>Wali_kelas</th>
-                                        <th>Created at</th>
                                         <th style={{ width: "40px" }}>
                                             Action
                                         </th>
@@ -81,20 +79,32 @@ const Index = () => {
                                             <td>{d.nama}</td>
                                             <td>{d.jenis_kelamin}</td>
                                             <td>{d.username}</td>
-                                            <td>{d.password}</td>
                                             <td>{d.alamat}</td>
                                             <td>{d.telp}</td>
-                                            <td>{d.wali_kelas}</td>
-                                            <td>{d.created_at}</td>
+                                            <td>{d.kelas.nama}</td>
                                             <td>
-                                                <button
-                                                    className="btn btn-danger"
-                                                    onClick={(e) =>
-                                                        handleDelete(e, d.id)
-                                                    }
-                                                >
-                                                    <i className="fas fa-solid fa-trash"></i>
-                                                </button>
+                                                <div className="d-flex">
+                                                    <Link
+                                                        href={
+                                                            "/admin/guru/" +
+                                                            d.id
+                                                        }
+                                                        className="btn btn-warning mr-2"
+                                                    >
+                                                        <i className="fas fa-school"></i>
+                                                    </Link>
+                                                    <button
+                                                        className="btn btn-danger mr-2"
+                                                        onClick={(e) =>
+                                                            handleDelete(
+                                                                e,
+                                                                d.id
+                                                            )
+                                                        }
+                                                    >
+                                                        <i className="fas fa-solid fa-trash"></i>
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}

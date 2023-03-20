@@ -10,31 +10,21 @@ import {
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ kelass }) => {
+const Create = () => {
     const [optionKelas, setOptionKelas] = useState(null);
-    useEffect(() => {
-        let cek = kelass.map((d) => ({ value: d.id, label: d.nama }));
-        setOptionKelas(cek);
-    }, []);
-
     const { data, setData, post, processing, errors, reset } = useForm({
-        nip: "",
-        nama: "",
-        jenis_kelamin: "",
-        username: "",
-        password: "",
-        alamat: "",
-        telp: "",
-        wali_kelas: "",
+        tahun_ajaran_id: "",
+        kelas_id: "",
+        mapel_id: "",
     });
 
-    const handleChange = (e) => {
-        setData(e.target.name, e.target.value);
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        post("/admin/guru");
-    };
+    // const handleChange = (e) => {
+    //     setData(e.target.name, e.target.value);
+    // };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     post("/admin/guru");
+    // };
 
     return (
         <AuthenticatedLayout>
@@ -58,7 +48,7 @@ const Create = ({ kelass }) => {
                                 </div>
                             </div>
                             <div className="card-body">
-                                <form onSubmit={handleSubmit}>
+                                {/* <form onSubmit={handleSubmit}>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <InputText
@@ -155,7 +145,7 @@ const Create = ({ kelass }) => {
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </form> */}
                             </div>
                         </div>
                     </div>

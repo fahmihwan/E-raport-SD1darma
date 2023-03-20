@@ -1,4 +1,5 @@
 import React from "react";
+import ReactSelect from "react-select";
 
 export const InputEL = () => {
     return <div>InputEL</div>;
@@ -11,13 +12,14 @@ export const InputText = ({
     handleChange,
     value,
     isError,
+    type = "text",
 }) => {
     return (
         <div className="form-group">
             <div>
                 <label htmlFor={name}>{title}</label>
                 <input
-                    type="text"
+                    type={type}
                     className={`form-control ${isError && "is-invalid"}`}
                     id={name}
                     name={name}
@@ -38,9 +40,14 @@ export const InputText = ({
     );
 };
 
-export const InputRadioButton = ({ title, name, handleChange, isError }) => {
+export const InputRadioButton = ({
+    title,
+    name,
+    handleChange,
+    isError,
+    value,
+}) => {
     const idEl = title.toLowerCase().split(" ").join("-");
-    const defaultValue = title.toLowerCase();
 
     return (
         <div className="form-check is-invalid mr-4">
@@ -51,13 +58,17 @@ export const InputRadioButton = ({ title, name, handleChange, isError }) => {
                 id={idEl}
                 required
                 onChange={(e) => handleChange(e)}
-                value={defaultValue}
+                value={value}
             />
             <label className="form-check-label" htmlFor={idEl}>
                 {title}
             </label>
         </div>
     );
+};
+
+export const SelectSearch = ({ handleChange, options }) => {
+    return <ReactSelect onChange={handleChange} options={options} />;
 };
 
 export const InputTextArea = ({
