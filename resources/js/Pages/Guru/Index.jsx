@@ -81,7 +81,7 @@ const Index = () => {
                                             <td>{d.username}</td>
                                             <td>{d.alamat}</td>
                                             <td>{d.telp}</td>
-                                            <td>{d.kelas.nama}</td>
+                                            <td>{d.kelas?.nama}</td>
                                             <td>
                                                 <div className="d-flex">
                                                     <Link

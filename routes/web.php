@@ -3,6 +3,7 @@
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\MengajarController;
 use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,3 +37,7 @@ Route::post('/admin/master/mapel', [MapelController::class, 'store']);
 Route::delete('/admin/master/mapel/{id}', [MapelController::class, 'destroy']);
 
 Route::resource('/admin/guru', GuruController::class);
+
+// transaksi
+Route::resource('/admin/mengajar', MengajarController::class);
+Route::get('/admin/mengajar/{id}/create_guru_mengajar/{tahun_id}', [MengajarController::class, 'create_guru_mengajar']);

@@ -13,6 +13,7 @@ export const InputText = ({
     value,
     isError,
     type = "text",
+    disabled = false,
 }) => {
     return (
         <div className="form-group">
@@ -27,6 +28,7 @@ export const InputText = ({
                     placeholder={placeholder}
                     onChange={handleChange}
                     aria-describedby="validationServer03Feedback"
+                    disabled={disabled}
                     required
                 />
                 <div

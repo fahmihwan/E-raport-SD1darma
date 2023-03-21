@@ -148,7 +148,7 @@ export const Sidebar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/admin/guru/dsd" className="nav-link">
+                            <Link href="/admin/mengajar" className="nav-link">
                                 <i className="nav-icon fas fa-th" />
                                 <p>Kelola Pengampu</p>
                             </Link>

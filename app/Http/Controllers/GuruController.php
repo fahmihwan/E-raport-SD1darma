@@ -38,6 +38,7 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $validated = $request->validate([
             'nip' => 'required',
             'nama' => 'required',
