@@ -142,7 +142,7 @@ export const Sidebar = () => {
                         </li>
                         <li className="nav-header">Kelola Data</li>
                         <li className="nav-item">
-                            <Link href="/admin/guru" className="nav-link">
+                            <Link href="/admin/mengikuti" className="nav-link">
                                 <i className="nav-icon fas fa-th" />
                                 <p>Kelola Siswa ajaran baru</p>
                             </Link>
@@ -150,7 +150,7 @@ export const Sidebar = () => {
                         <li className="nav-item">
                             <Link href="/admin/mengajar" className="nav-link">
                                 <i className="nav-icon fas fa-th" />
-                                <p>Kelola Pengampu</p>
+                                <p>Kelola Pengajar</p>
                             </Link>
                         </li>
                     </ul>

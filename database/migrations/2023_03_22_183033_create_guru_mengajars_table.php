@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,16 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gurus', function (Blueprint $table) {
+        Schema::create('guru_mengajars', function (Blueprint $table) {
             $table->id();
-            $table->string('nip');
-            $table->string('nama');
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->string('username');
-            $table->string('password');
-            $table->string('alamat');
-            $table->string('telp');
-            $table->softDeletes();
+            $table->foreignIdFor(Kelas::class)->nullable();
+            $table->foreignIdFor(Guru::class);
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gurus');
+        Schema::dropIfExists('guru_mengajars');
     }
 };

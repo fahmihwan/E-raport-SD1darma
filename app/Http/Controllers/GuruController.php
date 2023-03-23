@@ -38,7 +38,7 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+
         $validated = $request->validate([
             'nip' => 'required',
             'nama' => 'required',
@@ -48,8 +48,6 @@ class GuruController extends Controller
             'alamat' => 'required',
             'telp' => 'required',
         ]);
-
-        $validated['kelas_id'] = $request->wali_kelas;
 
         $validated['password'] = Hash::make($request->password);
         // return $validated;
@@ -62,7 +60,6 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-
 
         return Inertia::render('Guru/Mengajar');
     }

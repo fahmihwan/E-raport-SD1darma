@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Guru;
 use App\Models\Kelas;
-use App\Models\Mapel;
 use App\Models\Tahun_ajaran;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,12 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mengajars', function (Blueprint $table) {
+        Schema::create('mengikutis', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Tahun_ajaran::class);
             $table->foreignIdFor(Kelas::class);
-            $table->foreignIdFor(Guru::class);
-            $table->foreignIdFor(Mapel::class);
+            $table->foreignIdFor(Tahun_ajaran::class);
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mengajars');
+        Schema::dropIfExists('mengikutis');
     }
 };

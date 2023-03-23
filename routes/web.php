@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MengajarController;
+use App\Http\Controllers\MengikutiController;
 use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,10 +21,14 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/', [AuthController::class, 'index']);
+
+
 Route::get('/admin/dashboard', function () {
     // return view('welcome');
     return Inertia::render('Dashboard');
 });
+
 
 Route::get('/admin/master/tahun_ajaran', [Tahun_ajaranController::class, 'index']);
 Route::post('/admin/master/tahun_ajaran', [Tahun_ajaranController::class, 'store']);
@@ -39,5 +45,16 @@ Route::delete('/admin/master/mapel/{id}', [MapelController::class, 'destroy']);
 Route::resource('/admin/guru', GuruController::class);
 
 // transaksi
-Route::resource('/admin/mengajar', MengajarController::class);
-Route::get('/admin/mengajar/{id}/create_guru_mengajar/{tahun_id}', [MengajarController::class, 'create_guru_mengajar']);
+// guru-mengajar
+Route::get('/admin/mengajar', [MengajarController::class, 'index']);
+Route::get('/admin/mengajar/create_guru_mengajar', [MengajarController::class, 'create_guru_mengajar']);
+Route::post('/admin/mengajar/guru_mengajar', [MengajarController::class, 'store_guru_mengajar']);
+Route::get('/admin/mengajar/{guru_mengajar_id}/create_mengajar_mapel', [MengajarController::class, 'create_mengajar_mapel']);
+Route::post('/admin/mengajar/mengajar_mapel', [MengajarController::class, 'store_mengajar_mapel']);
+Route::delete('/admin/mengajar/mengajar_mapel/{id}', [MengajarController::class, 'destroy_mengajar_mapel']);
+
+
+// guru-mengikuti
+Route::get('/admin/mengikuti', [MengikutiController::class, 'index']);
+Route::get('/admin/mengikuti/{kelas_id}', [MengikutiController::class, 'list_siswa']);
+Route::get('/admin/mengikuti/{kelas_id}/create_siswa_baru', [MengikutiController::class, 'create_siswa_baru']);

@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
-import ReactSelect from "react-select";
+import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import {
-    InputText,
     InputRadioButton,
+    InputText,
     InputTextArea,
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ kelass }) => {
+const Create_siswa_baru = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
-        nip: "",
         nama: "",
+        no_induk: "",
         jenis_kelamin: "",
-        username: "",
-        password: "",
+        tempat_lahir: "",
+        tanggal_lahir: "",
+        agama: "",
         alamat: "",
-        telp: "",
+        wali_murid: "",
     });
 
     const handleChange = (e) => {
@@ -31,8 +31,8 @@ const Create = ({ kelass }) => {
     return (
         <AuthenticatedLayout>
             <HeaderLayout
-                title="Tambah Guru"
-                breadcrumbs={["List Guru", "Tambah Guru"]}
+                title="Tambah Siswa Baru"
+                breadcrumbs={["List Siswa Baru", "Tambah Guru"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -43,9 +43,9 @@ const Create = ({ kelass }) => {
                                     <span>Tambah Guru</span>
                                     <Link
                                         className="btn btn-primary btn-sm"
-                                        href="/admin/guru"
+                                        href=""
                                     >
-                                        Kembali
+                                        Kembali belum
                                     </Link>
                                 </div>
                             </div>
@@ -54,25 +54,18 @@ const Create = ({ kelass }) => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <InputText
-                                                title="Nip"
-                                                name="nip"
-                                                placeholder="Input Nip"
-                                                handleChange={handleChange}
-                                                value={data.nip}
-                                            />
-                                            <InputText
                                                 title="Nama"
                                                 name="nama"
                                                 placeholder="Input Nama"
                                                 handleChange={handleChange}
                                                 value={data.nama}
                                             />
-                                            <InputTextArea
-                                                title="alamat"
-                                                name="alamat"
-                                                placeholder="Input alamat"
+                                            <InputText
+                                                title="No induk"
+                                                name="no_induk"
+                                                placeholder="Input No Induk"
                                                 handleChange={handleChange}
-                                                value={data.alamat}
+                                                value={data.no_induk}
                                             />
                                             <div className="form-group">
                                                 <label>Jenis Kelamin</label>
@@ -95,38 +88,56 @@ const Create = ({ kelass }) => {
                                                     />
                                                 </div>
                                             </div>
+                                            <InputText
+                                                title="Tempat Lahir"
+                                                name="tempat_lahir"
+                                                placeholder="Input Tempat Lahir"
+                                                handleChange={handleChange}
+                                                value={data.tempat_lahir}
+                                            />
+                                            <InputText
+                                                type="date"
+                                                title="tanggal_lahir"
+                                                name="tanggal_lahir"
+                                                placeholder="Input tanggal_lahir"
+                                                handleChange={handleChange}
+                                                value={data.tanggal_lahir}
+                                            />
                                         </div>
                                         <div className="col-md-6 pl-3">
-                                            <div className="form-group">
-                                                <InputText
-                                                    title="Telp"
-                                                    name="telp"
-                                                    placeholder="Input telp"
-                                                    handleChange={handleChange}
-                                                    value={data.telp}
-                                                />
+                                            <div className="form-group ">
+                                                <select className="form-control">
+                                                    <option value="">
+                                                        Islam
+                                                    </option>
+                                                    <option value="">
+                                                        Kristen
+                                                    </option>
+                                                    <option value="">
+                                                        Katholik
+                                                    </option>
+                                                    <option value="">
+                                                        Hindu
+                                                    </option>
+                                                    <option value="">
+                                                        Budha
+                                                    </option>
+                                                </select>
                                             </div>
-
-                                            <br />
-
-                                            <p className="underline">Account</p>
-                                            <hr />
-                                            <InputText
-                                                title="Username"
-                                                name="username"
-                                                placeholder="Input Username"
+                                            <InputTextArea
+                                                title="alamat"
+                                                name="alamat"
+                                                placeholder="Input alamat"
                                                 handleChange={handleChange}
-                                                value={data.username}
+                                                value={data.alamat}
                                             />
                                             <InputText
-                                                title="Password"
-                                                name="password"
-                                                type="password"
-                                                placeholder="Input Username"
+                                                title="Wali Murid"
+                                                name="wali_murid"
+                                                placeholder="Input Wali murid"
                                                 handleChange={handleChange}
-                                                value={data.password}
+                                                value={data.wali_murid}
                                             />
-
                                             <button
                                                 type="submit"
                                                 className="btn btn-primary"
@@ -145,4 +156,4 @@ const Create = ({ kelass }) => {
     );
 };
 
-export default Create;
+export default Create_siswa_baru;

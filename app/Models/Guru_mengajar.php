@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mengajar extends Model
+class Guru_mengajar extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
@@ -14,8 +14,13 @@ class Mengajar extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
-    public function mapel()
+    public function guru()
     {
-        return $this->belongsTo(Mapel::class);
+        return $this->belongsTo(Guru::class);
+    }
+
+    public function mengajar_mapels()
+    {
+        return $this->hasMany(Mengajar_mapel::class);
     }
 }

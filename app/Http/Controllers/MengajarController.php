@@ -3,104 +3,102 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Guru_mengajar;
 use App\Models\Kelas;
 use App\Models\Mapel;
-use App\Models\Mengajar;
-use App\Models\Tahun_ajaran;
+use App\Models\Mengajar_mapel;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use function PHPUnit\Framework\returnSelf;
+
 class MengajarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $datas = Tahun_ajaran::latest()->orderBy('tahun_ajaran', 'desc')->paginate(10);
+
+
+        $list_guru_mengajar = Guru_mengajar::with([
+            'kelas:id,nama',
+            'guru:id,nama,nip',
+            'mengajar_mapels.kelas:id,nama',
+            'mengajar_mapels.mapel:id,nama'
+        ])->latest()->get();
         return Inertia::render('Mengajar/Index', [
-            'datas' => $datas
+            'list_guru_mengajar' => $list_guru_mengajar
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    // TB GURU MENGAJAR
+    public function create_guru_mengajar()
     {
+        $kelas = Kelas::orderBy('nama', 'DESC')->get();
+        $guru = Guru::latest()->get();
+
+        return Inertia::render('Mengajar/Create_guru_mengajar', [
+            'kelas' => $kelas,
+            'gurus' => $guru
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // TB GURU MENGAJAR
+    public function store_guru_mengajar(Request $request)
+    {
+        $validated = $request->validate([
+            'guru_id' => 'required',
+        ]);
+        $validated['kelas_id'] = $request->wali_kelas;
+
+        Guru_mengajar::create($validated);
+        return redirect('/admin/mengajar');
+    }
+
+    // TB MENGAJAR_MAPEL
+    public function create_mengajar_mapel($guru_mengajar_id)
+    {
+        $kelas = Kelas::orderBy('nama', 'DESC')->get();
+
+        $mapel = Mapel::latest()->get();
+
+
+        $guru_mengajar = Guru_mengajar::with([
+            'kelas:id,nama',
+            'guru:id,nama,nip',
+            'mengajar_mapels.kelas:id,nama',
+            'mengajar_mapels.mapel:id,nama'
+        ])
+            ->where('id', $guru_mengajar_id)
+            ->latest()->first();
+
+        // return $guru_mengajar;
+        return Inertia::render('Mengajar/Create_mengajar_mapel', [
+            'guru_mengajar' => $guru_mengajar,
+            'mapel' => $mapel,
+            'kelas' => $kelas
+        ]);
+    }
+
+    public function store_mengajar_mapel(Request $request)
     {
         $validated =   $request->validate([
-            'tahun_ajaran_id' => 'required',
             'kelas_id' => 'required',
-            'guru_id' => 'required',
             'mapel_id' => 'required',
+            'guru_mengajar_id' => 'required',
         ]);
 
-        Mengajar::create($validated);
+        Mengajar_mapel::create($validated);
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function destroy_mengajar_mapel($id)
     {
-        $datas =  Guru::with(['kelas:id,nama', 'mengajar'])->latest()->get();
-        // return $datas;
+        Mengajar_mapel::where('id', $id)->delete();
 
-        return Inertia::render('Mengajar/List_guru', [
-            'datas' => $datas,
-            'tahun_id' => $id
-        ]);
-    }
-
-    public function create_guru_mengajar($guru_id, $tahun_id)
-    {
-
-        $datas =  Mengajar::with(['kelas:id,nama', 'mapel:id,nama'])->latest()->get();
-
-        $list_kelas = Kelas::latest()->orderBy('nama', 'desc')->get();
-        $guru_detail = Guru::with('kelas:id,nama')->where('id', $guru_id)->latest()->first();
-
-        $detail_tahun_ajaran = Tahun_ajaran::where('id', $tahun_id)->first()->tahun_ajaran;
-        $list_mapel = Mapel::latest()->get();
-        return Inertia::render('Mengajar/Create', [
-            'guru_detail' => $guru_detail,
-            'tahun_ajaran_detail' => $detail_tahun_ajaran,
-            'list_kelas' => $list_kelas,
-            'list_mapel' => $list_mapel,
-            'tahun_ajaran_id' => $tahun_id,
-            'datas' => $datas
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Mengajar $mengajar)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Mengajar $mengajar)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Mengajar $mengajar)
-    {
-        //
+        return redirect()->back();
+        // return [
+        //     '1' => $guru_mengajar_id,
+        //     '2' => $id,
+        // ];
     }
 }

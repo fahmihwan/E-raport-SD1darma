@@ -1,24 +1,14 @@
-import { Inertia } from "@inertiajs/inertia";
-import { Link, useForm, usePage } from "@inertiajs/inertia-react";
-import React, { useRef } from "react";
-import {
-    AlertDanger,
-    ButtonModalComponent,
-    HeaderLayout,
-    ModalLayout,
-} from "../../Components/ComponentLayout";
-import { InputText } from "../../Components/InputEL";
-import { Pagination } from "../../Components/Pagination";
+import { Link } from "@inertiajs/inertia-react";
+import React from "react";
+import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = () => {
-    const { datas, errors } = usePage().props;
-
+const Index = ({ list_guru_mengajar }) => {
     return (
         <AuthenticatedLayout>
             <HeaderLayout
-                title="Kelola Pengampu"
-                breadcrumbs={["Kelola Pengampu"]}
+                title="List Guru Pengjar"
+                breadcrumbs={["Kelola Pengampu", "List Guru Pengajar"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -28,47 +18,38 @@ const Index = () => {
                                 <h3 className="card-title">
                                     List data tahun ajaran pengampu
                                 </h3>
+                                {/* /admin/mengajar/create_guru_mengajar */}
+                                <Link
+                                    href="/admin/mengajar/create_guru_mengajar"
+                                    className="btn btn-primary"
+                                >
+                                    Tamabh Data
+                                </Link>
                             </div>
                         </div>
                         {/* /.card-header */}
                         <div className="card-body">
-                            <table className="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: "10px" }}>#</th>
-                                        <th>Tahun Ajaran</th>
-                                        <th>Created at</th>
-                                        <th style={{ width: "40px" }}>
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {datas.data?.map((d, i) => (
-                                        <tr key={i}>
-                                            <td>{i + datas.from}</td>
-                                            <td>{d.tahun_ajaran}</td>
-                                            <td>{d.created_at}</td>
-                                            <td>
-                                                <Link
-                                                    href={`/admin/mengajar/${d.id}`}
-                                                    className="btn btn-info"
-                                                >
-                                                    kelola
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                            {/* <Link
+                                href="/admin/mengajar/create"
+                                className="btn btn-primary"
+                            >
+                                tambah data
+                            </Link> */}
+                            <div className="row row-cols-2">
+                                {list_guru_mengajar?.map((d, i) => (
+                                    <CardGuru
+                                        key={i}
+                                        id={d.id}
+                                        nip={d.guru.nip}
+                                        nama={d.guru.nama}
+                                        wali_kelas={d.kelas?.nama}
+                                        list_mengajar={d.mengajar_mapels}
+                                    />
+                                ))}
+                            </div>
                         </div>
+
                         {/* /.card-body */}
-                        <div className="card-footer clearfix">
-                            <Pagination
-                                links={datas.links}
-                                totals={datas.total}
-                            />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -77,3 +58,52 @@ const Index = () => {
 };
 
 export default Index;
+
+const CardGuru = ({ id, nip, nama, wali_kelas, list_mengajar }) => {
+    return (
+        <div className="col">
+            <div className="card bg-light d-flex flex-fill  ">
+                <div className="card-header text-muted border-bottom-0">
+                    WALI KELAS : {wali_kelas}
+                </div>
+                <div className="card-body pt-0">
+                    <div className="row">
+                        <div className="col-12">
+                            <h2 className="lead">
+                                <b>{nama}</b>
+                                <p>Nip. {nip}</p>
+                            </h2>
+                            <hr />
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Mengampu</th>
+                                        <th scope="col">Kelas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {list_mengajar?.map((d, i) => (
+                                        <tr key={i}>
+                                            <td>{d?.mapel.nama}</td>
+                                            <td>{d?.kelas.nama}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div className="card-footer">
+                    <div className="text-right">
+                        <Link
+                            href={`/admin/mengajar/${id}/create_mengajar_mapel`}
+                            className="btn btn-sm btn-primary"
+                        >
+                            Kelola Mapel
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
