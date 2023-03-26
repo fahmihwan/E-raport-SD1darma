@@ -6,6 +6,8 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MengajarController;
 use App\Http\Controllers\MengikutiController;
+use App\Http\Controllers\MuridController;
+use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,10 +24,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [AuthController::class, 'index']);
+Route::post('/admin/auth/', [AuthController::class, 'authenticated']);
+Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
 
 
 Route::get('/admin/dashboard', function () {
-    // return view('welcome');
     return Inertia::render('Dashboard');
 });
 
@@ -43,6 +46,7 @@ Route::post('/admin/master/mapel', [MapelController::class, 'store']);
 Route::delete('/admin/master/mapel/{id}', [MapelController::class, 'destroy']);
 
 Route::resource('/admin/guru', GuruController::class);
+Route::resource('/admin/murid', MuridController::class);
 
 // transaksi
 // guru-mengajar
@@ -53,8 +57,19 @@ Route::get('/admin/mengajar/{guru_mengajar_id}/create_mengajar_mapel', [Mengajar
 Route::post('/admin/mengajar/mengajar_mapel', [MengajarController::class, 'store_mengajar_mapel']);
 Route::delete('/admin/mengajar/mengajar_mapel/{id}', [MengajarController::class, 'destroy_mengajar_mapel']);
 
-
-// guru-mengikuti
+// mengikuti kelas
 Route::get('/admin/mengikuti', [MengikutiController::class, 'index']);
-Route::get('/admin/mengikuti/{kelas_id}', [MengikutiController::class, 'list_siswa']);
-Route::get('/admin/mengikuti/{kelas_id}/create_siswa_baru', [MengikutiController::class, 'create_siswa_baru']);
+Route::get('/admin/mengikuti/create_kelas_tahun_ajaran_baru', [MengikutiController::class, 'create_kelas_tahun_ajaran_baru']);
+Route::post('/admin/mengikuti/create_kelas_tahun_ajaran_baru', [MengikutiController::class, 'store_create_kelas_tahun_ajaran_baru']);
+
+// mengikuti ajaran
+Route::get('/admin/mengikuti/{kelas_id}/list_siswa', [MengikutiController::class, 'list_siswa']);
+Route::post('/admin/mengikuti/store_siswa_baru', [MengikutiController::class, 'store_mengikuti_ajaran']);
+Route::delete('/admin/mengikuti/{id}/mengikuti_ajaran', [MengikutiController::class, 'destroy_mengikuti_ajaran']);
+
+// get_kelas_tahun_ajaran
+Route::get('/admin/get_kelas_tahun_ajaran/{id}', [MengikutiController::class, 'get_kelas_tahun_ajaran']);
+
+
+// penilain
+Route::get('/guru/penilaian', [PenilaianController::class, 'index']);

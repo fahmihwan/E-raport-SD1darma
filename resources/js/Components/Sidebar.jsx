@@ -8,9 +8,10 @@ export const Sidebar = () => {
 
     return (
         // <aside className="main-sidebar sidebar-dark-primary elevation-4">
+        // <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
         <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
             {/* Brand Logo */}
-            <a href="index3.html" className="brand-link">
+            <Link href="/admin/dashboard" className="brand-link">
                 <img
                     src={AdminLTELogo}
                     alt="AdminLTE Logo"
@@ -18,7 +19,7 @@ export const Sidebar = () => {
                     style={{ opacity: ".8" }}
                 />
                 <span className="brand-text font-weight-light">AdminLTE 3</span>
-            </a>
+            </Link>
             {/* Sidebar */}
             <div className="sidebar">
                 {/* Sidebar user panel (optional) */}
@@ -140,17 +141,30 @@ export const Sidebar = () => {
                                 <p>Guru</p>
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link href="/admin/murid" className="nav-link">
+                                <i className="nav-icon fas fa-th" />
+                                <p>Murid</p>
+                            </Link>
+                        </li>
                         <li className="nav-header">Kelola Data</li>
                         <li className="nav-item">
                             <Link href="/admin/mengikuti" className="nav-link">
                                 <i className="nav-icon fas fa-th" />
-                                <p>Kelola Siswa ajaran baru</p>
+                                <p>Kelola Ajaran Baru</p>
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link href="/admin/mengajar" className="nav-link">
                                 <i className="nav-icon fas fa-th" />
                                 <p>Kelola Pengajar</p>
+                            </Link>
+                        </li>
+                        <li className="nav-header">Transaksi Penilain</li>
+                        <li className="nav-item">
+                            <Link href="/guru/penilaian" className="nav-link">
+                                <i className="nav-icon fas fa-th" />
+                                <p>Penilaian</p>
                             </Link>
                         </li>
                     </ul>

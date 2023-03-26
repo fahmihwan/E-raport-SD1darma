@@ -10,7 +10,6 @@ use App\Models\Mengajar_mapel;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-use function PHPUnit\Framework\returnSelf;
 
 class MengajarController extends Controller
 {
@@ -18,12 +17,13 @@ class MengajarController extends Controller
     {
 
 
-        $list_guru_mengajar = Guru_mengajar::with([
-            'kelas:id,nama',
-            'guru:id,nama,nip',
-            'mengajar_mapels.kelas:id,nama',
-            'mengajar_mapels.mapel:id,nama'
-        ])->latest()->get();
+        // $list_guru_mengajar = Guru_mengajar::with([
+        //     'kelas:id,nama',
+        //     'guru:id,nama,nip',
+        //     'mengajar_mapels.kelas:id,nama',
+        //     'mengajar_mapels.mapel:id,nama'
+        // ])->latest()->get();
+        $list_guru_mengajar = [];
         return Inertia::render('Mengajar/Index', [
             'list_guru_mengajar' => $list_guru_mengajar
         ]);

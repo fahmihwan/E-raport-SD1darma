@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Guru_mengajar;
+use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use Illuminate\Database\Migrations\Migration;
@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('mengajar_mapels', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Kelas::class);
+            $table->foreignIdFor(Guru::class);
             $table->foreignIdFor(Mapel::class);
-            $table->foreignIdFor(Guru_mengajar::class);
             $table->timestamps();
         });
     }

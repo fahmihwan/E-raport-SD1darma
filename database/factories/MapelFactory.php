@@ -29,6 +29,7 @@ class MapelFactory extends Factory
                 'Bahasa Jawa',
                 'Bahasa Inggris',
             ]),
+            'kkm' => 75
         ];
     }
 }

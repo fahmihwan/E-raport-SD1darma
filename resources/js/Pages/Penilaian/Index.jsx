@@ -7,30 +7,8 @@ import { InputText, SelectSearch } from "../../Components/InputEL";
 import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ tahun_ajarans }) => {
+const Index = ({ kelas }) => {
     const { datas, errors } = usePage().props;
-    const [selectTahun, setSelectTahun] = useState(tahun_ajarans[0].id);
-
-    const [listData, setListData] = useState();
-    const getTahunAjaran = async (second) => {
-        try {
-            await axios
-                .get(`/admin/get_kelas_tahun_ajaran/${selectTahun}`)
-                .then((result) => {
-                    setListData(result.data);
-                    console.log(result.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        getTahunAjaran();
-    }, []);
 
     return (
         <AuthenticatedLayout>
@@ -47,7 +25,7 @@ const Index = ({ tahun_ajarans }) => {
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">tahun ajaran :</span>
                                     <div className="mr-2">
-                                        <select
+                                        {/* <select
                                             className="form-control"
                                             onChange={(e) =>
                                                 setSelectTahun(e.target.value)
@@ -59,14 +37,14 @@ const Index = ({ tahun_ajarans }) => {
                                                     {d.tahun_ajaran}
                                                 </option>
                                             ))}
-                                        </select>
+                                        </select> */}
                                     </div>
-                                    <button
+                                    {/* <button
                                         onClick={() => getTahunAjaran()}
                                         className="btn btn-info"
                                     >
                                         Cari
-                                    </button>
+                                    </button> */}
                                 </div>
                                 <div className="d-flex align-items-center">
                                     <Link
@@ -85,23 +63,19 @@ const Index = ({ tahun_ajarans }) => {
                                     <tr>
                                         <th style={{ width: "10px" }}>#</th>
                                         <th>Kelas</th>
-                                        <th>tahun_ajaran</th>
                                         <th style={{ width: "40px" }}>
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {listData?.map((d, i) => (
+                                    {kelas?.map((d, i) => (
                                         <tr key={i}>
                                             <td>1</td>
                                             <td>{d.kelas.nama}</td>
                                             <td>
-                                                {d.tahun_ajaran.tahun_ajaran}
-                                            </td>
-                                            <td>
                                                 <Link
-                                                    href={`/admin/mengikuti/${d.id}/list_siswa`}
+                                                    // href={}
                                                     className="btn btn-info"
                                                 >
                                                     kelola
