@@ -33,6 +33,7 @@ class MuridController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated =   $request->validate([
             'nama' => 'required',
             'no_induk' => 'required',
@@ -42,6 +43,7 @@ class MuridController extends Controller
             'agama' => 'required',
             'alamat' => 'required',
         ]);
+
 
         Murid::create($validated);
         return redirect('/admin/murid');

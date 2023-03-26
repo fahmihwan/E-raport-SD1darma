@@ -4,12 +4,14 @@ import { HeaderLayout } from "../../Components/ComponentLayout";
 import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create_kelas_tahun_ajaran_baru = ({ kelas, tahun_ajaran }) => {
+const Create_kelas_tahun_ajaran_baru = ({ kelas, tahun_ajaran, gurus }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         kelas_id: "",
         tahun_ajaran_id: "",
+        guru_id: "",
     });
     let optionKelas = kelas.map((d) => ({ value: d.id, label: d.nama }));
+    let optionGuru = gurus.map((d) => ({ value: d.id, label: d.nama }));
     let optionTahunAjaran = tahun_ajaran.map((d) => ({
         value: d.id,
         label: d.tahun_ajaran,
@@ -63,6 +65,16 @@ const Create_kelas_tahun_ajaran_baru = ({ kelas, tahun_ajaran }) => {
                                                 options={optionKelas}
                                             />
                                         </div>
+                                        <div className="form-group">
+                                            <label>Wali Kelas</label>
+                                            <SelectSearch
+                                                handleChange={(e) =>
+                                                    setData("guru_id", e.value)
+                                                }
+                                                options={optionGuru}
+                                            />
+                                        </div>
+
                                         <button
                                             type="submit"
                                             className="btn btn-primary"

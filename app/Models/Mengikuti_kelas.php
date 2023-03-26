@@ -23,4 +23,8 @@ class Mengikuti_kelas extends Model
     {
         return $this->hasMany(Mengikuti_ajaran::class);
     }
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class);
+    }
 }

@@ -107,19 +107,19 @@ const Create_siswa_baru = () => {
                                         <div className="col-md-6 pl-3">
                                             <div className="form-group ">
                                                 <select className="form-control">
-                                                    <option value="">
+                                                    <option value="Islam">
                                                         Islam
                                                     </option>
-                                                    <option value="">
-                                                        Kristen
+                                                    <option value="Protestan">
+                                                        Protestan
                                                     </option>
-                                                    <option value="">
-                                                        Katholik
+                                                    <option value="Katolik">
+                                                        Katolik
                                                     </option>
-                                                    <option value="">
+                                                    <option value="Hindu">
                                                         Hindu
                                                     </option>
-                                                    <option value="">
+                                                    <option value="Budha">
                                                         Budha
                                                     </option>
                                                 </select>

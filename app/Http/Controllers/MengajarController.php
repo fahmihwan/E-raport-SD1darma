@@ -15,67 +15,68 @@ class MengajarController extends Controller
 {
     public function index()
     {
-
-
-        // $list_guru_mengajar = Guru_mengajar::with([
-        //     'kelas:id,nama',
-        //     'guru:id,nama,nip',
-        //     'mengajar_mapels.kelas:id,nama',
-        //     'mengajar_mapels.mapel:id,nama'
-        // ])->latest()->get();
-        $list_guru_mengajar = [];
+        $list_guru_mengajar = Guru::with([
+            'mengajar_mapels.kelas:id,nama',
+            'mengajar_mapels.mapel:id,nama',
+        ])->latest()->get();
         return Inertia::render('Mengajar/Index', [
             'list_guru_mengajar' => $list_guru_mengajar
         ]);
     }
 
 
+    // HAPUS
     // TB GURU MENGAJAR
     public function create_guru_mengajar()
     {
         $kelas = Kelas::orderBy('nama', 'DESC')->get();
         $guru = Guru::latest()->get();
+        $mapel = Mapel::latest()->get();
 
         return Inertia::render('Mengajar/Create_guru_mengajar', [
             'kelas' => $kelas,
-            'gurus' => $guru
+            'gurus' => $guru,
+            'mapel' => $mapel
         ]);
     }
 
+    // HAPUS
     // TB GURU MENGAJAR
     public function store_guru_mengajar(Request $request)
     {
         $validated = $request->validate([
             'guru_id' => 'required',
+            'kelas_id' => 'required',
+            'mapel_id' => 'required'
         ]);
-        $validated['kelas_id'] = $request->wali_kelas;
 
-        Guru_mengajar::create($validated);
+        Mengajar_mapel::create($validated);
+        // Guru_mengajar::create($validated);
         return redirect('/admin/mengajar');
     }
 
     // TB MENGAJAR_MAPEL
     public function create_mengajar_mapel($guru_mengajar_id)
     {
+        // return $guru_mengajar_id;
         $kelas = Kelas::orderBy('nama', 'DESC')->get();
-
         $mapel = Mapel::latest()->get();
+        $guru = Guru::where('id', $guru_mengajar_id)->first();
 
-
-        $guru_mengajar = Guru_mengajar::with([
+        $guru_mengajar = Mengajar_mapel::with([
             'kelas:id,nama',
-            'guru:id,nama,nip',
-            'mengajar_mapels.kelas:id,nama',
-            'mengajar_mapels.mapel:id,nama'
+            'mapel:id,nama'
         ])
-            ->where('id', $guru_mengajar_id)
-            ->latest()->first();
+            ->where('guru_id', $guru_mengajar_id)
+            ->latest()
+            ->get();
 
         // return $guru_mengajar;
         return Inertia::render('Mengajar/Create_mengajar_mapel', [
             'guru_mengajar' => $guru_mengajar,
             'mapel' => $mapel,
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'guru' => $guru
         ]);
     }
 
@@ -84,7 +85,7 @@ class MengajarController extends Controller
         $validated =   $request->validate([
             'kelas_id' => 'required',
             'mapel_id' => 'required',
-            'guru_mengajar_id' => 'required',
+            'guru_id' => 'required',
         ]);
 
         Mengajar_mapel::create($validated);

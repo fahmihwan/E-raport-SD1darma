@@ -6,17 +6,17 @@ import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
 
-const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel }) => {
+const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         kelas_id: "",
         mapel_id: "",
-        guru_mengajar_id: guru_mengajar.id,
+        guru_id: guru.id,
     });
+    // console.log(guru_mengajar);
 
     let optionKelas = kelas.map((d) => ({ value: d.id, label: d.nama }));
     let optionMapel = mapel.map((d) => ({ value: d.id, label: d.nama }));
 
-    console.log(guru_mengajar);
     const handleSubmit = async (e) => {
         e.preventDefault();
         await post("/admin/mengajar/mengajar_mapel");
@@ -59,10 +59,10 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel }) => {
                                                 >
                                                     <li>
                                                         <span className=" text-bold">
-                                                            Fahmi Ichwanurrohman
+                                                            {guru.nama}
                                                         </span>
                                                     </li>
-                                                    <li>NIP. 518031112313</li>
+                                                    <li>NIP. {guru.nip}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -109,29 +109,25 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel }) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {guru_mengajar.mengajar_mapels?.map(
-                                                (d, i) => (
-                                                    <tr key={i}>
-                                                        <th scope="row">
-                                                            {i + 1}
-                                                        </th>
-                                                        <td>{d.kelas.nama}</td>
-                                                        <td>{d.mapel.nama}</td>
-                                                        <td>
-                                                            <button
-                                                                className="btn btn-danger"
-                                                                onClick={() =>
-                                                                    handleDelete(
-                                                                        d.id
-                                                                    )
-                                                                }
-                                                            >
-                                                                <i className="fas fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            )}
+                                            {guru_mengajar?.map((d, i) => (
+                                                <tr key={i}>
+                                                    <th scope="row">{i + 1}</th>
+                                                    <td>{d.kelas.nama}</td>
+                                                    <td>{d.mapel.nama}</td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-danger"
+                                                            onClick={() =>
+                                                                handleDelete(
+                                                                    d.id
+                                                                )
+                                                            }
+                                                        >
+                                                            <i className="fas fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>

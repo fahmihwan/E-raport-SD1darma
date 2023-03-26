@@ -10,13 +10,15 @@ import {
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create_guru_mengajar = ({ kelas, gurus }) => {
+const Create_guru_mengajar = ({ kelas, gurus, mapel }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         guru_id: "",
-        wali_kelas: "",
+        kelas_id: "",
+        mapel_id: "",
     });
     let optionKelas = kelas.map((d) => ({ value: d.id, label: d.nama }));
     let optionGurus = gurus.map((d) => ({ value: d.id, label: d.nama }));
+    let optionMapel = mapel.map((d) => ({ value: d.id, label: d.nama }));
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -56,15 +58,21 @@ const Create_guru_mengajar = ({ kelas, gurus }) => {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label>Wali Kelas</label>
+                                            <label>Kelas</label>
                                             <SelectSearch
                                                 handleChange={(e) =>
-                                                    setData(
-                                                        "wali_kelas",
-                                                        e.value
-                                                    )
+                                                    setData("kelas_id", e.value)
                                                 }
                                                 options={optionKelas}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Mapel</label>
+                                            <SelectSearch
+                                                handleChange={(e) =>
+                                                    setData("mapel_id", e.value)
+                                                }
+                                                options={optionMapel}
                                             />
                                         </div>
                                         <button

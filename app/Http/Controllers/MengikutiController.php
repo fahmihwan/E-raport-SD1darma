@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mengikuti_ajaran;
 use App\Models\Mengikuti_kelas;
@@ -24,13 +25,14 @@ class MengikutiController extends Controller
     {
         // kelas 
         // tahun 
-
         $kelas = Kelas::orderBy('nama', 'DESC')->get();
         $tahun_ajarans = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->get();
+        $gurus = Guru::latest()->get();
 
         return Inertia::render('Mengikuti/Create_kelas_tahun_ajaran_baru', [
             'kelas' => $kelas,
-            'tahun_ajaran' => $tahun_ajarans
+            'tahun_ajaran' => $tahun_ajarans,
+            'gurus' => $gurus
         ]);
     }
 
@@ -38,8 +40,10 @@ class MengikutiController extends Controller
     {
         $validated = $request->validate([
             'kelas_id' => 'required',
-            'tahun_ajaran_id' => 'required'
+            'tahun_ajaran_id' => 'required',
+            'guru_id' => 'required'
         ]);
+
         Mengikuti_kelas::create($validated);
         return redirect('/admin/mengikuti');
     }
@@ -100,22 +104,13 @@ class MengikutiController extends Controller
     {
         $datas =  Mengikuti_kelas::with([
             'kelas',
-            'tahun_ajaran'
+            'tahun_ajaran',
+            'guru'
         ])
-
             ->where('tahun_ajaran_id', $id)
-
-            // ->when('kelas', function ($q) {
-            //     $q->orderBy('nama', 'desc');
-            // })
-
             ->get()->sortByDesc(function ($i) {
                 return $i->kelas->max('nama');
             });
         return $datas;
-
-        // $nearEpisodes = $nearEpisodes->sortByDesc(function ($item) {
-        //     return $item->the_numbers->max('episodeNumber');
-        //   })->values();
     }
 }

@@ -121,8 +121,8 @@ const Create = ({ kelass }) => {
                                                     <option value="Kristen">
                                                         Kristen
                                                     </option>
-                                                    <option value="Katholik">
-                                                        Katholik
+                                                    <option value="Katolik">
+                                                        Katolik
                                                     </option>
                                                     <option value="Hindu">
                                                         Hindu

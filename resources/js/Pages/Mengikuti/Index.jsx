@@ -1,10 +1,7 @@
-import { Inertia } from "@inertiajs/inertia";
-import { Link, useForm, usePage } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/inertia-react";
 import axios from "axios";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
-import { InputText, SelectSearch } from "../../Components/InputEL";
-import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
 const Index = ({ tahun_ajarans }) => {
@@ -85,6 +82,7 @@ const Index = ({ tahun_ajarans }) => {
                                     <tr>
                                         <th style={{ width: "10px" }}>#</th>
                                         <th>Kelas</th>
+                                        <th>Wali Kelas</th>
                                         <th>tahun_ajaran</th>
                                         <th style={{ width: "40px" }}>
                                             Action
@@ -96,6 +94,7 @@ const Index = ({ tahun_ajarans }) => {
                                         <tr key={i}>
                                             <td>1</td>
                                             <td>{d.kelas.nama}</td>
+                                            <td>{d.guru.nama}</td>
                                             <td>
                                                 {d.tahun_ajaran.tahun_ajaran}
                                             </td>

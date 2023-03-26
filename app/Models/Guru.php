@@ -21,8 +21,8 @@ class Guru extends Authenticatable
         return $this->belongsTo(Kelas::class);
     }
 
-    public function mengajars()
+    public function mengajar_mapels()
     {
-        return $this->hasMany(Mengajar::class);
+        return $this->hasMany(Mengajar_mapel::class);
     }
 }

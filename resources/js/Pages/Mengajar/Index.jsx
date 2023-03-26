@@ -4,10 +4,11 @@ import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
 const Index = ({ list_guru_mengajar }) => {
+    console.log(list_guru_mengajar);
     return (
         <AuthenticatedLayout>
             <HeaderLayout
-                title="List Guru Pengjar"
+                title="List Guru Pengajar"
                 breadcrumbs={["Kelola Pengampu", "List Guru Pengajar"]}
             />
             <div className="content">
@@ -19,12 +20,12 @@ const Index = ({ list_guru_mengajar }) => {
                                     List data tahun ajaran pengampu
                                 </h3>
                                 {/* /admin/mengajar/create_guru_mengajar */}
-                                <Link
+                                {/* <Link
                                     href="/admin/mengajar/create_guru_mengajar"
                                     className="btn btn-primary"
                                 >
                                     Tamabh Data
-                                </Link>
+                                </Link> */}
                             </div>
                         </div>
                         {/* /.card-header */}
@@ -40,8 +41,8 @@ const Index = ({ list_guru_mengajar }) => {
                                     <CardGuru
                                         key={i}
                                         id={d.id}
-                                        nip={d.guru.nip}
-                                        nama={d.guru.nama}
+                                        nip={d.nip}
+                                        nama={d.nama}
                                         wali_kelas={d.kelas?.nama}
                                         list_mengajar={d.mengajar_mapels}
                                     />
