@@ -2,9 +2,9 @@ import React from "react";
 import { HeaderLayout } from "../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../Layouts/AuthenticatedLayout";
 
-const Dashboard = () => {
+const Dashboard = ({ auth }) => {
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout title="Tahun Ajaran" breadcrumbs={["Dashboard"]} />
             {/* /.content-header */}
             {/* Main content */}

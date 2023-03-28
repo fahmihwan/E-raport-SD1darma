@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('murids', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('no_induk');
+            $table->string('no_induk')->unique();
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
@@ -28,6 +28,7 @@ return new class extends Migration
             ]);
             $table->string('alamat');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

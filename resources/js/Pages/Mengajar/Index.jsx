@@ -3,10 +3,10 @@ import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ list_guru_mengajar }) => {
+const Index = ({ list_guru_mengajar, auth }) => {
     console.log(list_guru_mengajar);
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="List Guru Pengajar"
                 breadcrumbs={["Kelola Pengampu", "List Guru Pengajar"]}

@@ -12,8 +12,8 @@ import { Pagination } from "../../../Components/Pagination";
 import { AuthenticatedLayout } from "../../../Layouts/AuthenticatedLayout";
 
 const Index = () => {
-    const { datas, errors } = usePage().props;
-    console.log(datas);
+    const { datas, errors, auth } = usePage().props;
+
     const { data, setData, post, processing, reset } = useForm({
         tahun_ajaran: "",
     });
@@ -37,7 +37,7 @@ const Index = () => {
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tahun Ajaran"
                 breadcrumbs={["Master", "List tahun ajaran"]}

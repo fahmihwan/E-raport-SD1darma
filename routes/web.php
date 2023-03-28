@@ -73,3 +73,9 @@ Route::get('/admin/get_kelas_tahun_ajaran/{id}', [MengikutiController::class, 'g
 
 // penilain
 Route::get('/guru/penilaian', [PenilaianController::class, 'index']);
+Route::get('/guru/penilaian/{kelas_id}/{mapel_id}/{semster}/list_nilai', [PenilaianController::class, 'list_nilai']);
+Route::get('/guru/penilaian/{kelas_id}/{mapel_id}/{semester}/create_nilai', [PenilaianController::class, 'create_nilai']);
+Route::post('/guru/penilaian/store_nilai', [PenilaianController::class, 'store_nilai']);
+
+Route::get('/guru/penilaian/{kelas_id}/{mapel_id}/{semester}/edit_nilai', [PenilaianController::class, 'edit_nilai']);
+Route::put('/guru/penilaian', [PenilaianController::class, 'update_nilai']);

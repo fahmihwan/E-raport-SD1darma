@@ -10,7 +10,7 @@ import {
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create_guru_mengajar = ({ kelas, gurus, mapel }) => {
+const Create_guru_mengajar = ({ kelas, gurus, mapel, auth }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         guru_id: "",
         kelas_id: "",
@@ -25,7 +25,7 @@ const Create_guru_mengajar = ({ kelas, gurus, mapel }) => {
         post("/admin/mengajar/guru_mengajar");
     };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tambah Guru"
                 breadcrumbs={["List Guru", "Tambah Guru"]}

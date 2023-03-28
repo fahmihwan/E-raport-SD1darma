@@ -12,7 +12,7 @@ import { Pagination } from "../../../Components/Pagination";
 import { AuthenticatedLayout } from "../../../Layouts/AuthenticatedLayout";
 
 const Index = () => {
-    const { datas, errors } = usePage().props;
+    const { datas, errors, auth } = usePage().props;
     const { data, setData, post, processing, reset } = useForm({
         nama: "",
     });
@@ -36,7 +36,7 @@ const Index = () => {
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Kelas"
                 breadcrumbs={["Master", "List Kelas"]}

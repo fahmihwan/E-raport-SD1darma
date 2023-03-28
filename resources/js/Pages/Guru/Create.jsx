@@ -9,7 +9,7 @@ import {
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ kelass }) => {
+const Create = ({ kelass, auth }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         nip: "",
         nama: "",
@@ -29,7 +29,7 @@ const Create = ({ kelass }) => {
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tambah Guru"
                 breadcrumbs={["List Guru", "Tambah Guru"]}

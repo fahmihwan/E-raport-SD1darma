@@ -9,7 +9,7 @@ import {
 import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const List_siswa = ({ murid, mengikuti_kelas_id }) => {
+const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
     const { datas, errors } = usePage().props;
     const closeModalRef = useRef(null);
     const { data, setData, post, processing, reset } = useForm({
@@ -32,7 +32,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id }) => {
         Inertia.delete(`/admin/mengikuti/${id}/mengikuti_ajaran`);
     };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title={`List ${datas.kelas.nama}`}
                 breadcrumbs={["Kelola"]}

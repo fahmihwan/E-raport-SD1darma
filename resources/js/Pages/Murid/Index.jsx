@@ -5,13 +5,13 @@ import { HeaderLayout } from "../../Components/ComponentLayout";
 import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ datas }) => {
+const Index = ({ datas, auth }) => {
     const handleDelete = (id) => {
         Inertia.delete(`/admin/murid/${id}`);
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout title="Murid" breadcrumbs={["List Murid"]} />
             <div className="content">
                 <div className="container-fluid">

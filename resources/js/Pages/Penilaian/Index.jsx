@@ -7,11 +7,9 @@ import { InputText, SelectSearch } from "../../Components/InputEL";
 import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ kelas }) => {
-    const { datas, errors } = usePage().props;
-
+const Index = ({ kelas, auth }) => {
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="List Mengikuti Kelas"
                 breadcrumbs={["Kelola"]}
@@ -47,12 +45,12 @@ const Index = ({ kelas }) => {
                                     </button> */}
                                 </div>
                                 <div className="d-flex align-items-center">
-                                    <Link
+                                    {/* <Link
                                         href="/admin/mengikuti/create_kelas_tahun_ajaran_baru"
                                         className="btn btn-primary"
                                     >
                                         Tamabh Data
-                                    </Link>
+                                    </Link> */}
                                 </div>
                             </div>
                         </div>
@@ -63,9 +61,8 @@ const Index = ({ kelas }) => {
                                     <tr>
                                         <th style={{ width: "10px" }}>#</th>
                                         <th>Kelas</th>
-                                        <th style={{ width: "40px" }}>
-                                            Action
-                                        </th>
+                                        <th>Mapel</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,12 +70,19 @@ const Index = ({ kelas }) => {
                                         <tr key={i}>
                                             <td>1</td>
                                             <td>{d.kelas.nama}</td>
+                                            <td>{d.mapel.nama}</td>
                                             <td>
                                                 <Link
-                                                    // href={}
+                                                    href={`/guru/penilaian/${d.kelas_id}/${d.mapel_id}/1/list_nilai`}
+                                                    className="btn btn-info mr-2"
+                                                >
+                                                    Semester 1
+                                                </Link>
+                                                <Link
+                                                    href={`/guru/penilaian/${d.kelas_id}/${d.mapel_id}/2/list_nilai`}
                                                     className="btn btn-info"
                                                 >
-                                                    kelola
+                                                    Semester 2
                                                 </Link>
                                             </td>
                                         </tr>

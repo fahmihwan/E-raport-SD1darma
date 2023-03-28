@@ -2,13 +2,11 @@ import { Link, usePage } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
 import AdminLTELogo from "../../../public/dist/img/AdminLTELogo.png";
 import UserLogo from "../../../public/dist/img/user2-160x160.jpg";
-export const Sidebar = () => {
+export const Sidebar = ({ auth }) => {
     const [toggleMaster, setToggleMaster] = useState(false);
     const { url, component } = usePage();
-
+    // console.log(auth.guru && console.log('ok'););
     return (
-        // <aside className="main-sidebar sidebar-dark-primary elevation-4">
-        // <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
         <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
             {/* Brand Logo */}
             <Link href="/admin/dashboard" className="brand-link">
@@ -160,13 +158,17 @@ export const Sidebar = () => {
                                 <p>Kelola Pengajar</p>
                             </Link>
                         </li>
-                        <li className="nav-header">Transaksi Penilain</li>
-                        <li className="nav-item">
-                            <Link href="/guru/penilaian" className="nav-link">
-                                <i className="nav-icon fas fa-th" />
-                                <p>Penilaian</p>
-                            </Link>
-                        </li>
+                        {auth?.guru && (
+                            <li className="nav-item">
+                                <Link
+                                    href="/guru/penilaian"
+                                    className="nav-link"
+                                >
+                                    <i className="nav-icon fas fa-th" />
+                                    <p>Penilaian</p>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </nav>
                 {/* /.sidebar-menu */}

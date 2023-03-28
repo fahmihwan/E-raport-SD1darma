@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ tahun_ajarans }) => {
+const Index = ({ tahun_ajarans, auth }) => {
     const { datas, errors } = usePage().props;
     const [selectTahun, setSelectTahun] = useState(tahun_ajarans[0].id);
 
@@ -30,7 +30,7 @@ const Index = ({ tahun_ajarans }) => {
     }, []);
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="List Mengikuti Kelas"
                 breadcrumbs={["Kelola"]}

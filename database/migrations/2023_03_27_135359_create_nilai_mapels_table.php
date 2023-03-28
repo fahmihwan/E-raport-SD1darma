@@ -1,8 +1,7 @@
 <?php
 
+use App\Models\Mapel;
 use App\Models\Mengikuti_ajaran;
-use App\Models\Mengikuti_kelas;
-use App\Models\Murid;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mengikuti_ajarans', function (Blueprint $table) {
+        Schema::create('nilai_mapels', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Mengikuti_kelas::class);
-            $table->foreignIdFor(Murid::class);
-            $table->boolean('isAlumni')->default(0);
+            $table->enum('semester', ['1', '2']);
+            $table->foreignIdFor(Mapel::class);
+            $table->foreignIdFor(Mengikuti_ajaran::class);
+            $table->integer('nilai');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mengikuti_ajarans');
+        Schema::dropIfExists('nilai_mapels');
     }
 };

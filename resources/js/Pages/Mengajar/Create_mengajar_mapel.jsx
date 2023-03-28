@@ -6,7 +6,7 @@ import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 import { Inertia } from "@inertiajs/inertia";
 
-const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru }) => {
+const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         kelas_id: "",
         mapel_id: "",
@@ -26,7 +26,7 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru }) => {
         Inertia.delete(`/admin/mengajar/mengajar_mapel/${id}`);
     };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tambah Guru"
                 breadcrumbs={["List Guru", "Tambah Guru"]}

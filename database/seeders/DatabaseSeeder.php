@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Kelas;
 use App\Models\Mapel;
+use App\Models\Murid;
 use App\Models\Tahun_ajaran;
 use Illuminate\Database\Seeder;
 
@@ -25,5 +26,6 @@ class DatabaseSeeder extends Seeder
         Kelas::factory(6)->create();
         Mapel::factory(10)->create();
         Tahun_ajaran::factory(3)->create();
+        Murid::factory(5)->create();
     }
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navbar } from "../Components/Navbar";
 import { Sidebar } from "../Components/Sidebar";
 
-export const AuthenticatedLayout = ({ children }) => {
+export const AuthenticatedLayout = ({ children, auth }) => {
     const [toggleSidebar, setToggleSidebar] = useState(false);
     return (
         <div
@@ -17,7 +17,7 @@ export const AuthenticatedLayout = ({ children }) => {
                 />
                 {/* /.navbar */}
                 {/* Main Sidebar Container */}
-                <Sidebar />
+                <Sidebar auth={auth} />
                 {/* Content Wrapper. Contains page content */}
                 <div className="content-wrapper">
                     {/* Content Header (Page header) */}

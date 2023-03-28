@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
-import ReactSelect from "react-select";
 import { HeaderLayout } from "../../Components/ComponentLayout";
-import {
-    InputText,
-    InputRadioButton,
-    InputTextArea,
-    SelectSearch,
-} from "../../Components/InputEL";
+import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
 const Create = ({
@@ -17,6 +11,7 @@ const Create = ({
     list_mapel,
     tahun_ajaran_id,
     datas,
+    auth,
 }) => {
     console.log(guru_detail);
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -52,7 +47,7 @@ const Create = ({
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tambah Guru"
                 breadcrumbs={["List Guru", "Tambah Guru"]}

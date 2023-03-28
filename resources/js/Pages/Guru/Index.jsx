@@ -10,7 +10,7 @@ import { InputText } from "../../Components/InputEL";
 import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = () => {
+const Index = ({ auth }) => {
     const { datas, errors } = usePage().props;
     const { data, setData, post, processing, reset } = useForm({
         nama: "",
@@ -35,7 +35,7 @@ const Index = () => {
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout title="Guru" breadcrumbs={["List Guru"]} />
             <div className="content">
                 <div className="container-fluid">
@@ -65,7 +65,6 @@ const Index = () => {
                                         <th>Username</th>
                                         <th>Alamat</th>
                                         <th>Telp</th>
-                                        <th>Wali_kelas</th>
                                         <th style={{ width: "40px" }}>
                                             Action
                                         </th>
@@ -81,7 +80,6 @@ const Index = () => {
                                             <td>{d.username}</td>
                                             <td>{d.alamat}</td>
                                             <td>{d.telp}</td>
-                                            <td>{d.kelas?.nama}</td>
                                             <td>
                                                 <div className="d-flex">
                                                     <Link

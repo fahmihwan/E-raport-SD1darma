@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class Tahun_ajaranController extends Controller
 {
     public function index()
     {
+
+        // dd();
         $datas =  Tahun_ajaran::latest()->paginate(10);
         return Inertia::render('Master/Tahun_ajaran/Index', [
             'datas' => $datas

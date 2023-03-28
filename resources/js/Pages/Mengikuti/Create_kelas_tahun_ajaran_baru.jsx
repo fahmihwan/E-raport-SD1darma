@@ -4,7 +4,12 @@ import { HeaderLayout } from "../../Components/ComponentLayout";
 import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create_kelas_tahun_ajaran_baru = ({ kelas, tahun_ajaran, gurus }) => {
+const Create_kelas_tahun_ajaran_baru = ({
+    kelas,
+    tahun_ajaran,
+    gurus,
+    auth,
+}) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         kelas_id: "",
         tahun_ajaran_id: "",
@@ -21,7 +26,7 @@ const Create_kelas_tahun_ajaran_baru = ({ kelas, tahun_ajaran, gurus }) => {
         post("/admin/mengikuti/create_kelas_tahun_ajaran_baru");
     };
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tambah Periode Kelas"
                 breadcrumbs={["List Periode Kelas", "Tambah Periode Kelas"]}
