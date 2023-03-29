@@ -9,15 +9,13 @@ import {
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ kelass, auth }) => {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        nama: "",
-        no_induk: "",
-        jenis_kelamin: "",
-        tempat_lahir: "",
-        tanggal_lahir: "",
-        agama: "Islam",
-        alamat: "",
+const Edit = ({ auth, guru }) => {
+    const { data, setData, put, processing, errors, reset } = useForm({
+        nip: guru.nip,
+        nama: guru.nama,
+        jenis_kelamin: guru.jenis_kelamin,
+        alamat: guru.alamat,
+        telp: guru.telp,
     });
 
     const handleChange = (e) => {
@@ -25,8 +23,7 @@ const Create = ({ kelass, auth }) => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        post("/admin/murid");
-        // post("/admin/murid");
+        put(`/admin/guru/${guru.id}`);
     };
 
     return (
@@ -44,7 +41,7 @@ const Create = ({ kelass, auth }) => {
                                     <span>Tambah Guru</span>
                                     <Link
                                         className="btn btn-primary btn-sm"
-                                        href="/admin/murid"
+                                        href="/admin/guru"
                                     >
                                         Kembali
                                     </Link>
@@ -55,18 +52,25 @@ const Create = ({ kelass, auth }) => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <InputText
+                                                title="Nip"
+                                                name="nip"
+                                                placeholder="Input Nip"
+                                                handleChange={handleChange}
+                                                value={data.nip}
+                                            />
+                                            <InputText
                                                 title="Nama"
                                                 name="nama"
                                                 placeholder="Input Nama"
                                                 handleChange={handleChange}
                                                 value={data.nama}
                                             />
-                                            <InputText
-                                                title="No induk"
-                                                name="no_induk"
-                                                placeholder="Input No Induk"
+                                            <InputTextArea
+                                                title="alamat"
+                                                name="alamat"
+                                                placeholder="Input alamat"
                                                 handleChange={handleChange}
-                                                value={data.no_induk}
+                                                value={data.alamat}
                                             />
                                             <div className="form-group">
                                                 <label>Jenis Kelamin</label>
@@ -75,6 +79,9 @@ const Create = ({ kelass, auth }) => {
                                                         title="Laki-Laki"
                                                         name="jenis_kelamin"
                                                         value="L"
+                                                        checked={
+                                                            data.jenis_kelamin
+                                                        }
                                                         handleChange={
                                                             handleChange
                                                         }
@@ -83,65 +90,28 @@ const Create = ({ kelass, auth }) => {
                                                         title="Peremepuan"
                                                         name="jenis_kelamin"
                                                         value="P"
+                                                        checked={
+                                                            data.jenis_kelamin
+                                                        }
                                                         handleChange={
                                                             handleChange
                                                         }
                                                     />
                                                 </div>
                                             </div>
-                                            <InputText
-                                                title="Tempat Lahir"
-                                                name="tempat_lahir"
-                                                placeholder="Input Tempat Lahir"
-                                                handleChange={handleChange}
-                                                value={data.tempat_lahir}
-                                            />
-                                            <InputText
-                                                type="date"
-                                                title="tanggal_lahir"
-                                                name="tanggal_lahir"
-                                                placeholder="Input tanggal_lahir"
-                                                handleChange={handleChange}
-                                                value={data.tanggal_lahir}
-                                            />
                                         </div>
                                         <div className="col-md-6 pl-3">
-                                            <div className="form-group ">
-                                                <label htmlFor={"agama"}>
-                                                    agama
-                                                </label>
-                                                <select
-                                                    onChange={handleChange}
-                                                    name="agama"
-                                                    className="form-control"
-                                                >
-                                                    <option value="Islam">
-                                                        Islam
-                                                    </option>
-                                                    <option value="Protestan">
-                                                        Katolik
-                                                    </option>
-                                                    <option value="Katolik">
-                                                        Katolik
-                                                    </option>
-                                                    <option value="Hindu">
-                                                        Hindu
-                                                    </option>
-                                                    <option value="Budha">
-                                                        Budha
-                                                    </option>
-                                                    <option value="Khonghucu">
-                                                        Khonghucu
-                                                    </option>
-                                                </select>
+                                            <div className="form-group">
+                                                <InputText
+                                                    title="Telp"
+                                                    name="telp"
+                                                    placeholder="Input telp"
+                                                    handleChange={handleChange}
+                                                    value={data.telp}
+                                                />
                                             </div>
-                                            <InputTextArea
-                                                title="alamat"
-                                                name="alamat"
-                                                placeholder="Input alamat"
-                                                handleChange={handleChange}
-                                                value={data.alamat}
-                                            />
+
+                                            <br />
 
                                             <button
                                                 type="submit"
@@ -161,4 +131,4 @@ const Create = ({ kelass, auth }) => {
     );
 };
 
-export default Create;
+export default Edit;

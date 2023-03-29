@@ -60,14 +60,22 @@ const Index = ({ datas, auth }) => {
                                             <td>{d.agama}</td>
                                             <td>{d.alamat}</td>
                                             <td>
-                                                <button
-                                                    onClick={() =>
-                                                        handleDelete(d.id)
-                                                    }
-                                                    className="btn btn-danger"
-                                                >
-                                                    <i className="fas fa-solid fa-trash"></i>
-                                                </button>
+                                                <div className="d-flex">
+                                                    <Link
+                                                        href={`/admin/murid/${d.id}/edit`}
+                                                        className="btn btn-warning mr-2"
+                                                    >
+                                                        <i className="fas fa-edit"></i>
+                                                    </Link>
+                                                    <button
+                                                        onClick={() =>
+                                                            handleDelete(d.id)
+                                                        }
+                                                        className="btn btn-danger"
+                                                    >
+                                                        <i className="fas fa-solid fa-trash"></i>
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}

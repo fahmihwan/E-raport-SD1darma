@@ -62,7 +62,10 @@ class MuridController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $murid = Murid::where('id', $id)->first();
+        return Inertia::render('Murid/Edit', [
+            'murid' => $murid
+        ]);
     }
 
     /**
@@ -70,7 +73,18 @@ class MuridController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated =   $request->validate([
+            'nama' => 'required',
+            'no_induk' => 'required',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'agama' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        Murid::where('id', $id)->update($validated);
+        return redirect('/admin/murid');
     }
 
     /**

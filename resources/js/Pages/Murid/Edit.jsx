@@ -9,15 +9,17 @@ import {
 } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create = ({ kelass, auth }) => {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        nama: "",
-        no_induk: "",
-        jenis_kelamin: "",
-        tempat_lahir: "",
-        tanggal_lahir: "",
-        agama: "Islam",
-        alamat: "",
+const Edit = ({ auth, murid }) => {
+    const tanggal = murid.tanggal_lahir.split("-");
+
+    const { data, setData, put, processing, errors, reset } = useForm({
+        nama: murid.nama,
+        no_induk: murid.no_induk,
+        jenis_kelamin: murid.jenis_kelamin,
+        tempat_lahir: murid.tempat_lahir,
+        tanggal_lahir: `${tanggal[2]}-${tanggal[1]}-${tanggal[0]}`,
+        agama: murid.agama,
+        alamat: murid.alamat,
     });
 
     const handleChange = (e) => {
@@ -25,15 +27,14 @@ const Create = ({ kelass, auth }) => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        post("/admin/murid");
-        // post("/admin/murid");
+        put(`/admin/murid/${murid.id}`);
     };
 
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Tambah Guru"
-                breadcrumbs={["List Guru", "Tambah Guru"]}
+                title="Edit Murid"
+                breadcrumbs={["List Guru", "Edit Murid"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -41,7 +42,7 @@ const Create = ({ kelass, auth }) => {
                         <div className="card">
                             <div className="card-header ">
                                 <div className="d-flex justify-content-between align-items-center ">
-                                    <span>Tambah Guru</span>
+                                    <span>Edit Murid</span>
                                     <Link
                                         className="btn btn-primary btn-sm"
                                         href="/admin/murid"
@@ -78,11 +79,17 @@ const Create = ({ kelass, auth }) => {
                                                         handleChange={
                                                             handleChange
                                                         }
+                                                        checked={
+                                                            data.jenis_kelamin
+                                                        }
                                                     />
                                                     <InputRadioButton
                                                         title="Peremepuan"
                                                         name="jenis_kelamin"
                                                         value="P"
+                                                        checked={
+                                                            data.jenis_kelamin
+                                                        }
                                                         handleChange={
                                                             handleChange
                                                         }
@@ -111,6 +118,7 @@ const Create = ({ kelass, auth }) => {
                                                     agama
                                                 </label>
                                                 <select
+                                                    value={data.agama}
                                                     onChange={handleChange}
                                                     name="agama"
                                                     className="form-control"
@@ -119,7 +127,7 @@ const Create = ({ kelass, auth }) => {
                                                         Islam
                                                     </option>
                                                     <option value="Protestan">
-                                                        Katolik
+                                                        Protestan
                                                     </option>
                                                     <option value="Katolik">
                                                         Katolik
@@ -161,4 +169,4 @@ const Create = ({ kelass, auth }) => {
     );
 };
 
-export default Create;
+export default Edit;

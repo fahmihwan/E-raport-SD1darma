@@ -36,7 +36,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
 
-
         Auth::guard('webguru')->logout();
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();

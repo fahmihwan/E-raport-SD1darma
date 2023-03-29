@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
@@ -24,6 +25,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [AuthController::class, 'index']);
+Route::resource('/admin/akun', AdminController::class);
 Route::post('/admin/auth/', [AuthController::class, 'authenticated']);
 Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
 

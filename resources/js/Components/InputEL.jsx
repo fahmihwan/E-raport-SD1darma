@@ -48,6 +48,7 @@ export const InputRadioButton = ({
     handleChange,
     isError,
     value,
+    checked,
 }) => {
     const idEl = title.toLowerCase().split(" ").join("-");
 
@@ -57,6 +58,7 @@ export const InputRadioButton = ({
                 className={`form-check-input `}
                 type="radio"
                 name={name}
+                checked={checked == value}
                 id={idEl}
                 required
                 onChange={(e) => handleChange(e)}

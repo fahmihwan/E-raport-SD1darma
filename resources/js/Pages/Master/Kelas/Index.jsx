@@ -63,7 +63,7 @@ const Index = () => {
                                     <InputText
                                         title="kelas"
                                         name="nama"
-                                        placeholder="input kelas"
+                                        placeholder="EX: KELAS_6"
                                         handleChange={handleChange}
                                         value={data.nama}
                                     />

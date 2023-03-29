@@ -69,7 +69,9 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru)
     {
-        //
+        return Inertia::render('Guru/Edit', [
+            'guru' => $guru
+        ]);
     }
 
     /**
@@ -77,7 +79,16 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        //
+        $validated = $request->validate([
+            'nip' => 'required',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
+        ]);
+
+        Guru::where('id', $guru->id)->update($validated);
+        return redirect('/admin/guru');
     }
 
     /**
