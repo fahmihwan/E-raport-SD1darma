@@ -18,11 +18,13 @@ class PenilaianController extends Controller
 {
     public function index()
     {
+
         $kelas = Mengajar_mapel::with([
             'kelas:id,nama',
             'mapel:id,nama'
         ])->where('guru_id',  Auth::guard('webguru')->user()->id)->get();
 
+        return $kelas;
         return Inertia::render('Penilaian/Index', [
             'kelas' => $kelas
         ]);

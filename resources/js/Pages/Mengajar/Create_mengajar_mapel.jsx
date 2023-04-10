@@ -12,7 +12,6 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
         mapel_id: "",
         guru_id: guru.id,
     });
-    // console.log(guru_mengajar);
 
     let optionKelas = kelas.map((d) => ({ value: d.id, label: d.nama }));
     let optionMapel = mapel.map((d) => ({ value: d.id, label: d.nama }));
@@ -28,7 +27,7 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Tambah Guru"
+                title="Tambah Mengajar Mapel"
                 breadcrumbs={["List Guru", "Tambah Guru"]}
             />
             <div className="content">
@@ -112,8 +111,8 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
                                             {guru_mengajar?.map((d, i) => (
                                                 <tr key={i}>
                                                     <th scope="row">{i + 1}</th>
-                                                    <td>{d.kelas.nama}</td>
-                                                    <td>{d.mapel.nama}</td>
+                                                    <td>{d?.kelas?.nama}</td>
+                                                    <td>{d?.mapel?.nama}</td>
                                                     <td>
                                                         <button
                                                             className="btn btn-danger"

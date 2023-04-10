@@ -21,29 +21,10 @@ export const Navbar = ({ setToggleSidebar, toggleSidebar }) => {
                         <i className="fas fa-bars" />
                     </a>
                 </li>
-                <li className="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" className="nav-link">
-                        Home
-                    </a>
-                </li>
-                <li className="nav-item d-none d-sm-inline-block">
-                    <a href="#" className="nav-link">
-                        Contact
-                    </a>
-                </li>
             </ul>
             {/* Right navbar links */}
             <ul className="navbar-nav ml-auto">
-                {/* Navbar Search */}
-                <li className="nav-item">
-                    <a
-                        className="nav-link"
-                        data-widget="navbar-search"
-                        href="#"
-                        role="button"
-                    >
-                        <i className="fas fa-search" />
-                    </a>
+                {/* <li className="nav-item">
                     <div className="navbar-search-block">
                         <form className="form-inline">
                             <div className="input-group input-group-sm">
@@ -72,7 +53,6 @@ export const Navbar = ({ setToggleSidebar, toggleSidebar }) => {
                         </form>
                     </div>
                 </li>
-                {/* Messages Dropdown Menu */}
                 <li className="nav-item dropdown">
                     <a className="nav-link" data-toggle="dropdown" href="#">
                         <i className="far fa-comments" />
@@ -91,7 +71,7 @@ export const Navbar = ({ setToggleSidebar, toggleSidebar }) => {
                         </a>
                     </div>
                 </li>
-                {/* Notifications Dropdown Menu */}
+
                 <li className="nav-item dropdown">
                     <a className="nav-link" data-toggle="dropdown" href="#">
                         <i className="far fa-bell" />
@@ -131,7 +111,7 @@ export const Navbar = ({ setToggleSidebar, toggleSidebar }) => {
                             See All Notifications
                         </a>
                     </div>
-                </li>
+                </li> */}
 
                 <li className="nav-item">
                     <a className="nav-link" data-toggle="dropdown" href="#">

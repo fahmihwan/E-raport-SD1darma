@@ -15,6 +15,7 @@ class MengikutiController extends Controller
 {
     public function index()
     {
+
         $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->get();
         return Inertia::render('Mengikuti/Index', [
             'tahun_ajarans' => $tahun_ajarans
@@ -23,9 +24,8 @@ class MengikutiController extends Controller
 
     public function create_kelas_tahun_ajaran_baru()
     {
-        // kelas 
-        // tahun 
         $kelas = Kelas::orderBy('nama', 'DESC')->get();
+
         $tahun_ajarans = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->get();
         $gurus = Guru::latest()->get();
 

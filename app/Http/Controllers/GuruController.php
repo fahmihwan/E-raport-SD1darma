@@ -16,6 +16,7 @@ class GuruController extends Controller
     public function index()
     {
 
+
         return Inertia::render('Guru/Index', [
             'datas' => Guru::with('kelas')->latest()->paginate(5)
         ]);

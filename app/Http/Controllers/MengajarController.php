@@ -7,6 +7,7 @@ use App\Models\Guru_mengajar;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Mengajar_mapel;
+use App\Models\Mengikuti_kelas;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -60,18 +61,24 @@ class MengajarController extends Controller
     {
         // return $guru_mengajar_id;
         $kelas = Kelas::orderBy('nama', 'DESC')->get();
+
+
+        // $kelas = Mengikuti_kelas::with('kelas:id,nama')->get();
+        // $kelas = Mengikuti_kelas::select(['mengikuti_kelas.id', 'kelas.nama'])->join('kelas', 'mengikuti_kelas.kelas_id', '=', 'kelas.id')->get();
+
+
         $mapel = Mapel::latest()->get();
         $guru = Guru::where('id', $guru_mengajar_id)->first();
 
+
         $guru_mengajar = Mengajar_mapel::with([
-            'kelas:id,nama',
+            'mengikuti_kelas:id,nama',
             'mapel:id,nama'
         ])
             ->where('guru_id', $guru_mengajar_id)
             ->latest()
             ->get();
 
-        // return $guru_mengajar;
         return Inertia::render('Mengajar/Create_mengajar_mapel', [
             'guru_mengajar' => $guru_mengajar,
             'mapel' => $mapel,
@@ -87,6 +94,8 @@ class MengajarController extends Controller
             'mapel_id' => 'required',
             'guru_id' => 'required',
         ]);
+
+
 
         Mengajar_mapel::create($validated);
         return redirect()->back();

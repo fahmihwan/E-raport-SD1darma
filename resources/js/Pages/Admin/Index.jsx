@@ -6,6 +6,7 @@ import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
 const Index = ({ datas, auth }) => {
+    console.log(auth);
     const handleDelete = (id) => {
         return Inertia.delete(`/admin/akun/${id}`);
     };

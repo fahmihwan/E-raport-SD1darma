@@ -28,8 +28,8 @@ const Create_kelas_tahun_ajaran_baru = ({
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Tambah Periode Kelas"
-                breadcrumbs={["List Periode Kelas", "Tambah Periode Kelas"]}
+                title="Tambah Ajaran baru"
+                breadcrumbs={["Ajaran baru", "Tambah Ajaran baru"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -38,7 +38,7 @@ const Create_kelas_tahun_ajaran_baru = ({
                             <div className="card">
                                 <div className="card-header ">
                                     <div className="d-flex justify-content-between align-items-center ">
-                                        <span>Tambah Periode Kelas</span>
+                                        <span>Tambah Ajaran Baru</span>
                                         <Link
                                             className="btn btn-primary btn-sm"
                                             href={`/admin/mengikuti`}

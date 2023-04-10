@@ -1,7 +1,8 @@
 import { useForm } from "@inertiajs/inertia-react";
 import React from "react";
 
-const Login = () => {
+const Login = (props) => {
+    console.log(props);
     const { data, setData, post, processing, errors, reset } = useForm({
         username: "",
         password: "",

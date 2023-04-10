@@ -43,7 +43,6 @@ const Index = ({ list_guru_mengajar, auth }) => {
                                         id={d.id}
                                         nip={d.nip}
                                         nama={d.nama}
-                                        wali_kelas={d.kelas?.nama}
                                         list_mengajar={d.mengajar_mapels}
                                     />
                                 ))}
@@ -60,13 +59,10 @@ const Index = ({ list_guru_mengajar, auth }) => {
 
 export default Index;
 
-const CardGuru = ({ id, nip, nama, wali_kelas, list_mengajar }) => {
+const CardGuru = ({ id, nip, nama, list_mengajar }) => {
     return (
         <div className="col">
             <div className="card bg-light d-flex flex-fill  ">
-                <div className="card-header text-muted border-bottom-0">
-                    WALI KELAS : {wali_kelas}
-                </div>
                 <div className="card-body pt-0">
                     <div className="row">
                         <div className="col-12">

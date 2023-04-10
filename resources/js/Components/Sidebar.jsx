@@ -5,7 +5,7 @@ import UserLogo from "../../../public/dist/img/user2-160x160.jpg";
 export const Sidebar = ({ auth }) => {
     const [toggleMaster, setToggleMaster] = useState(false);
     const { url, component } = usePage();
-    // console.log(auth.guru && console.log('ok'););
+    // url.startsWith("/admin/dashboard")
     return (
         <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
             {/* Brand Logo */}
@@ -63,111 +63,144 @@ export const Sidebar = ({ auth }) => {
                             <Link
                                 href="/admin/dashboard"
                                 className={`nav-link ${
-                                    url == "/admin/dashboard" && "active"
+                                    url.startsWith("/admin/dashboard") &&
+                                    "active"
                                 }`}
                             >
                                 <i className="nav-icon fas fa-th" />
                                 <p>Dashboard</p>
                             </Link>
                         </li>
-                        <li className="nav-header">Master Data</li>
-                        <li
-                            className={`nav-item ${
-                                toggleMaster && "menu-is-opening menu-open"
-                            }`}
-                        >
-                            <a
-                                href="#"
-                                className={`nav-link ${
-                                    url == "/admin/master/kelas" ||
-                                    url == "/admin/master/tahun_ajaran" ||
-                                    url == "/admin/master/mapel"
-                                        ? "active"
-                                        : ""
-                                }`}
-                                onClick={() => setToggleMaster(!toggleMaster)}
-                            >
-                                <i className="nav-icon fas fa-tachometer-alt" />
-                                <p>
-                                    Master Data
-                                    <i className="right fas fa-angle-left" />
-                                </p>
-                            </a>
-                            <ul className="nav nav-treeview">
-                                <li className="nav-item">
-                                    <Link
-                                        href="/admin/master/tahun_ajaran"
-                                        className={`nav-link ${
-                                            url ==
-                                                "/admin/master/tahun_ajaran" &&
-                                            "active"
-                                        }`}
-                                    >
-                                        <i className="far fa-circle nav-icon" />
-                                        <p>Tahun Ajaran</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        href="/admin/master/kelas"
-                                        className={`nav-link ${
-                                            url == "/admin/master/kelas" &&
-                                            "active"
-                                        }`}
-                                    >
-                                        <i className="far fa-circle nav-icon" />
-                                        <p>Kelas</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        href="/admin/master/mapel"
-                                        className={`nav-link ${
-                                            url == "/admin/master/mapel" &&
-                                            "active"
-                                        }`}
-                                    >
-                                        <i className="far fa-circle nav-icon" />
-                                        <p>Mapel</p>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="nav-item">
-                            <Link href="/admin/guru" className="nav-link">
-                                <i className="nav-icon fas fa-th" />
-                                <p>Guru</p>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link href="/admin/murid" className="nav-link">
-                                <i className="nav-icon fas fa-th" />
-                                <p>Murid</p>
-                            </Link>
-                        </li>
-                        <li className="nav-header">Kelola Data</li>
-                        <li className="nav-item">
-                            <Link href="/admin/mengikuti" className="nav-link">
-                                <i className="nav-icon fas fa-th" />
-                                <p>Kelola Ajaran Baru</p>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link href="/admin/mengajar" className="nav-link">
-                                <i className="nav-icon fas fa-th" />
-                                <p>Kelola Pengajar</p>
-                            </Link>
-                        </li>
-                        {auth?.guru && (
-                            <li className="nav-item">
-                                <Link
-                                    href="/guru/penilaian"
-                                    className="nav-link"
+                        {auth?.admin && (
+                            <>
+                                <li className="nav-header">Master Data</li>
+                                <li
+                                    className={`nav-item ${
+                                        toggleMaster &&
+                                        "menu-is-opening menu-open"
+                                    }`}
                                 >
-                                    <i className="nav-icon fas fa-th" />
-                                    <p>Penilaian</p>
-                                </Link>
-                            </li>
+                                    <a
+                                        href="#"
+                                        className={`nav-link ${
+                                            url.startsWith("/admin/master")
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                        onClick={() =>
+                                            setToggleMaster(!toggleMaster)
+                                        }
+                                    >
+                                        <i className="nav-icon fas fa-tachometer-alt" />
+                                        <p>
+                                            Master Data
+                                            <i className="right fas fa-angle-left" />
+                                        </p>
+                                    </a>
+                                    <ul className="nav nav-treeview">
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/admin/master/tahun_ajaran"
+                                                className={`nav-link ${
+                                                    url ==
+                                                        "/admin/master/tahun_ajaran" &&
+                                                    "active"
+                                                }`}
+                                            >
+                                                <i className="far fa-circle nav-icon" />
+                                                <p>Tahun Ajaran</p>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/admin/master/kelas"
+                                                className={`nav-link ${
+                                                    url ==
+                                                        "/admin/master/kelas" &&
+                                                    "active"
+                                                }`}
+                                            >
+                                                <i className="far fa-circle nav-icon" />
+                                                <p>Kelas</p>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/admin/master/mapel"
+                                                className={`nav-link ${
+                                                    url ==
+                                                        "/admin/master/mapel" &&
+                                                    "active"
+                                                }`}
+                                            >
+                                                <i className="far fa-circle nav-icon" />
+                                                <p>Mapel</p>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/admin/guru"
+                                        className={`nav-link ${
+                                            url == "/admin/guru" && "active"
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Guru</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/admin/murid"
+                                        className={`nav-link ${
+                                            url == "/admin/murid" && "active"
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Murid</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-header">Kelola Data</li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/admin/mengikuti"
+                                        className={`nav-link ${
+                                            url == "/admin/mengikuti" &&
+                                            "active"
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p> Ajaran Baru</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/admin/mengajar"
+                                        className={`nav-link ${
+                                            url.startsWith("/admin/mengajar") &&
+                                            "active"
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Kelola Pengajar</p>
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+                        {auth?.guru && (
+                            <>
+                                <li className="nav-header">Kelola Nilai</li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/guru/penilaian"
+                                        className="nav-link"
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Penilaian</p>
+                                    </Link>
+                                </li>
+                            </>
                         )}
                     </ul>
                 </nav>

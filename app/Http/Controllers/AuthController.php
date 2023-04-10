@@ -25,20 +25,23 @@ class AuthController extends Controller
                 return redirect()->intended('/guru/penilaian');
             }
         } else {
-            if (Auth::guard('web')->attempt($validated)) {
+            if (Auth::guard('webadmin')->attempt($validated)) {
+                // if (Auth::attempt($validated)) {
                 return redirect()->intended('/admin/dashboard');
             }
         }
 
-        return redirect()->back()->withErrors('Login Error!!.');
+        return redirect()->back()->with('error_message', 'username atau password salah');
+
+        // return redirect()->back()->withErrors('Login Error!!.');
     }
 
     public function logout(Request $request)
     {
-
+        Auth::guard('webadmin')->logout();
         Auth::guard('webguru')->logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/');
     }
 }
