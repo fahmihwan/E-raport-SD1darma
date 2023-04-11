@@ -20,12 +20,12 @@ class PenilaianController extends Controller
     {
 
         $kelas = Mengajar_mapel::with([
-            'mengikuti_kelas.kelas:id,nama',
-            'mengikuti_kelas:id,kelas_id',
+            // 'mengikuti_kelas.kelas:id,nama',
+            // 'mengikuti_kelas:id,kelas_id',
+            'kelas:id,nama',
             'mapel:id,nama',
         ])->where('guru_id',  Auth::guard('webguru')->user()->id)->get();
 
-        // return $kelas;
 
         return Inertia::render('Penilaian/Index', [
             'kelas' => $kelas
@@ -37,12 +37,16 @@ class PenilaianController extends Controller
 
         $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->first();
 
-
         $mengikuti_kelas_id = Mengikuti_kelas::where([
             ['kelas_id', '=', $kelas_id],
             ['tahun_ajaran_id', '=', $tahun_ajaran->id]
-        ])->first()->id;
+        ])->first();
+        if (!$mengikuti_kelas_id) {
+            return redirect()->back()->with('error_message', 'murid tidak tersedia');
+        }
 
+
+        // return $mengikuti_kelas_id;
         // no induk ,nama, nilai
         $datas = Nilai_mapel::with([
             'mengikuti_ajaran.murid:id,nama,no_induk'
@@ -50,7 +54,7 @@ class PenilaianController extends Controller
             ['semester', $semester],
             ['mapel_id', $mapel_id],
         ])->whereHas('mengikuti_ajaran', function ($q) use ($mengikuti_kelas_id) {
-            $q->where('mengikuti_kelas_id', $mengikuti_kelas_id);
+            $q->where('mengikuti_kelas_id', $mengikuti_kelas_id->id);
         })->get();
 
         $kelas = Kelas::where('id', $kelas_id)->first()->nama;

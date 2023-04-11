@@ -10,7 +10,7 @@ class Mengajar_mapel extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function mengikuti_kelas()
+    public function mengikuti_kelas() //hapus
     {
         return $this->belongsTo(Mengikuti_kelas::class);
     }
@@ -18,5 +18,10 @@ class Mengajar_mapel extends Model
     public function mapel()
     {
         return $this->belongsTo(Mapel::class);
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
     }
 }

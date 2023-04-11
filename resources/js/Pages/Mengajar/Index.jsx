@@ -82,12 +82,7 @@ const CardGuru = ({ id, nip, nama, list_mengajar }) => {
                                     {list_mengajar?.map((d, i) => (
                                         <tr key={i}>
                                             <td>{d?.mapel?.nama}</td>
-                                            <td>
-                                                {
-                                                    d?.mengikuti_kelas?.kelas
-                                                        ?.nama
-                                                }
-                                            </td>
+                                            <td>{d?.kelas?.nama}</td>
                                         </tr>
                                     ))}
                                 </tbody>

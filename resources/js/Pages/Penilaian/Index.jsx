@@ -7,7 +7,8 @@ import { InputText, SelectSearch } from "../../Components/InputEL";
 import { Pagination } from "../../Components/Pagination";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ kelas, auth }) => {
+const Index = ({ kelas, auth, flash }) => {
+    // console.log(flash);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
@@ -16,6 +17,11 @@ const Index = ({ kelas, auth }) => {
             />
             <div className="content">
                 <div className="container-fluid">
+                    {flash?.error_message && (
+                        <div className="alert alert-danger" role="alert">
+                            {flash?.error_message}
+                        </div>
+                    )}
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
@@ -69,19 +75,17 @@ const Index = ({ kelas, auth }) => {
                                     {kelas?.map((d, i) => (
                                         <tr key={i}>
                                             <td>1</td>
-                                            <td>
-                                                {d.mengikuti_kelas.kelas.nama}
-                                            </td>
+                                            <td>{d.kelas.nama}</td>
                                             <td>{d.mapel.nama}</td>
                                             <td>
                                                 <Link
-                                                    href={`/guru/penilaian/${d?.mengikuti_kelas?.kelas_id}/${d.mapel_id}/1/list_nilai`}
+                                                    href={`/guru/penilaian/${d?.kelas_id}/${d.mapel_id}/1/list_nilai`}
                                                     className="btn btn-info mr-2"
                                                 >
                                                     Semester 1
                                                 </Link>
                                                 <Link
-                                                    href={`/guru/penilaian/${d?.mengikuti_kelas?.kelas_id}/${d.mapel_id}/2/list_nilai`}
+                                                    href={`/guru/penilaian/${d?.kelas_id}/${d.mapel_id}/2/list_nilai`}
                                                     className="btn btn-info"
                                                 >
                                                     Semester 2
