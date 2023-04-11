@@ -20,11 +20,13 @@ class PenilaianController extends Controller
     {
 
         $kelas = Mengajar_mapel::with([
-            'kelas:id,nama',
-            'mapel:id,nama'
+            'mengikuti_kelas.kelas:id,nama',
+            'mengikuti_kelas:id,kelas_id',
+            'mapel:id,nama',
         ])->where('guru_id',  Auth::guard('webguru')->user()->id)->get();
 
-        return $kelas;
+        // return $kelas;
+
         return Inertia::render('Penilaian/Index', [
             'kelas' => $kelas
         ]);
@@ -34,6 +36,7 @@ class PenilaianController extends Controller
     {
 
         $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->first();
+
 
         $mengikuti_kelas_id = Mengikuti_kelas::where([
             ['kelas_id', '=', $kelas_id],
@@ -93,6 +96,7 @@ class PenilaianController extends Controller
             'semester' => 'required',
             'mapel_id' => 'required',
         ]);
+
 
         try {
             DB::beginTransaction();

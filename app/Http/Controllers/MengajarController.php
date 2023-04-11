@@ -17,9 +17,11 @@ class MengajarController extends Controller
     public function index()
     {
         $list_guru_mengajar = Guru::with([
-            'mengajar_mapels.kelas:id,nama',
+            'mengajar_mapels.mengikuti_kelas:id,kelas_id',
             'mengajar_mapels.mapel:id,nama',
-        ])->latest()->get();
+            'mengajar_mapels.mengikuti_kelas.kelas:id,nama',
+        ])->latest()->get(['id', 'nama', 'nip']);
+
         return Inertia::render('Mengajar/Index', [
             'list_guru_mengajar' => $list_guru_mengajar
         ]);
@@ -60,10 +62,11 @@ class MengajarController extends Controller
     public function create_mengajar_mapel($guru_mengajar_id)
     {
         // return $guru_mengajar_id;
-        $kelas = Kelas::orderBy('nama', 'DESC')->get();
+        // $kelas = Kelas::orderBy('nama', 'DESC')->get();
 
 
-        // $kelas = Mengikuti_kelas::with('kelas:id,nama')->get();
+        $kelas = Mengikuti_kelas::with('kelas:id,nama')->get();
+
         // $kelas = Mengikuti_kelas::select(['mengikuti_kelas.id', 'kelas.nama'])->join('kelas', 'mengikuti_kelas.kelas_id', '=', 'kelas.id')->get();
 
 
@@ -72,12 +75,13 @@ class MengajarController extends Controller
 
 
         $guru_mengajar = Mengajar_mapel::with([
-            'mengikuti_kelas:id,nama',
+            'mengikuti_kelas.kelas',
             'mapel:id,nama'
         ])
             ->where('guru_id', $guru_mengajar_id)
             ->latest()
             ->get();
+
 
         return Inertia::render('Mengajar/Create_mengajar_mapel', [
             'guru_mengajar' => $guru_mengajar,
@@ -90,11 +94,10 @@ class MengajarController extends Controller
     public function store_mengajar_mapel(Request $request)
     {
         $validated =   $request->validate([
-            'kelas_id' => 'required',
+            'mengikuti_kelas_id' => 'required',
             'mapel_id' => 'required',
             'guru_id' => 'required',
         ]);
-
 
 
         Mengajar_mapel::create($validated);

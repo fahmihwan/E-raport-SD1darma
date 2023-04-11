@@ -8,12 +8,12 @@ import { Inertia } from "@inertiajs/inertia";
 
 const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
-        kelas_id: "",
+        mengikuti_kelas_id: "",
         mapel_id: "",
         guru_id: guru.id,
     });
 
-    let optionKelas = kelas.map((d) => ({ value: d.id, label: d.nama }));
+    let optionKelas = kelas.map((d) => ({ value: d.id, label: d.kelas.nama }));
     let optionMapel = mapel.map((d) => ({ value: d.id, label: d.nama }));
 
     const handleSubmit = async (e) => {
@@ -78,7 +78,10 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
                                             <label>kelas</label>
                                             <SelectSearch
                                                 handleChange={(e) =>
-                                                    setData("kelas_id", e.value)
+                                                    setData(
+                                                        "mengikuti_kelas_id",
+                                                        e.value
+                                                    )
                                                 }
                                                 options={optionKelas}
                                             />
@@ -111,7 +114,12 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
                                             {guru_mengajar?.map((d, i) => (
                                                 <tr key={i}>
                                                     <th scope="row">{i + 1}</th>
-                                                    <td>{d?.kelas?.nama}</td>
+                                                    <td>
+                                                        {
+                                                            d?.mengikuti_kelas
+                                                                ?.kelas?.nama
+                                                        }
+                                                    </td>
                                                     <td>{d?.mapel?.nama}</td>
                                                     <td>
                                                         <button

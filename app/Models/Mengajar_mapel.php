@@ -12,7 +12,7 @@ class Mengajar_mapel extends Model
 
     public function mengikuti_kelas()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Mengikuti_kelas::class);
     }
 
     public function mapel()

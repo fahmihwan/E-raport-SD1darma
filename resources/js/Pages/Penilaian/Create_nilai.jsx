@@ -30,7 +30,9 @@ const Create_nilai = ({ mengikuti_kelas, mapel, semester, auth }) => {
         setData("data", list);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
         post(`/guru/penilaian/store_nilai`);
     };
 

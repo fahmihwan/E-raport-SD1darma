@@ -44,9 +44,9 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
                             id="modal-default"
                             title="Tambah Murid Baru"
                         />
-                        <button className="ml-2 btn btn-info">
+                        {/* <button className="ml-2 btn btn-info">
                             Kelola Kelulusan
-                        </button>
+                        </button> */}
                     </div>
 
                     <ModalLayout

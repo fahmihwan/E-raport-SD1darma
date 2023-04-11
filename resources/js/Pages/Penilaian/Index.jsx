@@ -69,17 +69,19 @@ const Index = ({ kelas, auth }) => {
                                     {kelas?.map((d, i) => (
                                         <tr key={i}>
                                             <td>1</td>
-                                            <td>{d.kelas.nama}</td>
+                                            <td>
+                                                {d.mengikuti_kelas.kelas.nama}
+                                            </td>
                                             <td>{d.mapel.nama}</td>
                                             <td>
                                                 <Link
-                                                    href={`/guru/penilaian/${d.kelas_id}/${d.mapel_id}/1/list_nilai`}
+                                                    href={`/guru/penilaian/${d?.mengikuti_kelas?.kelas_id}/${d.mapel_id}/1/list_nilai`}
                                                     className="btn btn-info mr-2"
                                                 >
                                                     Semester 1
                                                 </Link>
                                                 <Link
-                                                    href={`/guru/penilaian/${d.kelas_id}/${d.mapel_id}/2/list_nilai`}
+                                                    href={`/guru/penilaian/${d?.mengikuti_kelas?.kelas_id}/${d.mapel_id}/2/list_nilai`}
                                                     className="btn btn-info"
                                                 >
                                                     Semester 2

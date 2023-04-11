@@ -59,7 +59,7 @@ export const Sidebar = ({ auth }) => {
                         role="menu"
                         data-accordion="false"
                     >
-                        <li className="nav-item ">
+                        {/* <li className="nav-item ">
                             <Link
                                 href="/admin/dashboard"
                                 className={`nav-link ${
@@ -70,7 +70,7 @@ export const Sidebar = ({ auth }) => {
                                 <i className="nav-icon fas fa-th" />
                                 <p>Dashboard</p>
                             </Link>
-                        </li>
+                        </li> */}
                         {auth?.admin && (
                             <>
                                 <li className="nav-header">Master Data</li>

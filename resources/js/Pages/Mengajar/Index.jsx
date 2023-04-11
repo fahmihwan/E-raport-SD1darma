@@ -40,10 +40,10 @@ const Index = ({ list_guru_mengajar, auth }) => {
                                 {list_guru_mengajar?.map((d, i) => (
                                     <CardGuru
                                         key={i}
-                                        id={d.id}
-                                        nip={d.nip}
-                                        nama={d.nama}
-                                        list_mengajar={d.mengajar_mapels}
+                                        id={d?.id}
+                                        nip={d?.nip}
+                                        nama={d?.nama}
+                                        list_mengajar={d?.mengajar_mapels}
                                     />
                                 ))}
                             </div>
@@ -81,8 +81,13 @@ const CardGuru = ({ id, nip, nama, list_mengajar }) => {
                                 <tbody>
                                     {list_mengajar?.map((d, i) => (
                                         <tr key={i}>
-                                            <td>{d?.mapel.nama}</td>
-                                            <td>{d?.kelas.nama}</td>
+                                            <td>{d?.mapel?.nama}</td>
+                                            <td>
+                                                {
+                                                    d?.mengikuti_kelas?.kelas
+                                                        ?.nama
+                                                }
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
