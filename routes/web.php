@@ -8,7 +8,9 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MengajarController;
 use App\Http\Controllers\MengikutiController;
 use App\Http\Controllers\MuridController;
+use App\Http\Controllers\NilaiPesertaDidikController;
 use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\RaporMuridController;
 use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -81,3 +83,11 @@ Route::post('/guru/penilaian/store_nilai', [PenilaianController::class, 'store_n
 
 Route::get('/guru/penilaian/{kelas_id}/{mapel_id}/{semester}/edit_nilai', [PenilaianController::class, 'edit_nilai']);
 Route::put('/guru/penilaian', [PenilaianController::class, 'update_nilai']);
+
+// nilai peserta didik
+Route::get('/guru/nilai-peserta-didik', [NilaiPesertaDidikController::class, 'index']);
+Route::get('/guru/nilai-peserta-didik/{kelas_id}/{guru_id}/{mapel_id}/{semester}/detail_nilai_peserta_didik', [NilaiPesertaDidikController::class, 'detail_nilai_peserta_didik']);
+
+// rapor
+Route::get('/guru/rapor-murid', [RaporMuridController::class, 'index']);
+Route::get('/guru/rapor-murid/{mengikuti_ajaran_id}/{semester}/detail_nilai_murid', [RaporMuridController::class, 'detail_nilai_murid']);

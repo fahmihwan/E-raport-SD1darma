@@ -14,4 +14,9 @@ class Nilai_mapel extends Model
     {
         return $this->belongsTo(Mengikuti_ajaran::class);
     }
+
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class);
+    }
 }

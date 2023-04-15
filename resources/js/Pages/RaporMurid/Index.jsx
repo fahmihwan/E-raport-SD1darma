@@ -4,41 +4,28 @@ import React, { useRef, useState, useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ kelas, auth, flash }) => {
+const Index = ({ auth, datas }) => {
+    console.log(datas);
     // console.log(flash);
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout
-                title="List Mengikuti Kelas"
-                breadcrumbs={["Kelola"]}
-            />
+            <HeaderLayout title="Rapor murid" breadcrumbs={["Kelola"]} />
             <div className="content">
                 <div className="container-fluid">
-                    {flash?.error_message && (
-                        <div className="alert alert-danger" role="alert">
-                            {flash?.error_message}
-                        </div>
-                    )}
-                    <div className="mb-3">
-                        {/* <Link
-                            href="/guru/penilaian"
-                            className="btn btn-primary mr-2"
-                        >
-                            Nilai Seluruh mapel
-                        </Link>
-                        <Link href="/" className="btn btn-primary">
-                            Nilai Seluruh mapel
-                        </Link> */}
-                    </div>
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                {/* <h3 className="card-title">List</h3> */}
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">tahun ajaran :</span>
-                                    <div className="mr-2"></div>
                                 </div>
-                                <div className="d-flex align-items-center"></div>
+                                <div className="d-flex align-items-center">
+                                    {/* <Link
+                                        href="/admin/mengikuti/create_kelas_tahun_ajaran_baru"
+                                        className="btn btn-primary"
+                                    >
+                                        Tamabh Data
+                                    </Link> */}
+                                </div>
                             </div>
                         </div>
                         {/* /.card-header */}
@@ -46,30 +33,30 @@ const Index = ({ kelas, auth, flash }) => {
                             <table className="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: "10px" }}>#</th>
-                                        <th>Kelas</th>
-                                        <th>Mapel</th>
+                                        <th style={{ width: "20px" }}>#</th>
+                                        <th>No Induk</th>
+                                        <th>Murid</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {kelas?.map((d, i) => (
+                                    {datas?.map((d, i) => (
                                         <tr key={i}>
-                                            <td>1</td>
-                                            <td>{d.kelas.nama}</td>
-                                            <td>{d.mapel.nama}</td>
+                                            <td>{i + 1}</td>
+                                            <td>{d.murid.no_induk}</td>
+                                            <td>{d.murid.nama}</td>
                                             <td>
                                                 <Link
-                                                    href={`/guru/penilaian/${d?.kelas_id}/${d.mapel_id}/1/list_nilai`}
+                                                    href={`/guru/rapor-murid/${d.id}/1/detail_nilai_murid`}
                                                     className="btn btn-info mr-2"
                                                 >
-                                                    Semester 1
+                                                    semester 1
                                                 </Link>
                                                 <Link
-                                                    href={`/guru/penilaian/${d?.kelas_id}/${d.mapel_id}/2/list_nilai`}
-                                                    className="btn btn-info"
+                                                    href={`/guru/rapor-murid/${d.id}/2/detail_nilai_murid`}
+                                                    className="btn btn-info mr-2"
                                                 >
-                                                    Semester 2
+                                                    semester 2
                                                 </Link>
                                             </td>
                                         </tr>

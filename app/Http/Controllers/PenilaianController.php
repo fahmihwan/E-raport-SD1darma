@@ -27,6 +27,7 @@ class PenilaianController extends Controller
         ])->where('guru_id',  Auth::guard('webguru')->user()->id)->get();
 
 
+
         return Inertia::render('Penilaian/Index', [
             'kelas' => $kelas
         ]);
@@ -45,8 +46,6 @@ class PenilaianController extends Controller
             return redirect()->back()->with('error_message', 'murid tidak tersedia');
         }
 
-
-        // return $mengikuti_kelas_id;
         // no induk ,nama, nilai
         $datas = Nilai_mapel::with([
             'mengikuti_ajaran.murid:id,nama,no_induk'

@@ -17,7 +17,8 @@ class MuridFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->unique()->randomElement(['fajar', 'rian', 'ahmad', 'nur', 'dimas']),
+            // 'nama' => fake()->unique()->randomElement(['fajar', 'rian', 'ahmad', 'nur', 'dimas']),
+            'nama' => fake()->unique()->randomElement(['fajar', 'cipluk', 'tumbar', 'boncel', 'yahya']),
             'no_induk' => fake()->unique()->randomElement(['3707', '3708', '3709', '3710', '3711']),
             'jenis_kelamin' => 'L',
             'tempat_lahir' => fake()->randomElement(['Ponorogo', 'Magetan', 'Madiun']),

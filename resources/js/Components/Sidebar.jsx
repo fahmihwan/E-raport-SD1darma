@@ -143,7 +143,9 @@ export const Sidebar = ({ auth }) => {
                                     <Link
                                         href="/admin/guru"
                                         className={`nav-link ${
-                                            url == "/admin/guru" && "active"
+                                            url.startsWith("/admin/guru")
+                                                ? "active"
+                                                : ""
                                         }`}
                                     >
                                         <i className="nav-icon fas fa-th" />
@@ -154,7 +156,9 @@ export const Sidebar = ({ auth }) => {
                                     <Link
                                         href="/admin/murid"
                                         className={`nav-link ${
-                                            url == "/admin/murid" && "active"
+                                            url.startsWith("/admin/murid")
+                                                ? "active"
+                                                : ""
                                         }`}
                                     >
                                         <i className="nav-icon fas fa-th" />
@@ -166,8 +170,9 @@ export const Sidebar = ({ auth }) => {
                                     <Link
                                         href="/admin/mengikuti"
                                         className={`nav-link ${
-                                            url == "/admin/mengikuti" &&
-                                            "active"
+                                            url.startsWith("/admin/mengikuti")
+                                                ? "active"
+                                                : ""
                                         }`}
                                     >
                                         <i className="nav-icon fas fa-th" />
@@ -178,8 +183,9 @@ export const Sidebar = ({ auth }) => {
                                     <Link
                                         href="/admin/mengajar"
                                         className={`nav-link ${
-                                            url.startsWith("/admin/mengajar") &&
-                                            "active"
+                                            url.startsWith("/admin/mengajar")
+                                                ? "active"
+                                                : ""
                                         }`}
                                     >
                                         <i className="nav-icon fas fa-th" />
@@ -191,13 +197,61 @@ export const Sidebar = ({ auth }) => {
                         {auth?.guru && (
                             <>
                                 <li className="nav-header">Kelola Nilai</li>
+
                                 <li className="nav-item">
                                     <Link
                                         href="/guru/penilaian"
-                                        className="nav-link"
+                                        className={`nav-link ${
+                                            url.startsWith("/guru/penilaian")
+                                                ? "active"
+                                                : ""
+                                        }`}
                                     >
                                         <i className="nav-icon fas fa-th" />
-                                        <p>Penilaian</p>
+                                        <p>Nilai Mengajar</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-header">Wali Kelas</li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/guru/penilaian"
+                                        className={`nav-link ${
+                                            url.startsWith("/guru/penilaias")
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Nilai Kepribadian Murid</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-header">Laporan</li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/guru/nilai-peserta-didik"
+                                        className={`nav-link ${
+                                            url.startsWith(
+                                                "/guru/nilai-peserta-didik"
+                                            )
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Nilai Peserta didik</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/guru/rapor-murid"
+                                        className={`nav-link ${
+                                            url.startsWith("/guru/rapor-murid")
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-th" />
+                                        <p>Rapor Murid</p>
                                     </Link>
                                 </li>
                             </>

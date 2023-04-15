@@ -24,4 +24,8 @@ class Mengajar_mapel extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class);
+    }
 }
