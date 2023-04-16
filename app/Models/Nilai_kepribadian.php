@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Nilai_kepribadian extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 }

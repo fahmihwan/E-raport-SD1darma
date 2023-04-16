@@ -5,7 +5,6 @@ import UserLogo from "../../../public/dist/img/user2-160x160.jpg";
 export const Sidebar = ({ auth }) => {
     const [toggleMaster, setToggleMaster] = useState(false);
     const { url, component } = usePage();
-    // url.startsWith("/admin/dashboard")
     return (
         <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
             {/* Brand Logo */}
@@ -214,9 +213,11 @@ export const Sidebar = ({ auth }) => {
                                 <li className="nav-header">Wali Kelas</li>
                                 <li className="nav-item">
                                     <Link
-                                        href="/guru/penilaian"
+                                        href="/guru/nilai-kepribadian"
                                         className={`nav-link ${
-                                            url.startsWith("/guru/penilaias")
+                                            url.startsWith(
+                                                "/guru/nilai-kepribadian"
+                                            )
                                                 ? "active"
                                                 : ""
                                         }`}

@@ -1,26 +1,29 @@
-import { Link } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/inertia-react";
 import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
+import { InputText } from "../../Components/InputEL";
 
-// 'datas' => $datas,
-// 'tahun_ajaran' => $tahun_ajaran,
-// 'semester' => $semester,
-// 'guru' => $view_guru
-const Detail_nilai_murid = ({ nilai, detailCard, nilai_kepribadian, auth }) => {
+const Detail_nilai_kepribadian = ({
+    auth,
+    detailCard,
+    mengikuti_ajaran_id,
+    semester,
+    nilai_kepribadian,
+}) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title={"List Nilai Peserta Didik"}
+                title={"Detail Nilai Kepribadian Siswa"}
                 breadcrumbs={[
                     "Nilai Peserta Didik",
-                    "List Nilai Peserta Didik",
+                    "Detail Nilai Kepribadian Siswa",
                 ]}
             />
             <div className="content">
                 <div className="container-fluid">
                     <Link
-                        href="/guru/rapor-murid"
+                        href="/guru/nilai-kepribadian"
                         className="btn btn-primary mb-2  float-right"
                     >
                         kembali
@@ -33,49 +36,35 @@ const Detail_nilai_murid = ({ nilai, detailCard, nilai_kepribadian, auth }) => {
                         tahun_ajaran={detailCard?.tahun_ajaran}
                     />
 
-                    {/*  */}
-
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">
                                         tahun ajaran :{" "}
-                                        {/* {tahun_ajaran.tahun_ajaran} */}
+                                        {detailCard?.tahun_ajaran}
                                     </span>
                                 </div>
+                                {nilai_kepribadian == null ? (
+                                    <Link
+                                        href={`/guru/nilai-kepribadian/${mengikuti_ajaran_id}/${semester}/create_nilai_kepribadian`}
+                                        className="btn btn-primary"
+                                    >
+                                        Tambah Data
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        href={`/guru/nilai-kepribadian/${mengikuti_ajaran_id}/${semester}/edit_nilai_kepribadian`}
+                                        className="btn btn-warning"
+                                    >
+                                        Edit
+                                    </Link>
+                                )}
                             </div>
                         </div>
                         {/* /.card-header */}
                         <div className="card-body">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <table className="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style={{ width: "20px" }}>
-                                                    No
-                                                </th>
-                                                <th>Mata Pelajaran</th>
-                                                <th>KKM</th>
-                                                <th>Nilai Siswa</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {nilai?.map((d, i) => (
-                                                <tr key={i}>
-                                                    <td>{i + 1}</td>
-                                                    <td>{d?.mapel?.nama}</td>
-                                                    <td>{d?.mapel?.kkm}</td>
-                                                    <td> {d?.nilai}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <p>Nilai Kepribadian</p>
-                            <div className="row">
+                            <div className="row ">
                                 <div className="col-md-6">
                                     <table className="table table-bordered">
                                         <tbody>
@@ -141,7 +130,7 @@ const Detail_nilai_murid = ({ nilai, detailCard, nilai_kepribadian, auth }) => {
     );
 };
 
-export default Detail_nilai_murid;
+export default Detail_nilai_kepribadian;
 
 const CardDetail = ({ data_murid, kelas, semester, tahun_ajaran }) => {
     return (

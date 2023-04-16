@@ -8,6 +8,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MengajarController;
 use App\Http\Controllers\MengikutiController;
 use App\Http\Controllers\MuridController;
+use App\Http\Controllers\NilaiKepribadianMuridController;
 use App\Http\Controllers\NilaiPesertaDidikController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\RaporMuridController;
@@ -84,6 +85,15 @@ Route::post('/guru/penilaian/store_nilai', [PenilaianController::class, 'store_n
 Route::get('/guru/penilaian/{kelas_id}/{mapel_id}/{semester}/edit_nilai', [PenilaianController::class, 'edit_nilai']);
 Route::put('/guru/penilaian', [PenilaianController::class, 'update_nilai']);
 
+Route::get('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 'index']);
+Route::get('/guru/nilai-kepribadian/{mengikuti_ajaran_id}/{semester}/create_nilai_kepribadian', [NilaiKepribadianMuridController::class, 'create_nilai_kepribadian']);
+Route::get('/guru/nilai-kepribadian/{mengikuti_ajaran_id}/{semester}/edit_nilai_kepribadian', [NilaiKepribadianMuridController::class, 'edit_nilai_kepribadian']);
+Route::get('/guru/nilai-kepribadian/detail/{mengikuti_ajaran_id}/{semester}/detail_nilai_kepribadian', [NilaiKepribadianMuridController::class, 'detail_nilai_kepribadian']);
+Route::post('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 'store']);
+Route::put('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 'update']);
+
+
+//LAPORAN
 // nilai peserta didik
 Route::get('/guru/nilai-peserta-didik', [NilaiPesertaDidikController::class, 'index']);
 Route::get('/guru/nilai-peserta-didik/{kelas_id}/{guru_id}/{mapel_id}/{semester}/detail_nilai_peserta_didik', [NilaiPesertaDidikController::class, 'detail_nilai_peserta_didik']);

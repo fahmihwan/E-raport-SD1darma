@@ -6,6 +6,7 @@ use App\Models\Mapel;
 use App\Models\Mengajar_mapel;
 use App\Models\Mengikuti_ajaran;
 use App\Models\Mengikuti_kelas;
+use App\Models\Nilai_kepribadian;
 use App\Models\Nilai_mapel;
 use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ class RaporMuridController extends Controller
             'kelas' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->mengikuti_kelas->kelas->nama
         ];
 
+        $nilai_kepribadian = Nilai_kepribadian::where([
+            ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
+            ['semester', '=', $semester],
+        ])->first();
 
         $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])->where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
@@ -49,7 +54,8 @@ class RaporMuridController extends Controller
 
         return Inertia::render('RaporMurid/Detail_nilai_murid', [
             'nilai' => $nilai,
-            'detailCard' => $card
+            'detailCard' => $card,
+            'nilai_kepribadian' => $nilai_kepribadian
         ]);
     }
 }

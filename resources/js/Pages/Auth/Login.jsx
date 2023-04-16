@@ -2,7 +2,6 @@ import { useForm } from "@inertiajs/inertia-react";
 import React from "react";
 
 const Login = (props) => {
-    console.log(props);
     const { data, setData, post, processing, errors, reset } = useForm({
         username: "",
         password: "",
@@ -12,8 +11,6 @@ const Login = (props) => {
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
-
-    console.log(data.akses);
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -3,22 +3,7 @@ import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-// 'datas' => $datas,
-// 'tahun_ajaran' => $tahun_ajaran,
-// 'semester' => $semester,
-// 'guru' => $view_guru
 const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
-    console.log(guru);
-
-    console.log([
-        {
-            guru: guru.nama,
-            nip: guru.nip,
-            mapel: mapel,
-            semester: semester,
-            tahun_ajaran: tahun_ajaran.tahun_ajaran,
-        },
-    ]);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
