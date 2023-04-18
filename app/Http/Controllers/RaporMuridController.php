@@ -28,6 +28,7 @@ class RaporMuridController extends Controller
 
         return Inertia::render('RaporMurid/Index', [
             'datas' => $mengikuti_ajaran,
+            'tahun_ajaran' => $tahun_ajaran->tahun_ajaran
         ]);
     }
 

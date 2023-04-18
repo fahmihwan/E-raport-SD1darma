@@ -18,20 +18,10 @@ const Index = ({ auth }) => {
 
     const closeModalRef = useRef(null);
 
-    const handleChange = (e) => {
-        setData(e.target.name, e.target.value);
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await post("/admin/master/mapel");
-        closeModalRef.current.click();
-        setData("nama", "");
-    };
-
     const handleDelete = (e, id) => {
         e.preventDefault();
         confirm("apakah anda yakin ingin menghapus?") &&
-            Inertia.delete("/admin/master/mapel/" + id);
+            Inertia.delete("/admin/guru/" + id);
     };
 
     return (

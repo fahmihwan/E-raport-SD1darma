@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mengikuti_ajaran extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
+
     public function murid()
     {
         return $this->belongsTo(Murid::class)->withTrashed();

@@ -12,8 +12,7 @@ class Tahun_ajaranController extends Controller
     public function index()
     {
 
-        // dd();
-        $datas =  Tahun_ajaran::latest()->paginate(10);
+        $datas =  Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->paginate(10);
         return Inertia::render('Master/Tahun_ajaran/Index', [
             'datas' => $datas
         ]);

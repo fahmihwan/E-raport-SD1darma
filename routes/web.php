@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
@@ -33,10 +34,11 @@ Route::post('/admin/auth/', [AuthController::class, 'authenticated']);
 Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
 
 
-Route::get('/admin/dashboard', function () {
-    return Inertia::render('Dashboard');
-});
+// Route::get('/admin/dashboard', function () {
 
+// });
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/admin/master/tahun_ajaran', [Tahun_ajaranController::class, 'index']);
 Route::post('/admin/master/tahun_ajaran', [Tahun_ajaranController::class, 'store']);
@@ -71,6 +73,11 @@ Route::post('/admin/mengikuti/create_kelas_tahun_ajaran_baru', [MengikutiControl
 Route::get('/admin/mengikuti/{kelas_id}/list_siswa', [MengikutiController::class, 'list_siswa']);
 Route::post('/admin/mengikuti/store_siswa_baru', [MengikutiController::class, 'store_mengikuti_ajaran']);
 Route::delete('/admin/mengikuti/{id}/mengikuti_ajaran', [MengikutiController::class, 'destroy_mengikuti_ajaran']);
+
+// mengikuti kelas
+Route::get('/admin/mengikuti/{id}/mengikuti_kelas', [MengikutiController::class, 'edit_mengikuti_kelas']);
+Route::put('/admin/mengikuti/{id}/mengikuti_kelas', [MengikutiController::class, 'update_mengikuti_kelas']);
+Route::delete('/admin/mengikuti/{id}/mengikuti_kelas', [MengikutiController::class, 'destroy_mengikuti_kelas']);
 
 // get_kelas_tahun_ajaran
 Route::get('/admin/get_kelas_tahun_ajaran/{id}', [MengikutiController::class, 'get_kelas_tahun_ajaran']);

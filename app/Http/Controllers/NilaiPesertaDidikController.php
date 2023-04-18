@@ -23,8 +23,11 @@ class NilaiPesertaDidikController extends Controller
         $list_kelas_mapel = Mengajar_mapel::with(['mapel:id,nama', 'kelas:id,nama', 'guru:id,nama'])
             ->where('kelas_id', $wali_kelas)->get();
 
+        $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->tahun_ajaran;
+
         return Inertia::render('NilaiPesertaDidik/Index', [
-            'list_kelas_mapel' => $list_kelas_mapel
+            'list_kelas_mapel' => $list_kelas_mapel,
+            'tahun_ajaran' => $tahun_ajaran
         ]);
     }
 

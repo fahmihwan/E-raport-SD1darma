@@ -6,7 +6,7 @@ export const Sidebar = ({ auth }) => {
     const [toggleMaster, setToggleMaster] = useState(false);
     const { url, component } = usePage();
     return (
-        <aside className="main-sidebar  sidebar-dark-warning  elevation-4">
+        <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* Brand Logo */}
             <Link href="/admin/dashboard" className="brand-link">
                 <img
@@ -15,41 +15,26 @@ export const Sidebar = ({ auth }) => {
                     className="brand-image img-circle elevation-3"
                     style={{ opacity: ".8" }}
                 />
-                <span className="brand-text font-weight-light">AdminLTE 3</span>
+                <span className="brand-text font-weight-light">E-raport</span>
             </Link>
             {/* Sidebar */}
-            <div className="sidebar">
+            <div className="sidebar ">
                 {/* Sidebar user panel (optional) */}
-                <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div className="image">
-                        <img
-                            src={UserLogo}
-                            className="img-circle elevation-2"
-                            alt="User Image"
-                        />
+                <div className="user-panel mt-3 pb-3 mb-3 d-flex ">
+                    <div
+                        className="bg-white d-flex rounded-circle align-items-center justify-content-center ml-3"
+                        style={{ width: "30px", height: "30px" }}
+                    >
+                        <i className="fa-regular fa-user"></i>
                     </div>
                     <div className="info">
                         <a href="#" className="d-block">
-                            Alexander Pierce
+                            {auth?.admin?.nama ?? auth?.guru?.nama}
                         </a>
                     </div>
                 </div>
                 {/* SidebarSearch Form */}
-                <div className="form-inline">
-                    <div className="input-group" data-widget="sidebar-search">
-                        <input
-                            className="form-control form-control-sidebar"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <div className="input-group-append">
-                            <button className="btn btn-sidebar">
-                                <i className="fas fa-search fa-fw" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
+
                 {/* Sidebar Menu */}
                 <nav className="mt-2">
                     <ul
@@ -58,7 +43,7 @@ export const Sidebar = ({ auth }) => {
                         role="menu"
                         data-accordion="false"
                     >
-                        {/* <li className="nav-item ">
+                        <li className="nav-item ">
                             <Link
                                 href="/admin/dashboard"
                                 className={`nav-link ${
@@ -69,7 +54,7 @@ export const Sidebar = ({ auth }) => {
                                 <i className="nav-icon fas fa-th" />
                                 <p>Dashboard</p>
                             </Link>
-                        </li> */}
+                        </li>
                         {auth?.admin && (
                             <>
                                 <li className="nav-header">Master Data</li>
@@ -165,7 +150,7 @@ export const Sidebar = ({ auth }) => {
                                     </Link>
                                 </li>
                                 <li className="nav-header">Kelola Data</li>
-                                <li className="nav-item">
+                                <li className="nav-item ">
                                     <Link
                                         href="/admin/mengikuti"
                                         className={`nav-link ${
@@ -210,51 +195,63 @@ export const Sidebar = ({ auth }) => {
                                         <p>Nilai Mengajar</p>
                                     </Link>
                                 </li>
-                                <li className="nav-header">Wali Kelas</li>
-                                <li className="nav-item">
-                                    <Link
-                                        href="/guru/nilai-kepribadian"
-                                        className={`nav-link ${
-                                            url.startsWith(
-                                                "/guru/nilai-kepribadian"
-                                            )
-                                                ? "active"
-                                                : ""
-                                        }`}
-                                    >
-                                        <i className="nav-icon fas fa-th" />
-                                        <p>Nilai Kepribadian Murid</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-header">Laporan</li>
-                                <li className="nav-item">
-                                    <Link
-                                        href="/guru/nilai-peserta-didik"
-                                        className={`nav-link ${
-                                            url.startsWith(
-                                                "/guru/nilai-peserta-didik"
-                                            )
-                                                ? "active"
-                                                : ""
-                                        }`}
-                                    >
-                                        <i className="nav-icon fas fa-th" />
-                                        <p>Nilai Peserta didik</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        href="/guru/rapor-murid"
-                                        className={`nav-link ${
-                                            url.startsWith("/guru/rapor-murid")
-                                                ? "active"
-                                                : ""
-                                        }`}
-                                    >
-                                        <i className="nav-icon fas fa-th" />
-                                        <p>Rapor Murid</p>
-                                    </Link>
-                                </li>
+                                {auth?.guru?.kelas_id && (
+                                    <>
+                                        <li className="nav-header">
+                                            Wali Kelas
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/guru/nilai-kepribadian"
+                                                className={`nav-link ${
+                                                    url.startsWith(
+                                                        "/guru/nilai-kepribadian"
+                                                    )
+                                                        ? "active"
+                                                        : ""
+                                                }`}
+                                            >
+                                                <i className="nav-icon fas fa-th" />
+                                                <p>Nilai Kepribadian Murid</p>
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
+                                {auth?.guru?.kelas_id && (
+                                    <>
+                                        <li className="nav-header">Laporan</li>
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/guru/nilai-peserta-didik"
+                                                className={`nav-link ${
+                                                    url.startsWith(
+                                                        "/guru/nilai-peserta-didik"
+                                                    )
+                                                        ? "active"
+                                                        : ""
+                                                }`}
+                                            >
+                                                <i className="nav-icon fas fa-th" />
+                                                <p>Nilai peserta didik</p>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/guru/rapor-murid"
+                                                className={`nav-link ${
+                                                    url.startsWith(
+                                                        "/guru/rapor-murid"
+                                                    )
+                                                        ? "active"
+                                                        : ""
+                                                }`}
+                                            >
+                                                <i className="nav-icon fas fa-th" />
+                                                <p>Rapor Murid</p>
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
                             </>
                         )}
                     </ul>

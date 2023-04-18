@@ -14,11 +14,8 @@ const Detail_nilai_kepribadian = ({
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title={"Detail Nilai Kepribadian Siswa"}
-                breadcrumbs={[
-                    "Nilai Peserta Didik",
-                    "Detail Nilai Kepribadian Siswa",
-                ]}
+                title={"Detail Nilai Kepribadian "}
+                breadcrumbs={["Nilai kepribadian", "Detail nilai kepribadian"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -41,8 +38,7 @@ const Detail_nilai_kepribadian = ({
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">
-                                        tahun ajaran :{" "}
-                                        {detailCard?.tahun_ajaran}
+                                        Nilai kepribadian murid
                                     </span>
                                 </div>
                                 {nilai_kepribadian == null ? (

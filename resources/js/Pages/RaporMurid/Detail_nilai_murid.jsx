@@ -3,19 +3,12 @@ import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-// 'datas' => $datas,
-// 'tahun_ajaran' => $tahun_ajaran,
-// 'semester' => $semester,
-// 'guru' => $view_guru
 const Detail_nilai_murid = ({ nilai, detailCard, nilai_kepribadian, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title={"List Nilai Peserta Didik"}
-                breadcrumbs={[
-                    "Nilai Peserta Didik",
-                    "List Nilai Peserta Didik",
-                ]}
+                title={"Detail nilai rapor"}
+                breadcrumbs={["Rapor murid", "Detail nilai rapor"]}
             />
             <div className="content">
                 <div className="container-fluid">

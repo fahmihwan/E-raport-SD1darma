@@ -1,7 +1,7 @@
 import { useForm } from "@inertiajs/inertia-react";
 import React from "react";
 
-const Login = (props) => {
+const Login = ({ flash }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         username: "",
         password: "",
@@ -23,13 +23,16 @@ const Login = (props) => {
                 <div className="card card-outline card-primary">
                     <div className="card-header text-center">
                         <a href="../../index2.html" className="h1">
-                            <b>Admin</b>LTE
+                            {/* <b>SD DAHROMO</b> */}
+                            <b>E-RAPORT</b>
                         </a>
                     </div>
                     <div className="card-body">
                         <p className="login-box-msg">
-                            Sign in to start your session
+                            {/* Sign in to start your session */}
+                            SD DAHROMO
                         </p>
+
                         <form onSubmit={handleSubmit}>
                             <div className="input-group mb-3">
                                 <input
@@ -92,7 +95,13 @@ const Login = (props) => {
                                 {/* /.col */}
                             </div>
                         </form>
+
                         <div className="social-auth-links text-center mt-2 mb-3"></div>
+                        {flash?.error_message && (
+                            <p className="text-danger text-center">
+                                Username atau Password Salah
+                            </p>
+                        )}
                         {/* /.social-auth-links */}
                     </div>
                     {/* /.card-body */}

@@ -16,7 +16,7 @@ const List_nilai = ({
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title={"List " + kelas_nama}
-                breadcrumbs={["Kelola"]}
+                breadcrumbs={["Nilai mengajar", `List kelas `]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -26,18 +26,27 @@ const List_nilai = ({
                                 {/* <h3 className="card-title">List</h3> */}
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">
-                                        tahun ajaran :{" "}
-                                        {tahun_ajaran.tahun_ajaran}
+                                        Tahun ajaran :{" "}
+                                        {tahun_ajaran.tahun_ajaran},
+                                    </span>
+                                    <span className="mr-3 p-1 rounded">
+                                        Semester {semester}
                                     </span>
                                 </div>
-                                <div className="d-flex align-items-center"></div>
+                                <div className="d-flex align-items-center">
+                                    <Link
+                                        href="/guru/penilaian"
+                                        className="btn btn-primary"
+                                    >
+                                        kembali
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         {/* /.card-header */}
                         <div className="card-body">
                             <div className="row">
-                                <div className="d-flex align-items-center mb-2">
-                                    <span className="mr-3">Semester 1</span>
+                                <div className="d-flex align-items-center  col-md-12 mb-2">
                                     {datas.length == 0 ? (
                                         <Link
                                             className="btn btn-sm btn-primary"

@@ -4,13 +4,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ kelas, auth, flash, list_kelas_mapel }) => {
-    // console.log(flash);
+const Index = ({ auth, flash, list_kelas_mapel, tahun_ajaran }) => {
+    // console.log(list_kelas_mapel);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Nilai Peserta Didik"
-                breadcrumbs={["Kelola"]}
+                title="Nilai peserta didik"
+                breadcrumbs={["Nilai peserta didik"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -22,38 +22,10 @@ const Index = ({ kelas, auth, flash, list_kelas_mapel }) => {
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                {/* <h3 className="card-title">List</h3> */}
                                 <div className="d-flex align-items-center">
-                                    <span className="mr-2">tahun ajaran :</span>
-                                    <div className="mr-2">
-                                        {/* <select
-                                            className="form-control"
-                                            onChange={(e) =>
-                                                setSelectTahun(e.target.value)
-                                            }
-                                            defaultChecked={selectTahun}
-                                        >
-                                            {tahun_ajarans.map((d, i) => (
-                                                <option key={i} value={d.id}>
-                                                    {d.tahun_ajaran}
-                                                </option>
-                                            ))}
-                                        </select> */}
-                                    </div>
-                                    {/* <button
-                                        onClick={() => getTahunAjaran()}
-                                        className="btn btn-info"
-                                    >
-                                        Cari
-                                    </button> */}
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    {/* <Link
-                                        href="/admin/mengikuti/create_kelas_tahun_ajaran_baru"
-                                        className="btn btn-primary"
-                                    >
-                                        Tamabh Data
-                                    </Link> */}
+                                    <span className="mr-2">
+                                        tahun ajaran : {tahun_ajaran}
+                                    </span>
                                 </div>
                             </div>
                         </div>

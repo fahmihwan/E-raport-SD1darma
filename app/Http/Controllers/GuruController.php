@@ -16,7 +16,6 @@ class GuruController extends Controller
     public function index()
     {
 
-
         return Inertia::render('Guru/Index', [
             'datas' => Guru::with('kelas')->latest()->paginate(5)
         ]);
@@ -97,6 +96,7 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        //
+        Guru::destroy($guru->id);
+        return redirect()->back();
     }
 }

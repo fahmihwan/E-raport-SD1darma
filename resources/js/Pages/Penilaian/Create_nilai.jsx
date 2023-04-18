@@ -1,9 +1,15 @@
-import { useForm } from "@inertiajs/inertia-react";
+import { Link, useForm } from "@inertiajs/inertia-react";
 import React, { useState, useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Create_nilai = ({ mengikuti_kelas, mapel, semester, auth }) => {
+const Create_nilai = ({
+    mengikuti_kelas,
+    mapel,
+    semester,
+    auth,
+    redirect_back,
+}) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         data: [],
         semester: semester, //static
@@ -39,11 +45,20 @@ const Create_nilai = ({ mengikuti_kelas, mapel, semester, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Input Nilai Murid"
-                breadcrumbs={["List Murid"]}
+                title="Nilai Murid"
+                breadcrumbs={["Nilai mengajar", "List kelas", "Nilai murid"]}
+                // Nilai mengajar List kelas KELAS_6
             />
+
             <div className="content">
                 <div className="container-fluid">
+                    <Link
+                        href={`/guru/penilaian/${redirect_back?.kelas_id}/${redirect_back?.mapel_id}/${redirect_back?.semester}/list_nilai`}
+                        className="btn btn-primary mb-2 float-right"
+                    >
+                        kembali
+                    </Link>
+                    <div className="clearfix"></div>
                     <div className="card">
                         <div className="card-header">
                             <HeaderInfoEl
@@ -51,13 +66,6 @@ const Create_nilai = ({ mengikuti_kelas, mapel, semester, auth }) => {
                                 mapel={mapel}
                                 semester={semester}
                             />
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center">
-                                    <span className="mr-2">List Murid :</span>
-                                    <div className="mr-2"></div>
-                                </div>
-                                <div className="d-flex align-items-center"></div>
-                            </div>
                         </div>
                         {/* /.card-header */}
                         <div className="card-body">
@@ -117,7 +125,7 @@ const HeaderInfoEl = ({ mengikuti_kelas, mapel, semester }) => {
     return (
         <div className="card  bg-info p-2">
             <div className="row ">
-                <div className="col-3 ">
+                <div className="col-4 ">
                     <table style={{ width: "100%" }}>
                         <tbody>
                             <tr>
@@ -135,7 +143,7 @@ const HeaderInfoEl = ({ mengikuti_kelas, mapel, semester }) => {
                         </tbody>
                     </table>
                 </div>
-                <div className="col-3">
+                <div className="col-5">
                     {/* <h3>{mapel.nama}</h3>
                     <h4>Semester {semester}</h4> */}
                     <table style={{ width: "100%" }}>

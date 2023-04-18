@@ -1,15 +1,13 @@
 import { Inertia } from "@inertiajs/inertia";
 import { Link, useForm, usePage } from "@inertiajs/inertia-react";
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ auth, datas }) => {
-    console.log(datas);
-    // console.log(flash);
+const Index = ({ auth, datas, tahun_ajaran }) => {
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Rapor murid" breadcrumbs={["Kelola"]} />
+            <HeaderLayout title="Rapor murid" breadcrumbs={["Rapor murid"]} />
             <div className="content">
                 <div className="container-fluid">
                     <div className="card">

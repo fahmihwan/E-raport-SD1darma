@@ -61,7 +61,7 @@ const Index = () => {
 
                             <ModalLayout
                                 id="modal-default"
-                                title="Tahun Ajaran"
+                                title="Tambah Tahun Ajaran Baru"
                                 closeModalRef={closeModalRef}
                             >
                                 <form onSubmit={handleSubmit}>

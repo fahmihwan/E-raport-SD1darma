@@ -12,19 +12,19 @@ class Mengikuti_kelas extends Model
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Kelas::class)->withTrashed();
     }
     public function tahun_ajaran()
     {
-        return $this->belongsTo(Tahun_ajaran::class);
+        return $this->belongsTo(Tahun_ajaran::class)->withTrashed();
     }
 
     public function mengikuti_ajarans()
     {
-        return $this->hasMany(Mengikuti_ajaran::class);
+        return $this->hasMany(Mengikuti_ajaran::class)->withTrashed();
     }
     public function guru()
     {
-        return $this->belongsTo(Guru::class);
+        return $this->belongsTo(Guru::class)->withTrashed();
     }
 }

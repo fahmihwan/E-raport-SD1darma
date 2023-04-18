@@ -7,11 +7,8 @@ const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title={"List Nilai Peserta Didik"}
-                breadcrumbs={[
-                    "Nilai Peserta Didik",
-                    "List Nilai Peserta Didik",
-                ]}
+                title={"Detail Nilai "}
+                breadcrumbs={["Nilai peserta didik", "Detail nilai"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -97,31 +94,35 @@ const CardDetail = ({ guru, nip, mapel, tahun_ajaran, semester }) => {
                 <div className="col-md-6">
                     <h3>Detail :</h3>
                     <table>
-                        <tr>
-                            <td style={{ width: "100px" }}>Guru</td>
-                            <td>: {guru}</td>
-                        </tr>
-                        <tr>
-                            <td>NIP</td>
-                            <td>: {nip}</td>
-                        </tr>
-                        <tr>
-                            <td>Mengajar</td>
-                            <td>: {mapel}</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td style={{ width: "100px" }}>Guru</td>
+                                <td>: {guru}</td>
+                            </tr>
+                            <tr>
+                                <td>NIP</td>
+                                <td>: {nip}</td>
+                            </tr>
+                            <tr>
+                                <td>Mengajar</td>
+                                <td>: {mapel}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className="col-md-6">
                     <h3>&nbsp;</h3>
                     <table>
-                        <tr>
-                            <td style={{ width: "100px" }}>Tahun ajaran</td>
-                            <td>: {tahun_ajaran}</td>
-                        </tr>
-                        <tr>
-                            <td>Semester</td>
-                            <td>: {semester}</td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td style={{ width: "100px" }}>Tahun ajaran</td>
+                                <td>: {tahun_ajaran}</td>
+                            </tr>
+                            <tr>
+                                <td>Semester</td>
+                                <td>: {semester}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

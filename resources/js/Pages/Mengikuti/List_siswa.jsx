@@ -35,7 +35,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title={`List ${datas.kelas.nama}`}
-                breadcrumbs={["Kelola"]}
+                breadcrumbs={["Ajaran baru", "list murid"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -65,6 +65,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
                                 />
                             </div>
                             <button
+                                disabled={processing}
                                 type="submit"
                                 className="btn btn-primary float-right"
                             >
@@ -75,14 +76,20 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <h3 className="card-title">List</h3>
-                                <div className="d-flex align-items-center">
-                                    <span className="mr-2">tahun ajaran :</span>
-                                    <div className="mr-2"></div>
-                                    <button className="btn btn-info">
-                                        Cari
-                                    </button>
+                                <div>
+                                    <h3 className="card-title">List Murid</h3>
                                 </div>
+                                <div className="d-flex justify-content-between align-items-center ">
+                                    <Link
+                                        className="btn btn-primary btn-sm"
+                                        href={`/admin/mengikuti`}
+                                    >
+                                        Kembali
+                                    </Link>
+                                </div>
+                                {/* <div className="d-flex align-items-center">
+                                    <div className="mr-2"></div>
+                                </div> */}
                             </div>
                         </div>
                         {/* /.card-header */}

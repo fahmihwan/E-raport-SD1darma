@@ -34,7 +34,7 @@ const Edit = ({ auth, murid }) => {
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Edit Murid"
-                breadcrumbs={["List Guru", "Edit Murid"]}
+                breadcrumbs={["List Murid", "Edit Murid"]}
             />
             <div className="content">
                 <div className="container-fluid">

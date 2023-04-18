@@ -5,12 +5,11 @@ import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
 const Index = ({ kelas, auth, flash }) => {
-    // console.log(flash);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="List Mengikuti Kelas"
-                breadcrumbs={["Kelola"]}
+                title="Nilai mengajar"
+                breadcrumbs={["Nilai mengajar"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -19,23 +18,12 @@ const Index = ({ kelas, auth, flash }) => {
                             {flash?.error_message}
                         </div>
                     )}
-                    <div className="mb-3">
-                        {/* <Link
-                            href="/guru/penilaian"
-                            className="btn btn-primary mr-2"
-                        >
-                            Nilai Seluruh mapel
-                        </Link>
-                        <Link href="/" className="btn btn-primary">
-                            Nilai Seluruh mapel
-                        </Link> */}
-                    </div>
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
                                 {/* <h3 className="card-title">List</h3> */}
                                 <div className="d-flex align-items-center">
-                                    <span className="mr-2">tahun ajaran :</span>
+                                    <span className="mr-2">List mengajar</span>
                                     <div className="mr-2"></div>
                                 </div>
                                 <div className="d-flex align-items-center"></div>

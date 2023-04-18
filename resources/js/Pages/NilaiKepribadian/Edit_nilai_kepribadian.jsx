@@ -34,10 +34,11 @@ const Edit_nilai_kepribadian = ({
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title={"Edit Nilai Kepribadian Siswa"}
+                title={"Edit nilai kepribadian"}
                 breadcrumbs={[
-                    "Nilai Peserta Didik",
-                    "Edit Nilai Kepribadian Siswa",
+                    "Nilai kepribadian",
+                    "Detail nilai kepribadian",
+                    "Edit nilai kepribadian",
                 ]}
             />
             <div className="content">
@@ -61,8 +62,7 @@ const Edit_nilai_kepribadian = ({
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">
-                                        tahun ajaran :{" "}
-                                        {detailCard?.tahun_ajaran}
+                                        Form nilai kepribadian
                                     </span>
                                 </div>
                             </div>
@@ -189,8 +189,9 @@ const Edit_nilai_kepribadian = ({
                                     <button
                                         className="btn btn-primary"
                                         type="submit"
+                                        disabled={processing}
                                     >
-                                        Submit
+                                        Update
                                     </button>
                                 </form>
                             </div>

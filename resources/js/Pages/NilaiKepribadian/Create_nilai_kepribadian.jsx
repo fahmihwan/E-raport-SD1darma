@@ -37,11 +37,14 @@ const Create_nilai_kepribadian = ({
     let data_kepribadian = ["A", "B", "C", "D", "E"];
     return (
         <AuthenticatedLayout auth={auth}>
+            {/* Nilai kepribadian
+Detail nilai kepribadian */}
             <HeaderLayout
-                title={"Create Nilai Kepribadian Siswa"}
+                title={"Tambah nilai kepribadian"}
                 breadcrumbs={[
-                    "Nilai Peserta Didik",
-                    "Create Nilai Kepribadian Siswa",
+                    "Nilai kepribadian",
+                    "Detail nilai kepribadian",
+                    "Tambah nilai kepribadian",
                 ]}
             />
             <div className="content">
@@ -65,8 +68,7 @@ const Create_nilai_kepribadian = ({
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">
-                                        tahun ajaran :{" "}
-                                        {detailCard?.tahun_ajaran}
+                                        Form nilai kepribadian
                                     </span>
                                 </div>
                             </div>
@@ -205,6 +207,7 @@ const Create_nilai_kepribadian = ({
                                     <button
                                         className="btn btn-primary"
                                         type="submit"
+                                        disabled={processing}
                                     >
                                         Submit
                                     </button>

@@ -32,8 +32,8 @@ const Create = ({ kelass, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Tambah Guru"
-                breadcrumbs={["List Guru", "Tambah Guru"]}
+                title="Tambah Murid"
+                breadcrumbs={["List Murid", "Tambah Murid"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -41,7 +41,7 @@ const Create = ({ kelass, auth }) => {
                         <div className="card">
                             <div className="card-header ">
                                 <div className="d-flex justify-content-between align-items-center ">
-                                    <span>Tambah Guru</span>
+                                    <span>Tambah Murid</span>
                                     <Link
                                         className="btn btn-primary btn-sm"
                                         href="/admin/murid"
@@ -144,6 +144,7 @@ const Create = ({ kelass, auth }) => {
                                             />
 
                                             <button
+                                                disabled={processing}
                                                 type="submit"
                                                 className="btn btn-primary"
                                             >

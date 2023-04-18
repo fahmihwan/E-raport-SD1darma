@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
+import { Inertia } from "@inertiajs/inertia";
 
 const Index = ({ tahun_ajarans, auth }) => {
     const { datas, errors } = usePage().props;
@@ -29,9 +30,19 @@ const Index = ({ tahun_ajarans, auth }) => {
         getTahunAjaran();
     }, []);
 
+    const handleDelete = (e, id) => {
+        e.preventDefault();
+        confirm("apakah anda yakin ingin menghapus?") &&
+            Inertia.delete(`/admin/mengikuti/${id}/mengikuti_kelas`);
+        getTahunAjaran();
+    };
+
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Ajaran baru" breadcrumbs={["Kelola"]} />
+            <HeaderLayout
+                title="Ajaran baru"
+                breadcrumbs={["List ajaran baru"]}
+            />
             <div className="content">
                 <div className="container-fluid">
                     <div className="card">
@@ -81,9 +92,8 @@ const Index = ({ tahun_ajarans, auth }) => {
                                         <th>Kelas</th>
                                         <th>Wali Kelas</th>
                                         <th>tahun_ajaran</th>
-                                        <th style={{ width: "40px" }}>
-                                            Action
-                                        </th>
+                                        {/* <th style={{ width: "50px" }}> */}
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,13 +105,27 @@ const Index = ({ tahun_ajarans, auth }) => {
                                             <td>
                                                 {d.tahun_ajaran.tahun_ajaran}
                                             </td>
-                                            <td>
+                                            <td className="d-flex">
                                                 <Link
                                                     href={`/admin/mengikuti/${d.id}/list_siswa`}
-                                                    className="btn btn-info"
+                                                    className="btn btn-info mr-2"
                                                 >
-                                                    kelola
+                                                    Tambahkan Murid
                                                 </Link>
+                                                <Link
+                                                    href={`/admin/mengikuti/${d.id}/mengikuti_kelas`}
+                                                    className="btn btn-warning mr-2"
+                                                >
+                                                    <i className="fas fa-edit"></i>
+                                                </Link>
+                                                <button
+                                                    className="btn btn-danger mr-2"
+                                                    onClick={(e) =>
+                                                        handleDelete(e, d.id)
+                                                    }
+                                                >
+                                                    <i className="fas fa-solid fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}

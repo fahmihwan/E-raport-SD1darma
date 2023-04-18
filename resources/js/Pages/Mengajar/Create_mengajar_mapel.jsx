@@ -22,13 +22,14 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
     };
 
     const handleDelete = (id) => {
-        Inertia.delete(`/admin/mengajar/mengajar_mapel/${id}`);
+        confirm("Apakah anda yakin ingin menghapus?") &&
+            Inertia.delete(`/admin/mengajar/mengajar_mapel/${id}`);
     };
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Tambah Mengajar Mapel"
-                breadcrumbs={["List Guru", "Tambah Guru"]}
+                title="Kelola mapel"
+                breadcrumbs={["List guru Pengajar", "Kelola mapel"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -37,7 +38,7 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
                             <div className="card">
                                 <div className="card-header ">
                                     <div className="d-flex justify-content-between align-items-center ">
-                                        <span>Tambah Guru</span>
+                                        <span>Tambah mapel guru</span>
                                         <Link
                                             className="btn btn-primary btn-sm"
                                             href={`/admin/mengajar`}
@@ -96,7 +97,7 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
                         </div>
                         <div className="col-md-8">
                             <div className="card">
-                                <div className="card-header">List Guru</div>
+                                <div className="card-header">List mengajar</div>
                                 <div className="card-body">
                                     <table className="table">
                                         <thead>

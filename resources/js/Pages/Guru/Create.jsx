@@ -135,6 +135,7 @@ const Create = ({ kelass, auth }) => {
 
                                             <button
                                                 type="submit"
+                                                disabled={processing}
                                                 className="btn btn-primary"
                                             >
                                                 Submit

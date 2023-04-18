@@ -7,7 +7,10 @@ import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 const Index = ({ auth, datas }) => {
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Nilai Kepribadian Murid" breadcrumbs={[""]} />
+            <HeaderLayout
+                title="Nilai Kepribadian"
+                breadcrumbs={["Nilai kepribadian"]}
+            />
             <div className="content">
                 <div className="container-fluid">
                     <div className="card">

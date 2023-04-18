@@ -26,7 +26,6 @@ class AuthController extends Controller
             }
         } else {
             if (Auth::guard('webadmin')->attempt($validated)) {
-                // if (Auth::attempt($validated)) {
                 return redirect()->intended('/admin/dashboard');
             }
         }

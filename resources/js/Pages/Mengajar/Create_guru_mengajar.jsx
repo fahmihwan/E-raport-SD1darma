@@ -78,6 +78,7 @@ const Create_guru_mengajar = ({ kelas, gurus, mapel, auth }) => {
                                         <button
                                             type="submit"
                                             className="btn btn-primary"
+                                            disabled={processing}
                                         >
                                             Submit
                                         </button>

@@ -87,7 +87,12 @@ class PenilaianController extends Controller
         return Inertia::render('Penilaian/Create_nilai', [
             'mengikuti_kelas' => $mengikuti_kelas,
             'mapel' => Mapel::where('id', $mapel_id)->first(),
-            'semester' => $semester
+            'semester' => $semester,
+            'redirect_back' => [
+                'kelas_id' => $kelas_id,
+                'mapel_id' => $mapel_id,
+                'semester' => $semester,
+            ]
         ]);
     }
 

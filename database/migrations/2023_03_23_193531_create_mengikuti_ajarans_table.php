@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Mengikuti_kelas::class);
             $table->foreignIdFor(Murid::class);
             $table->boolean('isAlumni')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
