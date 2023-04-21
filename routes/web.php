@@ -133,3 +133,11 @@ Route::get('/guru/rapor-murid/{mengikuti_ajaran_id}/{semester}/detail_nilai_muri
 // GURU 
 Route::get('/guru/auth/edit_password', [GuruController::class, 'edit_password']);
 Route::put('/guru/auth/edit_password', [GuruController::class, 'update_password']);
+
+
+// Route::get('/demo',);
+Route::get('/demo/create', function () {
+    return view('demo.create');
+});
+
+// Route::post('/')

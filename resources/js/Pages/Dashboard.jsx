@@ -5,7 +5,7 @@ import { AuthenticatedLayout } from "../Layouts/AuthenticatedLayout";
 const Dashboard = ({ auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Tahun Ajaran" breadcrumbs={["Dashboard"]} />
+            <HeaderLayout title="Dashboard" breadcrumbs={["Dashboard"]} />
             {/* /.content-header */}
             {/* Main content */}
             <div className="content">

@@ -31,11 +31,11 @@ class DatabaseSeeder extends Seeder
 
 
 
-        Admin::create([
-            'nama' => 'fahmi',
-            'username' => 'fahmihwan',
-            'password' => Hash::make('qweqwe123')
-        ]);
+        // Admin::create([
+        //     'nama' => 'fahmi',
+        //     'username' => 'fahmihwan',
+        //     'password' => Hash::make('qweqwe123')
+        // ]);
         Kelas::factory(6)->create();
         Mapel::factory(10)->create();
         Tahun_ajaran::factory(3)->create();
