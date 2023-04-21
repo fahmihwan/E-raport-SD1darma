@@ -12,6 +12,7 @@ export const AuthenticatedLayout = ({ children, auth }) => {
             <div className="wrapper">
                 {/* Navbar */}
                 <Navbar
+                    auth={auth}
                     setToggleSidebar={setToggleSidebar}
                     toggleSidebar={toggleSidebar}
                 />

@@ -21,7 +21,7 @@ class Mengikuti_kelas extends Model
 
     public function mengikuti_ajarans()
     {
-        return $this->hasMany(Mengikuti_ajaran::class)->withTrashed();
+        return $this->hasMany(Mengikuti_ajaran::class);
     }
     public function guru()
     {

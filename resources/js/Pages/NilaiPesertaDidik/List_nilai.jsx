@@ -73,6 +73,13 @@ const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
                                             </tr>
                                         ))}
                                     </tbody>
+                                    {/* <tbody>
+                                        <tr>
+                                            <td>Jumlah</td>
+                                            <td>Jumlah</td>
+                                            <td>Jumlah</td>
+                                        </tr>
+                                    </tbody> */}
                                 </table>
                             </div>
                         </div>

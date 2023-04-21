@@ -2,7 +2,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 
-export const Navbar = ({ setToggleSidebar, toggleSidebar }) => {
+export const Navbar = ({ setToggleSidebar, toggleSidebar, auth }) => {
     const handleLogout = () => {
         Inertia.post("/admin/auth/logout");
     };
@@ -115,16 +115,24 @@ export const Navbar = ({ setToggleSidebar, toggleSidebar }) => {
 
                 <li className="nav-item">
                     <a className="nav-link" data-toggle="dropdown" href="#">
-                        setting
+                        Menu
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div className="dropdown-divider" />
-                        <Link href="/admin/akun" className="dropdown-item">
-                            List Akun
-                        </Link>
-                        <a href="#" className="dropdown-item">
-                            Ubah Password
-                        </a>
+                        {auth?.admin && (
+                            <Link href="/admin/akun" className="dropdown-item">
+                                List Akun
+                            </Link>
+                        )}
+                        {auth?.guru && (
+                            <Link
+                                href="/guru/auth/edit_password"
+                                className="dropdown-item"
+                            >
+                                Ubah Password
+                            </Link>
+                        )}
+
                         <button
                             onClick={handleLogout}
                             className="dropdown-item"

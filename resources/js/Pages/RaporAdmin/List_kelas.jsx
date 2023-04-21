@@ -1,31 +1,27 @@
-import { Inertia } from "@inertiajs/inertia";
 import { Link, useForm, usePage } from "@inertiajs/inertia-react";
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
-const Index = ({ auth, flash, list_kelas_mapel, tahun_ajaran }) => {
-    // console.log(list_kelas_mapel);
+const List_kelas = ({ auth, datas, tahun_ajaran }) => {
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout
-                title="Nilai peserta didik"
-                breadcrumbs={["Nilai peserta didik"]}
-            />
+            <HeaderLayout title="Rapor murid" breadcrumbs={["Rapor murid"]} />
             <div className="content">
                 <div className="container-fluid">
-                    {flash?.error_message && (
-                        <div className="alert alert-danger" role="alert">
-                            {flash?.error_message}
-                        </div>
-                    )}
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
-                                    <span className="mr-2">
-                                        tahun ajaran : {tahun_ajaran}
-                                    </span>
+                                    <span className="mr-2">List kelas</span>
+                                </div>
+                                <div className="d-flex align-items-center">
+                                    {/* <Link
+                                        href="/admin/mengikuti/create_kelas_tahun_ajaran_baru"
+                                        className="btn btn-primary"
+                                    >
+                                        Tamabh Data
+                                    </Link> */}
                                 </div>
                             </div>
                         </div>
@@ -34,32 +30,35 @@ const Index = ({ auth, flash, list_kelas_mapel, tahun_ajaran }) => {
                             <table className="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: "10px" }}>#</th>
-                                        <th>Mapel</th>
-                                        <th>Guru</th>
+                                        <th style={{ width: "20px" }}>#</th>
                                         <th>Kelas</th>
+                                        <th>Tahun Ajaran</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {list_kelas_mapel?.map((d, i) => (
+                                    {datas?.map((d, i) => (
                                         <tr key={i}>
                                             <td>{i + 1}</td>
-                                            <td>{d.mapel.nama}</td>
-                                            <td>{d.guru.nama}</td>
-                                            <td>{d.kelas.nama}</td>
+                                            <td>
+                                                {
+                                                    d?.mengikuti_kelas?.kelas
+                                                        ?.nama
+                                                }
+                                            </td>
+                                            <td>
+                                                {
+                                                    d?.mengikuti_kelas
+                                                        ?.tahun_ajaran
+                                                        ?.tahun_ajaran
+                                                }
+                                            </td>
                                             <td>
                                                 <Link
-                                                    href={`/guru/nilai-peserta-didik/${d.kelas_id}/${d.guru_id}/${d.mapel_id}/1/detail_nilai_peserta_didik`}
-                                                    className="btn btn-info mr-2"
+                                                    href={`/admin/rapor-murid/${d?.mengikuti_kelas_id}/${d?.murid_id}/detail_rapor`}
+                                                    className="btn btn-info"
                                                 >
-                                                    semester 1
-                                                </Link>
-                                                <Link
-                                                    href={`/guru/nilai-peserta-didik/${d.kelas_id}/${d.guru_id}/${d.mapel_id}/2/detail_nilai_peserta_didik`}
-                                                    className="btn btn-info mr-2"
-                                                >
-                                                    semester 2
+                                                    Detail Rapor
                                                 </Link>
                                             </td>
                                         </tr>
@@ -81,4 +80,4 @@ const Index = ({ auth, flash, list_kelas_mapel, tahun_ajaran }) => {
     );
 };
 
-export default Index;
+export default List_kelas;

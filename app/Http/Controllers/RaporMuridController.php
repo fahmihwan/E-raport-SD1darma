@@ -53,6 +53,7 @@ class RaporMuridController extends Controller
             ['semester', '=', $semester],
         ])->get();
 
+
         return Inertia::render('RaporMurid/Detail_nilai_murid', [
             'nilai' => $nilai,
             'detailCard' => $card,

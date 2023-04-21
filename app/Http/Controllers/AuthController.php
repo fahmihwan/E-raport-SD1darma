@@ -31,7 +31,6 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->with('error_message', 'username atau password salah');
-
         // return redirect()->back()->withErrors('Login Error!!.');
     }
 

@@ -16,4 +16,8 @@ class Murid extends Model
     {
         return $this->hasMany(Mengikuti_ajaran::class);
     }
+    public function perpindahans()
+    {
+        return $this->hasMany(Perpindahan::class);
+    }
 }

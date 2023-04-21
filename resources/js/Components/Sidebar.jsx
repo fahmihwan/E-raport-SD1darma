@@ -9,13 +9,15 @@ export const Sidebar = ({ auth }) => {
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* Brand Logo */}
             <Link href="/admin/dashboard" className="brand-link">
-                <img
+                {/* <img
                     src={AdminLTELogo}
                     alt="AdminLTE Logo"
                     className="brand-image img-circle elevation-3"
                     style={{ opacity: ".8" }}
-                />
-                <span className="brand-text font-weight-light">E-raport</span>
+                /> */}
+                <span className="brand-text text-warning p-2 font-bold">
+                    SD DAHROMO E-raport
+                </span>
             </Link>
             {/* Sidebar */}
             <div className="sidebar ">
@@ -51,7 +53,8 @@ export const Sidebar = ({ auth }) => {
                                     "active"
                                 }`}
                             >
-                                <i className="nav-icon fas fa-th" />
+                                {/* <i className="nav-icon fas fa-th" /> */}
+                                <i className="nav-icon fas fa-home"></i>
                                 <p>Dashboard</p>
                             </Link>
                         </li>
@@ -75,7 +78,9 @@ export const Sidebar = ({ auth }) => {
                                             setToggleMaster(!toggleMaster)
                                         }
                                     >
-                                        <i className="nav-icon fas fa-tachometer-alt" />
+                                        {/* <i className="nav-icon fas fa-tachometer-alt" /> */}
+                                        {/* <i class="nav-icon far fa-lock"></i> */}
+                                        <i className="nav-icon fas fa-lock"></i>
                                         <p>
                                             Master Data
                                             <i className="right fas fa-angle-left" />
@@ -132,7 +137,8 @@ export const Sidebar = ({ auth }) => {
                                                 : ""
                                         }`}
                                     >
-                                        <i className="nav-icon fas fa-th" />
+                                        {/* <i className="nav-icon fas fa-th" /> */}
+                                        <i className="nav-icon fas fa-chalkboard-teacher"></i>
                                         <p>Guru</p>
                                     </Link>
                                 </li>
@@ -145,7 +151,8 @@ export const Sidebar = ({ auth }) => {
                                                 : ""
                                         }`}
                                     >
-                                        <i className="nav-icon fas fa-th" />
+                                        {/* <i className="nav-icon fas fa-th" /> */}
+                                        <i className="nav-icon fas fa-users"></i>
                                         <p>Murid</p>
                                     </Link>
                                 </li>
@@ -159,7 +166,8 @@ export const Sidebar = ({ auth }) => {
                                                 : ""
                                         }`}
                                     >
-                                        <i className="nav-icon fas fa-th" />
+                                        {/* <i className="nav-icon fas fa-th" /> */}
+                                        <i className="nav-icon fas fa-calendar-check"></i>
                                         <p> Ajaran Baru</p>
                                     </Link>
                                 </li>
@@ -172,8 +180,37 @@ export const Sidebar = ({ auth }) => {
                                                 : ""
                                         }`}
                                     >
-                                        <i className="nav-icon fas fa-th" />
+                                        {/* <i className="nav-icon fas fa-th" /> */}
+                                        <i className="nav-icon fas fa-user-clock"></i>
                                         <p>Kelola Pengajar</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-header">Alumni</li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/admin/perpindahan"
+                                        className={`nav-link ${
+                                            url.startsWith("/admin/perpindahan")
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                    >
+                                        {/* <i className="nav-icon fas fa-th" /> */}
+                                        <i className="nav-icon fas fa-user-graduate"></i>
+                                        <p>Perpindahan Murid</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        href="/admin/rapor-murid"
+                                        className={`nav-link ${
+                                            url.startsWith("/admin/rapor-murid")
+                                                ? "active"
+                                                : ""
+                                        }`}
+                                    >
+                                        <i className="nav-icon fas fa-book"></i>
+                                        <p>Rapor Murid</p>
                                     </Link>
                                 </li>
                             </>
@@ -191,7 +228,8 @@ export const Sidebar = ({ auth }) => {
                                                 : ""
                                         }`}
                                     >
-                                        <i className="nav-icon fas fa-th" />
+                                        {/* <i className="nav-icon fas fa-th" /> */}
+                                        <i className="nav-icon fas fa-tasks"></i>
                                         <p>Nilai Mengajar</p>
                                     </Link>
                                 </li>
@@ -211,7 +249,8 @@ export const Sidebar = ({ auth }) => {
                                                         : ""
                                                 }`}
                                             >
-                                                <i className="nav-icon fas fa-th" />
+                                                {/* <i className="nav-icon fas fa-th" /> */}
+                                                <i className="nav-icon fas fa-walking"></i>
                                                 <p>Nilai Kepribadian Murid</p>
                                             </Link>
                                         </li>
@@ -231,7 +270,8 @@ export const Sidebar = ({ auth }) => {
                                                         : ""
                                                 }`}
                                             >
-                                                <i className="nav-icon fas fa-th" />
+                                                {/* <i className="nav-icon fas fa-th" /> */}
+                                                <i className="nav-icon fas fa-folder-open"></i>
                                                 <p>Nilai peserta didik</p>
                                             </Link>
                                         </li>
@@ -246,7 +286,7 @@ export const Sidebar = ({ auth }) => {
                                                         : ""
                                                 }`}
                                             >
-                                                <i className="nav-icon fas fa-th" />
+                                                <i className="nav-icon fas fa-book"></i>
                                                 <p>Rapor Murid</p>
                                             </Link>
                                         </li>

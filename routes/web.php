@@ -12,6 +12,8 @@ use App\Http\Controllers\MuridController;
 use App\Http\Controllers\NilaiKepribadianMuridController;
 use App\Http\Controllers\NilaiPesertaDidikController;
 use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PerpindahanController;
+use App\Http\Controllers\RaporAdminController;
 use App\Http\Controllers\RaporMuridController;
 use App\Http\Controllers\Tahun_ajaranController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +54,7 @@ Route::get('/admin/master/mapel', [MapelController::class, 'index']);
 Route::post('/admin/master/mapel', [MapelController::class, 'store']);
 Route::delete('/admin/master/mapel/{id}', [MapelController::class, 'destroy']);
 
+// guru
 Route::resource('/admin/guru', GuruController::class);
 Route::resource('/admin/murid', MuridController::class);
 
@@ -79,9 +82,26 @@ Route::get('/admin/mengikuti/{id}/mengikuti_kelas', [MengikutiController::class,
 Route::put('/admin/mengikuti/{id}/mengikuti_kelas', [MengikutiController::class, 'update_mengikuti_kelas']);
 Route::delete('/admin/mengikuti/{id}/mengikuti_kelas', [MengikutiController::class, 'destroy_mengikuti_kelas']);
 
+// perpindahan
+Route::get('/admin/perpindahan', [PerpindahanController::class, 'index']);
+Route::get('/admin/perpindahan/{id}/detail', [PerpindahanController::class, 'detail']);
+Route::get('/admin/perpindahan/{mengikuti_kelas_id}/{murid_id}/detail_rapor', [PerpindahanController::class, 'detail_rapor']);
+Route::get('/admin/perpindahan/create', [PerpindahanController::class, 'create']);
+Route::post('/admin/perpindahan', [PerpindahanController::class, 'store']);
+Route::delete('/admin/perpindahan/{id}', [PerpindahanController::class, 'destroy']);
+
+Route::get('/admin/rapor-murid', [RaporAdminController::class, 'index']);
+Route::get('/admin/raport-murid/detail', [RaporAdminController::class, 'detail']);
+Route::get('/admin/rapor-murid/{mengikuti_kelas_id}/{murid_id}/detail_rapor', [PerpindahanController::class, 'detail_rapor']);
+
+Route::get('/admin/rapor-murid/{murid_id}/detail', [RaporAdminController::class, 'search_detail_rapor']);
+
+
 // get_kelas_tahun_ajaran
 Route::get('/admin/get_kelas_tahun_ajaran/{id}', [MengikutiController::class, 'get_kelas_tahun_ajaran']);
 
+
+Route::get('/admin/rapor-murid', [RaporAdminController::class, 'index']);
 
 // penilain
 Route::get('/guru/penilaian', [PenilaianController::class, 'index']);
@@ -100,6 +120,7 @@ Route::post('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 
 Route::put('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 'update']);
 
 
+
 //LAPORAN
 // nilai peserta didik
 Route::get('/guru/nilai-peserta-didik', [NilaiPesertaDidikController::class, 'index']);
@@ -108,3 +129,7 @@ Route::get('/guru/nilai-peserta-didik/{kelas_id}/{guru_id}/{mapel_id}/{semester}
 // rapor
 Route::get('/guru/rapor-murid', [RaporMuridController::class, 'index']);
 Route::get('/guru/rapor-murid/{mengikuti_ajaran_id}/{semester}/detail_nilai_murid', [RaporMuridController::class, 'detail_nilai_murid']);
+
+// GURU 
+Route::get('/guru/auth/edit_password', [GuruController::class, 'edit_password']);
+Route::put('/guru/auth/edit_password', [GuruController::class, 'update_password']);

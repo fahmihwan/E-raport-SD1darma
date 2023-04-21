@@ -16,13 +16,12 @@ const Index = ({ tahun_ajarans, auth }) => {
                 .get(`/admin/get_kelas_tahun_ajaran/${selectTahun}`)
                 .then((result) => {
                     setListData(result.data);
-                    console.log(result.data);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    alert(err);
                 });
         } catch (error) {
-            console.log(error);
+            alert(error);
         }
     };
 

@@ -15,7 +15,8 @@ class MengikutiController extends Controller
 {
     public function index()
     {
-        $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->withTrashed()->get();
+        $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->get();
+
 
         return Inertia::render('Mengikuti/Index', [
             'tahun_ajarans' => $tahun_ajarans
@@ -47,7 +48,8 @@ class MengikutiController extends Controller
             'kelas:id,nama',
             'tahun_ajaran:id,tahun_ajaran'
         ])->where('id', $id)->first();
-
+        // $murid = Murid::doesntHave('perpindahans')->latest()->paginate(5);
+        // return $murid;
 
         $murid = Murid::with('mengikuti_ajarans')
             ->whereNot(function ($q) use ($id) {
@@ -55,7 +57,9 @@ class MengikutiController extends Controller
                     $q->where('mengikuti_kelas_id', $id);
                 });
             })
+            ->doesntHave('perpindahans')
             ->latest()->get();
+
 
         return Inertia::render('Mengikuti/List_siswa', [
             'datas' => $datas,
@@ -77,6 +81,7 @@ class MengikutiController extends Controller
 
     public function destroy_mengikuti_ajaran($id)
     {
+
         Mengikuti_ajaran::destroy($id);
         return redirect()->back();
     }

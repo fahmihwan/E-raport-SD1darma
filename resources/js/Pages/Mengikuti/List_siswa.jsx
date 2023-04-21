@@ -1,6 +1,6 @@
 import { Inertia } from "@inertiajs/inertia";
 import { Link, useForm, usePage } from "@inertiajs/inertia-react";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
     ButtonModalComponent,
     HeaderLayout,
@@ -9,6 +9,7 @@ import {
 import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
+import ReactSelect from "react-select";
 const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
     const { datas, errors } = usePage().props;
     const closeModalRef = useRef(null);
@@ -16,6 +17,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
         murid_id: "",
         mengikuti_kelas_id: mengikuti_kelas_id,
     });
+    const [selectedMurid, setSelectedMurid] = useState();
 
     let optionMurid = murid.map((d) => ({
         value: d.id,
@@ -27,6 +29,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
         await post("/admin/mengikuti/store_siswa_baru");
         closeModalRef.current.click();
         setData("murid_id", "");
+        setSelectedMurid([]);
     };
     const handleDelete = (id) => {
         Inertia.delete(`/admin/mengikuti/${id}/mengikuti_ajaran`);
@@ -34,7 +37,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title={`List ${datas.kelas.nama}`}
+                title={`List ${datas?.kelas?.nama}`}
                 breadcrumbs={["Ajaran baru", "list murid"]}
             />
             <div className="content">
@@ -44,24 +47,24 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
                             id="modal-default"
                             title="Tambah Murid Baru"
                         />
-                        {/* <button className="ml-2 btn btn-info">
-                            Kelola Kelulusan
-                        </button> */}
                     </div>
 
                     <ModalLayout
                         id="modal-default"
-                        title="Tahun Ajaran"
+                        title={`Tambah murid ${datas?.kelas?.nama}`}
                         closeModalRef={closeModalRef}
                     >
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label>Murid</label>
-                                <SelectSearch
-                                    handleChange={(e) =>
-                                        setData("murid_id", e.value)
-                                    }
+                                <ReactSelect
+                                    name="murid_id"
+                                    onChange={(value, actionMeta) => {
+                                        setData(actionMeta.name, value.value);
+                                        setSelectedMurid(value);
+                                    }}
                                     options={optionMurid}
+                                    value={selectedMurid}
                                 />
                             </div>
                             <button
@@ -87,9 +90,6 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
                                         Kembali
                                     </Link>
                                 </div>
-                                {/* <div className="d-flex align-items-center">
-                                    <div className="mr-2"></div>
-                                </div> */}
                             </div>
                         </div>
                         {/* /.card-header */}

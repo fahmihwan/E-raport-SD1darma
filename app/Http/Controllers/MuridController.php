@@ -13,8 +13,7 @@ class MuridController extends Controller
      */
     public function index()
     {
-
-        $murid = Murid::latest()->paginate(5);
+        $murid = Murid::doesntHave('perpindahans')->latest()->paginate(5);
         return Inertia::render('Murid/Index', [
             'datas' => $murid
         ]);
@@ -43,7 +42,6 @@ class MuridController extends Controller
             'agama' => 'required',
             'alamat' => 'required',
         ]);
-
 
         Murid::create($validated);
         return redirect('/admin/murid');

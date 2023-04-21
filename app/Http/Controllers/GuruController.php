@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
@@ -89,6 +90,32 @@ class GuruController extends Controller
 
         Guru::where('id', $guru->id)->update($validated);
         return redirect('/admin/guru');
+    }
+
+    public function edit_password(Request $request)
+    {
+        // return $request;
+        return Inertia::render('Guru/Edit_password');
+    }
+    public function update_password(Request $request)
+    {
+        $validated = $request->validate([
+            "password_lama" => 'required',
+            "password_baru" => 'required',
+            "confirm_password" => "required",
+        ]);
+
+        if (!Hash::check($validated['password_lama'], auth()->guard('webguru')->user()->password)) {
+            return redirect()->back()->with('error_message', 'password anda salah');
+        }
+        if ($validated['password_baru'] != $validated['confirm_password']) {
+            return redirect()->back()->with('error_message', 'password tidak cocok');
+        }
+        Guru::where('id', auth()->guard('webguru')->user()->id)->update([
+            'password' => Hash::make($validated['password_baru'])
+        ]);
+
+        return redirect('/guru/penilaian');
     }
 
     /**
