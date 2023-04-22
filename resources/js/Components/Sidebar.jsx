@@ -168,7 +168,8 @@ export const Sidebar = ({ auth }) => {
                                     >
                                         {/* <i className="nav-icon fas fa-th" /> */}
                                         <i className="nav-icon fas fa-calendar-check"></i>
-                                        <p> Ajaran Baru</p>
+                                        {/* <p> Ajaran Baru</p> */}
+                                        <p> Wali kelas</p>
                                     </Link>
                                 </li>
                                 <li className="nav-item">

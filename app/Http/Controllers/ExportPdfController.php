@@ -4,75 +4,71 @@ namespace App\Http\Controllers;
 
 use App\Models\Mengikuti_ajaran;
 use App\Models\Mengikuti_kelas;
-use App\Models\Murid;
 use App\Models\Nilai_kepribadian;
 use App\Models\Nilai_mapel;
-use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
-class RaporAdminController extends Controller
+use PDF;
+
+class ExportPdfController extends Controller
 {
-    public function index()
+    public function export_detail_nilai()
     {
-        // Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get() //before
-
-
-        // return        Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get();
-        // Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get();
-        return Inertia::render('RaporAdmin/Index', [
-            'murid' => Murid::select(['id', 'nama', 'no_induk'])->get()
-        ]);
+        return 'ok';
     }
-    public function search_detail_rapor($murid_id)
+    public function export_rapor($mengikuti_kelas_id, $murid_id, $semester)
     {
-        // return $murid_id;
-        $datas = Mengikuti_ajaran::with([
-            'mengikuti_kelas.kelas:id,nama',
-            'mengikuti_kelas.tahun_ajaran:id,tahun_ajaran',
-        ])->where('murid_id', $murid_id)->get();
-
-
-        return Inertia::render('RaporAdmin/List_kelas', [
-            'datas' => $datas
-        ]);
-    }
-    public function detail_rapor($mengikuti_kelas_id, $murid_id)
-    {
-
+        // return [
+        //     $mengikuti_kelas_id,
+        //     $murid_id,
+        // ];
         $mengikuti_ajaran_id = Mengikuti_ajaran::with('mengikuti_kelas.tahun_ajaran')->where([
             ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
             ['murid_id', '=', $murid_id],
         ])->first();
 
+
         $nilai_kepribadian = Nilai_kepribadian::where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id->id],
-        ])->get();
+            ['semester', '=', $semester],
+        ])->first();
+
 
         $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])->where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id->id],
         ])->get();
 
-        if (!$mengikuti_ajaran_id || !$nilai_kepribadian || !$nilai) {
-            return 'false';
-        }
 
-        return Inertia::render('RaporAdmin/Detail_nilai_murid', [
+
+        // return view('export_pdf.print_rapor', [
+        //     'nilai' => $nilai,
+        //     'redirect_back' => [
+        //         'mengikuti_ajaran_id' => $mengikuti_ajaran_id,
+        //         'murid_id' => $murid_id,
+        //     ],
+        //     'nilai_kepribadian' => $nilai_kepribadian,
+        //     'detailCard' => [
+        //         'tahun_ajaran' => Mengikuti_kelas::where('id', $mengikuti_kelas_id)->with('tahun_ajaran')->first()->tahun_ajaran->tahun_ajaran,
+        //         'data_murid' => Mengikuti_ajaran::with(['murid:id,nama,no_induk'])->where('id', $mengikuti_ajaran_id->id)->first(),
+        //         'kelas' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id->id)->with(['mengikuti_kelas.kelas'])->first()->mengikuti_kelas->kelas->nama
+        //     ],
+        // ]);
+
+
+        $pdf = PDF::loadview('export_pdf.print_rapor', [
             'nilai' => $nilai,
-            'var_get' => [
-                'mengikuti_kelas_id' => $mengikuti_kelas_id,
-                'murid_id' => $murid_id,
-            ],
             'redirect_back' => [
                 'mengikuti_ajaran_id' => $mengikuti_ajaran_id,
                 'murid_id' => $murid_id,
             ],
             'nilai_kepribadian' => $nilai_kepribadian,
             'detailCard' => [
+                'semester' => $semester,
                 'tahun_ajaran' => Mengikuti_kelas::where('id', $mengikuti_kelas_id)->with('tahun_ajaran')->first()->tahun_ajaran->tahun_ajaran,
                 'data_murid' => Mengikuti_ajaran::with(['murid:id,nama,no_induk'])->where('id', $mengikuti_ajaran_id->id)->first(),
                 'kelas' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id->id)->with(['mengikuti_kelas.kelas'])->first()->mengikuti_kelas->kelas->nama
             ],
         ]);
+        return $pdf->download('report');
     }
 }

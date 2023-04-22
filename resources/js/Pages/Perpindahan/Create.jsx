@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useForm } from "@inertiajs/inertia-react";
-import ReactSelect from "react-select";
 import { HeaderLayout } from "../../Components/ComponentLayout";
-import {
-    InputText,
-    InputRadioButton,
-    InputTextArea,
-    SelectSearch,
-} from "../../Components/InputEL";
+import { SelectSearch } from "../../Components/InputEL";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 
 const Create = ({ auth, murid }) => {
@@ -39,7 +33,7 @@ const Create = ({ auth, murid }) => {
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title="Tambah Murid"
-                breadcrumbs={["Create murid", "Tambah murid"]}
+                breadcrumbs={["perpindahan", "Tambah murid"]}
             />
             <div className="content">
                 <div className="container-fluid">

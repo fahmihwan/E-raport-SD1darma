@@ -12,14 +12,14 @@ const Index = ({ datas, auth }) => {
 
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Murid" breadcrumbs={["List Murid"]} />
+            <HeaderLayout title="Murid" breadcrumbs={["List murid"]} />
             <div className="content">
                 <div className="container-fluid">
                     <div className="mb-2"></div>
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <h3 className="card-title">List</h3>
+                                <h3 className="card-title">List murid</h3>
                                 <div className="d-flex align-items-center">
                                     <Link
                                         href="/admin/murid/create"

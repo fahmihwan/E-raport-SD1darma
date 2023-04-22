@@ -43,6 +43,7 @@ class RaporMuridController extends Controller
             'kelas' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->mengikuti_kelas->kelas->nama
         ];
 
+
         $nilai_kepribadian = Nilai_kepribadian::where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
             ['semester', '=', $semester],
@@ -54,7 +55,15 @@ class RaporMuridController extends Controller
         ])->get();
 
 
+
+
+
         return Inertia::render('RaporMurid/Detail_nilai_murid', [
+            'var_get' => [
+                'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->id,
+                'murid_id' => $card['data_murid']->murid->id,
+                'semester' => $semester
+            ],
             'nilai' => $nilai,
             'detailCard' => $card,
             'nilai_kepribadian' => $nilai_kepribadian

@@ -25,7 +25,7 @@ const Index = ({ murid, auth }) => {
     };
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Cari raport" breadcrumbs={["Cari raport"]} />
+            <HeaderLayout title="Cari rapor" breadcrumbs={["Cari rapor"]} />
             <div className="content">
                 <div className="container-fluid">
                     <div className="mb-2"></div>
@@ -34,7 +34,7 @@ const Index = ({ murid, auth }) => {
                         <div className="container-fluid">
                             <h2 className="text-center display-4">Search</h2>
                             <div className="row">
-                                <div className="col-md-8 offset-md-2">
+                                <div className="d-flex justify-content-center col-md-8 offset-md-2">
                                     <form onSubmit={handleSearch}>
                                         <div className="d-flex">
                                             <ReactSelect

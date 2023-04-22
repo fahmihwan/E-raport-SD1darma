@@ -2,15 +2,15 @@ import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
-
+import { ExportBlob } from "../../Components/ExportBlob";
 const Detail_nilai_murid = ({
     nilai,
     detailCard,
     nilai_kepribadian,
     auth,
     redirect_back,
+    var_get,
 }) => {
-    console.log(redirect_back);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
@@ -38,9 +38,20 @@ const Detail_nilai_murid = ({
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center">
-                                    <span className="mr-2">Semester 1</span>
+                                <div className="d-flex align-items-center ">
+                                    <span className="mr-2">Semester 1 </span>
                                 </div>
+                                <button
+                                    onClick={() =>
+                                        ExportBlob(
+                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/1/detail_rapor`,
+                                            "detail_rapor.pdf"
+                                        )
+                                    }
+                                    className="btn btn-primary"
+                                >
+                                    Export
+                                </button>
                             </div>
                         </div>
                         {/* /.card-header */}
@@ -75,6 +86,17 @@ const Detail_nilai_murid = ({
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">Semester 2</span>
                                 </div>
+                                <button
+                                    onClick={() =>
+                                        ExportBlob(
+                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/2/detail_rapor`,
+                                            "detail_rapor.pdf"
+                                        )
+                                    }
+                                    className="btn btn-primary"
+                                >
+                                    Export
+                                </button>
                             </div>
                         </div>
                         {/* /.card-header */}

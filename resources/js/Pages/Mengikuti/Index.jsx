@@ -39,8 +39,8 @@ const Index = ({ tahun_ajarans, auth }) => {
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Ajaran baru"
-                breadcrumbs={["List ajaran baru"]}
+                title="Wali kelas"
+                breadcrumbs={["List wali kelas"]}
             />
             <div className="content">
                 <div className="container-fluid">

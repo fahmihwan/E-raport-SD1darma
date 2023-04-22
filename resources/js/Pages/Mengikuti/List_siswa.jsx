@@ -38,7 +38,7 @@ const List_siswa = ({ murid, mengikuti_kelas_id, auth }) => {
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title={`List ${datas?.kelas?.nama}`}
-                breadcrumbs={["Ajaran baru", "list murid"]}
+                breadcrumbs={["List wali kelas", "list murid"]}
             />
             <div className="content">
                 <div className="container-fluid">

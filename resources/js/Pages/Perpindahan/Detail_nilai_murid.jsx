@@ -15,7 +15,11 @@ const Detail_nilai_murid = ({
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title={"Detail nilai rapor"}
-                breadcrumbs={["Rapor murid", "Detail nilai rapor"]}
+                breadcrumbs={[
+                    "perpindahan",
+                    "detail murid",
+                    "detail nilai rapor",
+                ]}
             />
             <div className="content">
                 <div className="container-fluid">

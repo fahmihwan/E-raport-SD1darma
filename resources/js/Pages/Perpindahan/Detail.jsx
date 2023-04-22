@@ -8,7 +8,10 @@ import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 const Detail = ({ auth, murid, datas }) => {
     return (
         <AuthenticatedLayout auth={auth}>
-            <HeaderLayout title="Perpindahan" breadcrumbs={["perpindahan"]} />
+            <HeaderLayout
+                title="Detail murid"
+                breadcrumbs={["perpindahan", "detail murid"]}
+            />
             <div className="content">
                 <div className="container-fluid">
                     <Link
@@ -21,7 +24,7 @@ const Detail = ({ auth, murid, datas }) => {
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <h3 className="card-title">List perpindahan</h3>
+                                <h3 className="card-title">Detail murid</h3>
                             </div>
                         </div>
                         <div className="card-body">
@@ -31,7 +34,7 @@ const Detail = ({ auth, murid, datas }) => {
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <h3 className="card-title">List perpindahan</h3>
+                                <h3 className="card-title">List kelas</h3>
                             </div>
                         </div>
                         <div className="card-body">

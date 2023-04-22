@@ -28,8 +28,8 @@ const Create_kelas_tahun_ajaran_baru = ({
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Tambah Ajaran baru"
-                breadcrumbs={["Ajaran baru", "Tambah Ajaran baru"]}
+                title="Tambah data"
+                breadcrumbs={["List wali kelas", "Tambah data"]}
             />
             <div className="content">
                 <div className="container-fluid">

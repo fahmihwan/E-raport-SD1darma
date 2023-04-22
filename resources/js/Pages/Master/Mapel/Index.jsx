@@ -15,6 +15,7 @@ const Index = () => {
     const { datas, errors, auth } = usePage().props;
     const { data, setData, post, processing, reset } = useForm({
         nama: "",
+        kkm: "",
     });
 
     const closeModalRef = useRef(null);
@@ -61,11 +62,19 @@ const Index = () => {
                             >
                                 <form onSubmit={handleSubmit}>
                                     <InputText
-                                        title="kelas"
+                                        title="mapel"
                                         name="nama"
-                                        placeholder="input kelas"
+                                        placeholder="input mapel"
                                         handleChange={handleChange}
                                         value={data.nama}
+                                    />
+                                    <InputText
+                                        title="kkm"
+                                        name="kkm"
+                                        type="number"
+                                        placeholder="input kkm"
+                                        handleChange={handleChange}
+                                        value={data.kkm}
                                     />
 
                                     <button
@@ -84,6 +93,7 @@ const Index = () => {
                                     <tr>
                                         <th style={{ width: "10px" }}>#</th>
                                         <th>Mapel</th>
+                                        <th>KKM</th>
                                         <th>Created at</th>
                                         <th style={{ width: "40px" }}>
                                             Action
@@ -95,6 +105,7 @@ const Index = () => {
                                         <tr key={i}>
                                             <td>{i + datas.from}</td>
                                             <td>{d.nama}</td>
+                                            <td>{d.kkm}</td>
                                             <td>{d.created_at}</td>
                                             <td>
                                                 <button

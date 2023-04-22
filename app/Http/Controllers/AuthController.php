@@ -22,7 +22,7 @@ class AuthController extends Controller
 
         if ($request->akses == 'guru') {
             if (Auth::guard('webguru')->attempt($validated)) {
-                return redirect()->intended('/guru/penilaian');
+                return redirect()->intended('/admin/dashboard');
             }
         } else {
             if (Auth::guard('webadmin')->attempt($validated)) {

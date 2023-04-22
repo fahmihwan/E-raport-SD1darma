@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportPdfController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
@@ -92,7 +93,7 @@ Route::delete('/admin/perpindahan/{id}', [PerpindahanController::class, 'destroy
 
 Route::get('/admin/rapor-murid', [RaporAdminController::class, 'index']);
 Route::get('/admin/raport-murid/detail', [RaporAdminController::class, 'detail']);
-Route::get('/admin/rapor-murid/{mengikuti_kelas_id}/{murid_id}/detail_rapor', [PerpindahanController::class, 'detail_rapor']);
+Route::get('/admin/rapor-murid/{mengikuti_kelas_id}/{murid_id}/detail_rapor', [RaporAdminController::class, 'detail_rapor']);
 
 Route::get('/admin/rapor-murid/{murid_id}/detail', [RaporAdminController::class, 'search_detail_rapor']);
 
@@ -141,3 +142,5 @@ Route::get('/demo/create', function () {
 });
 
 // Route::post('/')
+Route::get('/export-detail-nilai', [ExportPdfController::class, 'export_detail_nilai']);
+Route::get('/export-rapor/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor', [ExportPdfController::class, 'export_rapor']);

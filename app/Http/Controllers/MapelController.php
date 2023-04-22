@@ -21,6 +21,7 @@ class MapelController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|unique:mapels',
+            'kkm' => 'required',
         ]);
 
         Mapel::create($validated);

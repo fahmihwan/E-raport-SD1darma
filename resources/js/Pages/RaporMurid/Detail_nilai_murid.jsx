@@ -2,8 +2,16 @@ import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
+import { ExportBlob } from "../../Components/ExportBlob";
 
-const Detail_nilai_murid = ({ nilai, detailCard, nilai_kepribadian, auth }) => {
+const Detail_nilai_murid = ({
+    nilai,
+    detailCard,
+    nilai_kepribadian,
+    auth,
+    var_get,
+}) => {
+    console.log(var_get);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
@@ -32,11 +40,20 @@ const Detail_nilai_murid = ({ nilai, detailCard, nilai_kepribadian, auth }) => {
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
-                                    <span className="mr-2">
-                                        tahun ajaran :{" "}
-                                        {/* {tahun_ajaran.tahun_ajaran} */}
-                                    </span>
+                                    <span className="mr-2">Nilai Rapor </span>
+                                    {/* /export-rapor/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor */}
                                 </div>
+                                <button
+                                    onClick={() =>
+                                        ExportBlob(
+                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor`,
+                                            "detail_rapor.pdf"
+                                        )
+                                    }
+                                    className="btn btn-primary"
+                                >
+                                    Export
+                                </button>
                             </div>
                         </div>
                         {/* /.card-header */}
