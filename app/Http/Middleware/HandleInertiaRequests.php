@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
         $auth_guru = null;
         $guru = Auth::guard('webguru')->user();
         if ($guru) {
-            $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
+            $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->withTrashed()->first()->id;
             $auth_guru = Guru::leftJoin('mengikuti_kelas', 'gurus.id', '=', 'mengikuti_kelas.guru_id')
                 ->where([
                     ['gurus.id', '=', $guru->id],
@@ -55,8 +55,6 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'admin' => $request->user(),
                 'guru' => $auth_guru ? $auth_guru : $guru
-                // 'guru' => Auth::guard('webguru')->user()
-                // 'guru' => $auth_guru
             ],
             'flash' => [
                 'error_message' => fn () => $request->session()->get('error_message')

@@ -17,7 +17,7 @@ class KelasFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->unique()->randomElement(['KELAS_1', 'KELAS_2', 'KELAS_3', 'KELAS_4', 'KELAS_5', 'KELAS_6']),
+            'nama' => fake()->unique()->randomElement(['KELAS 1', 'KELAS 2', 'KELAS 3', 'KELAS 4', 'KELAS 5', 'KELAS 6']),
         ];
     }
 }

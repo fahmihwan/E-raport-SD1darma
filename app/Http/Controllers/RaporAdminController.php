@@ -21,7 +21,7 @@ class RaporAdminController extends Controller
         // return        Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get();
         // Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get();
         return Inertia::render('RaporAdmin/Index', [
-            'murid' => Murid::select(['id', 'nama', 'no_induk'])->get()
+            'murid' => Murid::select(['id', 'nama', 'no_induk'])->withTrashed()->get()
         ]);
     }
     public function search_detail_rapor($murid_id)
@@ -40,10 +40,12 @@ class RaporAdminController extends Controller
     public function detail_rapor($mengikuti_kelas_id, $murid_id)
     {
 
+
         $mengikuti_ajaran_id = Mengikuti_ajaran::with('mengikuti_kelas.tahun_ajaran')->where([
             ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
             ['murid_id', '=', $murid_id],
         ])->first();
+
 
         $nilai_kepribadian = Nilai_kepribadian::where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id->id],

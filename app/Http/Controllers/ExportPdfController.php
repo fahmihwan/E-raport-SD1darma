@@ -36,7 +36,7 @@ class ExportPdfController extends Controller
 
         $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])->where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id->id],
-        ])->get();
+        ])->where('semester', $semester)->get();
 
 
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mapels', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->unique();
+            $table->string('nama');
             $table->string('kkm');
             $table->timestamps();
             $table->softDeletes();

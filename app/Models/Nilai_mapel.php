@@ -17,6 +17,6 @@ class Nilai_mapel extends Model
 
     public function mapel()
     {
-        return $this->belongsTo(Mapel::class);
+        return $this->belongsTo(Mapel::class)->withTrashed();
     }
 }

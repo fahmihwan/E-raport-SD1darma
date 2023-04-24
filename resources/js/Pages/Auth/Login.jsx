@@ -12,9 +12,9 @@ const Login = ({ flash }) => {
         setData(e.target.name, e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        post("/admin/auth/");
+        await post("/admin/auth/");
         // console.log(data);
     };
     return (

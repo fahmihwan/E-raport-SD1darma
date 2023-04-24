@@ -69,6 +69,9 @@ const Index = ({ datas, auth }) => {
                                                     </Link>
                                                     <button
                                                         onClick={() =>
+                                                            confirm(
+                                                                "apakah anda yakin ingin menghapus?"
+                                                            ) &&
                                                             handleDelete(d.id)
                                                         }
                                                         className="btn btn-danger"

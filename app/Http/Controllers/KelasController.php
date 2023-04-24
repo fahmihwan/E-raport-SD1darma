@@ -10,7 +10,7 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $datas =  Kelas::latest()->paginate(10);
+        $datas =  Kelas::orderBy('nama', 'DESC')->paginate(10);
 
         return Inertia::render('Master/Kelas/Index', [
             'datas' => $datas

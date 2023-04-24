@@ -15,8 +15,7 @@ class MengikutiController extends Controller
 {
     public function index()
     {
-        $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->get();
-
+        $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->withTrashed()->get();
 
         return Inertia::render('Mengikuti/Index', [
             'tahun_ajarans' => $tahun_ajarans
@@ -74,7 +73,6 @@ class MengikutiController extends Controller
             'murid_id' => 'required',
             'mengikuti_kelas_id' => 'required'
         ]);
-        $validated['isLulus'] = false;
         Mengikuti_ajaran::create($validated);
         return redirect()->back();
     }

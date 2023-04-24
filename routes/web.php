@@ -31,17 +31,21 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::resource('/admin/akun', AdminController::class);
 Route::post('/admin/auth/', [AuthController::class, 'authenticated']);
+
+
+
+
+
+// Route::middleware(['auth'])->group(function () {
+
+// auth
 Route::post('/admin/auth/logout', [AuthController::class, 'logout']);
 
-
-// Route::get('/admin/dashboard', function () {
-
-// });
-
 Route::get('/admin/dashboard', [DashboardController::class, 'index']);
+// });
 
 Route::get('/admin/master/tahun_ajaran', [Tahun_ajaranController::class, 'index']);
 Route::post('/admin/master/tahun_ajaran', [Tahun_ajaranController::class, 'store']);
@@ -135,12 +139,13 @@ Route::get('/guru/rapor-murid/{mengikuti_ajaran_id}/{semester}/detail_nilai_muri
 Route::get('/guru/auth/edit_password', [GuruController::class, 'edit_password']);
 Route::put('/guru/auth/edit_password', [GuruController::class, 'update_password']);
 
+// Route::post('/')
 
-// Route::get('/demo',);
+// });
+
 Route::get('/demo/create', function () {
     return view('demo.create');
 });
 
-// Route::post('/')
 Route::get('/export-detail-nilai', [ExportPdfController::class, 'export_detail_nilai']);
 Route::get('/export-rapor/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor', [ExportPdfController::class, 'export_rapor']);

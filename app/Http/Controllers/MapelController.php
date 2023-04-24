@@ -20,7 +20,7 @@ class MapelController extends Controller
     {
 
         $validated = $request->validate([
-            'nama' => 'required|unique:mapels',
+            'nama' => 'required',
             'kkm' => 'required',
         ]);
 

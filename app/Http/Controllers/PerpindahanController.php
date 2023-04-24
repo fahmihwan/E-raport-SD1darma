@@ -24,7 +24,7 @@ class PerpindahanController extends Controller
     }
     public function create()
     {
-        $murid = Murid::latest()->get();
+        $murid = Murid::doesntHave('perpindahans')->latest()->get();
         return Inertia::render('Perpindahan/Create', [
             'murid' => $murid
         ]);

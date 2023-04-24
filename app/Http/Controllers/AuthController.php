@@ -22,10 +22,13 @@ class AuthController extends Controller
 
         if ($request->akses == 'guru') {
             if (Auth::guard('webguru')->attempt($validated)) {
+                $request->session()->regenerate();
                 return redirect()->intended('/admin/dashboard');
             }
-        } else {
+        }
+        if ($request->akses == 'admin') {
             if (Auth::guard('webadmin')->attempt($validated)) {
+                $request->session()->regenerate();
                 return redirect()->intended('/admin/dashboard');
             }
         }
@@ -36,8 +39,13 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('webadmin')->logout();
-        Auth::guard('webguru')->logout();
+        // dd(Auth::guard('webadmin')->user() !== null);
+        if (Auth::guard('webadmin')->user() !== null) {
+            Auth::guard('webadmin')->logout();
+        };
+        if (Auth::guard('webguru')->user() !== null) {
+            Auth::guard('webguru')->logout();
+        }
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
