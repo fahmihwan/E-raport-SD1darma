@@ -16,6 +16,7 @@ class MapelFactory extends Factory
      */
     public function definition(): array
     {
+        static $kode = 1;
         return [
             'nama' => fake()->unique()->randomElement([
                 'Pendidikan Agama',
@@ -29,7 +30,10 @@ class MapelFactory extends Factory
                 'Bahasa Jawa',
                 'Bahasa Inggris',
             ]),
-            'kkm' => 75
+            'kkm' => 75,
+            // 'kode_mapel' => 'MP00' . $kode++
+            'kode_mapel' => 'MP' . str_pad($kode++, 3, "0", STR_PAD_LEFT)
+
         ];
     }
 }

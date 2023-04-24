@@ -67,7 +67,10 @@ const CardGuru = ({ id, nip, nama, list_mengajar }) => {
                                 <tbody>
                                     {list_mengajar?.map((d, i) => (
                                         <tr key={i}>
-                                            <td>{d?.mapel?.nama}</td>
+                                            <td>
+                                                [{d?.mapel?.kode_mapel}] -{" "}
+                                                {d?.mapel?.nama}
+                                            </td>
                                             <td>{d?.kelas?.nama}</td>
                                         </tr>
                                     ))}

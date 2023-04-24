@@ -14,7 +14,10 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
     });
 
     let optionKelas = kelas.map((d) => ({ value: d.id, label: d.nama }));
-    let optionMapel = mapel.map((d) => ({ value: d.id, label: d.nama }));
+    let optionMapel = mapel.map((d) => ({
+        value: d.id,
+        label: `${[d.kode_mapel]} - ${d.nama}`,
+    }));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -113,7 +116,10 @@ const Create_mengajar_mapel = ({ guru_mengajar, kelas, mapel, guru, auth }) => {
                                                 <tr key={i}>
                                                     <th scope="row">{i + 1}</th>
                                                     <td>{d?.kelas?.nama}</td>
-                                                    <td>{d?.mapel?.nama}</td>
+                                                    <td>
+                                                        [{d?.mapel?.kode_mapel}]
+                                                        - {d?.mapel?.nama}
+                                                    </td>
                                                     <td>
                                                         <button
                                                             className="btn btn-danger"

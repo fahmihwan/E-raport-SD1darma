@@ -18,7 +18,7 @@ class MengajarController extends Controller
     {
         $list_guru_mengajar = Guru::with([
             'mengajar_mapels.kelas:id,nama',
-            'mengajar_mapels.mapel:id,nama',
+            'mengajar_mapels.mapel:id,nama,kode_mapel',
         ])->latest()->get(['id', 'nama', 'nip']);
 
         return Inertia::render('Mengajar/Index', [
@@ -67,11 +67,12 @@ class MengajarController extends Controller
         $guru_mengajar = Mengajar_mapel::with([
             // 'mengikuti_kelas.kelas',
             'kelas',
-            'mapel:id,nama,kkm'
+            'mapel:id,nama,kkm,kode_mapel'
         ])
             ->where('guru_id', $guru_mengajar_id)
             ->latest()
             ->get();
+
 
 
 

@@ -92,6 +92,7 @@ const Index = () => {
                                 <thead>
                                     <tr>
                                         <th style={{ width: "10px" }}>#</th>
+                                        <th>kode mapel</th>
                                         <th>Mapel</th>
                                         <th>KKM</th>
                                         <th>Created at</th>
@@ -104,6 +105,7 @@ const Index = () => {
                                     {datas.data.map((d, i) => (
                                         <tr key={i}>
                                             <td>{i + datas.from}</td>
+                                            <td>{d.kode_mapel}</td>
                                             <td>{d.nama}</td>
                                             <td>{d.kkm}</td>
                                             <td>{d.created_at}</td>
