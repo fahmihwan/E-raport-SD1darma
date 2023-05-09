@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
 
         $master_guru = [
             [
-                'nip' => '53232432',
+                'nip' => '198507232005022001',
                 'nama' => 'sadiyono',
                 'jenis_kelamin' => 'L',
                 'username' => 'sadiyono',
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
                 'telp' => '08123123123'
             ],
             [
-                'nip' => '53232432',
+                'nip' => '198907232005022001',
                 'nama' => 'jum',
                 'jenis_kelamin' => 'P',
                 'username' => 'jum',
@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 'telp' => '0812312323'
             ],
             [
-                'nip' => '52344234123',
+                'nip' => '198507232005022002',
                 'nama' => 'tutik',
                 'jenis_kelamin' => 'P',
                 'username' => 'tutik',
@@ -71,10 +71,37 @@ class DatabaseSeeder extends Seeder
                 'telp' => '081231232213'
             ],
             [
-                'nip' => '51232138',
+                'nip' => '199207232005052001',
                 'nama' => 'lanjar',
                 'jenis_kelamin' => 'L',
                 'username' => 'lanjar',
+                'password' => Hash::make('qweqwe123'),
+                'alamat' => 'magetan',
+                'telp' => '23232313'
+            ],
+            [
+                'nip' => '199207232005052001',
+                'nama' => 'mariaten',
+                'jenis_kelamin' => 'P',
+                'username' => 'mariaten',
+                'password' => Hash::make('qweqwe123'),
+                'alamat' => 'magetan',
+                'telp' => '23232313'
+            ],
+            [
+                'nip' => '200207232005052020',
+                'nama' => 'sri',
+                'jenis_kelamin' => 'P',
+                'username' => 'sri',
+                'password' => Hash::make('qweqwe123'),
+                'alamat' => 'magetan',
+                'telp' => '23232313'
+            ],
+            [
+                'nip' => '201007232005052020',
+                'nama' => 'afif',
+                'jenis_kelamin' => 'L',
+                'username' => 'afif',
                 'password' => Hash::make('qweqwe123'),
                 'alamat' => 'magetan',
                 'telp' => '23232313'

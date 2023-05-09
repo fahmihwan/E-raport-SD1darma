@@ -18,7 +18,7 @@ class MuridFactory extends Factory
     {
         return [
             // 'nama' => fake()->unique()->randomElement(['fajar', 'rian', 'ahmad', 'nur', 'dimas']),
-            'nama' => fake()->unique()->randomElement(['fajar', 'cipluk', 'tumbar', 'boncel', 'yahya']),
+            'nama' => fake()->unique()->randomElement(['fajar', 'rizky', 'dimas', 'ardi', 'yahya']),
             'no_induk' => fake()->unique()->randomElement(['3707', '3708', '3709', '3710', '3711']),
             'jenis_kelamin' => 'L',
             'tempat_lahir' => fake()->randomElement(['Ponorogo', 'Magetan', 'Madiun']),
