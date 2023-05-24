@@ -92,7 +92,7 @@ const Create = ({ auth, murid }) => {
                                                 className="form-check-label"
                                                 htmlFor="exampleRadios1"
                                             >
-                                                Lulus
+                                                Lulus / Alumni
                                             </label>
                                         </div>
                                         <div className="form-check">

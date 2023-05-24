@@ -74,6 +74,9 @@ const Create = ({ kelass, auth }) => {
                                                     <InputRadioButton
                                                         title="Laki-Laki"
                                                         name="jenis_kelamin"
+                                                        checked={
+                                                            data.jenis_kelamin
+                                                        }
                                                         value="L"
                                                         handleChange={
                                                             handleChange
@@ -83,6 +86,9 @@ const Create = ({ kelass, auth }) => {
                                                         title="Peremepuan"
                                                         name="jenis_kelamin"
                                                         value="P"
+                                                        checked={
+                                                            data.jenis_kelamin
+                                                        }
                                                         handleChange={
                                                             handleChange
                                                         }
