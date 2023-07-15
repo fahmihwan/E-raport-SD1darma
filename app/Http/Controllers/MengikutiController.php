@@ -92,15 +92,30 @@ class MengikutiController extends Controller
 
     public function get_kelas_tahun_ajaran($id)
     {
+        // $datas =  Mengikuti_kelas::with([
+        //     'kelas',
+        //     'tahun_ajaran',
+        //     'guru'
+        // ])
+        //     ->where('tahun_ajaran_id', $id)
+        //     ->get()->sortByDesc(function ($i) {
+        //         return $i->kelas->max('nama');
+        //     });
+
         $datas =  Mengikuti_kelas::with([
             'kelas',
             'tahun_ajaran',
             'guru'
         ])
             ->where('tahun_ajaran_id', $id)
-            ->get()->sortByDesc(function ($i) {
-                return $i->kelas->max('nama');
-            });
+            // ->whereNot('id', 10)
+            ->get();
+
+
+
+        // ->get()->sortByDesc(function ($i) {
+        //     return $i->kelas->max('nama');
+        // });
         return $datas;
     }
 

@@ -101,9 +101,15 @@ return [
             'throttle' => 60,
         ],
         'gurus' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Guru::class,
+            'provider' => 'gurus',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
         ],
+        // 'gurus' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\Guru::class,
+        // ],
     ],
 
     /*

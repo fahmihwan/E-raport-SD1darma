@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Kelas::class);
             $table->foreignIdFor(Tahun_ajaran::class);
             $table->foreignIdFor(Guru::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

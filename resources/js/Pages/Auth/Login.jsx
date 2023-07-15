@@ -14,8 +14,11 @@ const Login = ({ flash }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await post("/admin/auth/");
-        // console.log(data);
+        await post(
+            data?.akses == "guru"
+                ? "/admin/auth/guru/login"
+                : "/admin/auth/admin/login"
+        );
     };
     return (
         <div className="hold-transition login-page">

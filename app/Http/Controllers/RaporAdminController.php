@@ -26,12 +26,14 @@ class RaporAdminController extends Controller
     }
     public function search_detail_rapor($murid_id)
     {
-        // return $murid_id;
+
         $datas = Mengikuti_ajaran::with([
             'mengikuti_kelas.kelas:id,nama',
             'mengikuti_kelas.tahun_ajaran:id,tahun_ajaran',
-        ])->where('murid_id', $murid_id)->get();
-
+        ])->where([
+            ['murid_id', '=', $murid_id],
+        ])->whereRelation('mengikuti_kelas', 'deleted_at', '=', null)
+            ->get();
 
         return Inertia::render('RaporAdmin/List_kelas', [
             'datas' => $datas
@@ -58,6 +60,9 @@ class RaporAdminController extends Controller
         if (!$mengikuti_ajaran_id || !$nilai_kepribadian || !$nilai) {
             return 'false';
         }
+
+        // dd($mengikuti_kelas_id);
+
 
         return Inertia::render('RaporAdmin/Detail_nilai_murid', [
             'nilai' => $nilai,

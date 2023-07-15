@@ -54,10 +54,6 @@ class RaporMuridController extends Controller
             ['semester', '=', $semester],
         ])->get();
 
-
-
-
-
         return Inertia::render('RaporMurid/Detail_nilai_murid', [
             'var_get' => [
                 'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->id,

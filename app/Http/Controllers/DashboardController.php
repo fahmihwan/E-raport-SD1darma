@@ -13,7 +13,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //   Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->first()->tahun_ajaran;
+
+        // session()->flush();
         // jumlah siswa terbanyak
         return Inertia::render('Dashboard', [
             'stat' => [

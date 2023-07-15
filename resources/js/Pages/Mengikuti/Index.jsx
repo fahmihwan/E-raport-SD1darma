@@ -10,17 +10,22 @@ const Index = ({ tahun_ajarans, auth }) => {
     const [selectTahun, setSelectTahun] = useState(tahun_ajarans[0].id);
 
     const [listData, setListData] = useState();
-    const getTahunAjaran = async (second) => {
+    const getTahunAjaran = async () => {
         try {
             await axios
                 .get(`/admin/get_kelas_tahun_ajaran/${selectTahun}`)
                 .then((result) => {
-                    setListData(result.data);
+                    let sortData = result?.data?.sort(function (a, b) {
+                        return a?.kelas?.nama - b?.kelas?.nama;
+                    });
+                    setListData(sortData);
                 })
                 .catch((err) => {
+                    console.log(err);
                     alert(err);
                 });
         } catch (error) {
+            console.log(error);
             alert(error);
         }
     };
@@ -58,7 +63,7 @@ const Index = ({ tahun_ajarans, auth }) => {
                                             }
                                             defaultChecked={selectTahun}
                                         >
-                                            {tahun_ajarans.map((d, i) => (
+                                            {tahun_ajarans?.map((d, i) => (
                                                 <option key={i} value={d.id}>
                                                     {d.tahun_ajaran}
                                                 </option>
@@ -98,11 +103,21 @@ const Index = ({ tahun_ajarans, auth }) => {
                                 <tbody>
                                     {listData?.map((d, i) => (
                                         <tr key={i}>
-                                            <td>1</td>
-                                            <td>{d.kelas.nama}</td>
-                                            <td>{d.guru.nama}</td>
+                                            <td>{i + 1}</td>
+                                            <td>{d?.kelas?.nama}</td>
                                             <td>
-                                                {d.tahun_ajaran.tahun_ajaran}
+                                                {d?.guru?.nama}
+                                                {d?.guru?.deleted_at !==
+                                                null ? (
+                                                    <span className="text-danger">
+                                                        &nbsp; (nonaktif)
+                                                    </span>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </td>
+                                            <td>
+                                                {d?.tahun_ajaran?.tahun_ajaran}
                                             </td>
                                             <td className="d-flex">
                                                 <Link

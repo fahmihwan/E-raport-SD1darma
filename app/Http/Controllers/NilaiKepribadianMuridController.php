@@ -14,12 +14,16 @@ class NilaiKepribadianMuridController extends Controller
 {
     public function index()
     {
+
         $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->first();
         $user_id = auth()->guard('webguru')->user()->id;
+
         $mengikuti_kelas = Mengikuti_kelas::where([
             'tahun_ajaran_id' => $tahun_ajaran->id,
             'guru_id' => $user_id
         ])->first();
+
+        // return $mengikuti_kelas;
 
         $mengikuti_ajaran =  Mengikuti_ajaran::with(['murid:id,nama,no_induk'])->where('mengikuti_kelas_id', $mengikuti_kelas->id)->get();
 

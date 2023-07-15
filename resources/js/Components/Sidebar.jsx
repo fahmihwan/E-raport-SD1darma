@@ -5,6 +5,7 @@ import UserLogo from "../../../public/dist/img/user2-160x160.jpg";
 export const Sidebar = ({ auth }) => {
     const [toggleMaster, setToggleMaster] = useState(false);
     const { url, component } = usePage();
+
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* Brand Logo */}
@@ -234,7 +235,7 @@ export const Sidebar = ({ auth }) => {
                                         <p>Nilai Mengajar</p>
                                     </Link>
                                 </li>
-                                {auth?.guru?.kelas_id && (
+                                {auth?.guru?.is_wali_kelas && (
                                     <>
                                         <li className="nav-header">
                                             Wali Kelas
@@ -257,7 +258,7 @@ export const Sidebar = ({ auth }) => {
                                         </li>
                                     </>
                                 )}
-                                {auth?.guru?.kelas_id && (
+                                {auth?.guru?.is_wali_kelas && (
                                     <>
                                         <li className="nav-header">Laporan</li>
                                         <li className="nav-item">

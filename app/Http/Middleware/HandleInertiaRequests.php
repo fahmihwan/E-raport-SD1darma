@@ -7,6 +7,7 @@ use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
+use PhpParser\Node\Expr\AssignOp\ShiftLeft;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -30,7 +31,7 @@ class HandleInertiaRequests extends Middleware
         return parent::version($request);
     }
 
-    /**
+    /**x
      * Defines the props that are shared by default.
      *
      * @see https://inertiajs.com/shared-data
@@ -40,17 +41,30 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
 
-        $auth_guru = null;
+        $auth_guru = [];
         $guru = Auth::guard('webguru')->user();
         if ($guru) {
-            $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->withTrashed()->first()->id;
-            $auth_guru = Guru::leftJoin('mengikuti_kelas', 'gurus.id', '=', 'mengikuti_kelas.guru_id')
+            $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
+            $auth_guru = Guru::select([
+                'gurus.id as id',
+                'nip',
+                'gurus.nama as nama',
+                'username',
+                'alamat',
+                'mengikuti_kelas.id as is_wali_kelas',
+                'telp',
+                'kelas_id',
+                'tahun_ajaran_id',
+                'guru_id',
+            ])->leftJoin('mengikuti_kelas', 'gurus.id', '=', 'mengikuti_kelas.guru_id')
                 ->where([
                     ['gurus.id', '=', $guru->id],
-                    ['tahun_ajaran_id', '=', $tahun_ajaran]
+                    ['tahun_ajaran_id', '=', $tahun_ajaran],
+                    ['mengikuti_kelas.deleted_at', '=', null]
                 ])
                 ->first();
         }
+
         return array_merge(parent::share($request), [
             'auth' => [
                 'admin' => $request->user(),

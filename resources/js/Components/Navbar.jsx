@@ -3,9 +3,19 @@ import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 
 export const Navbar = ({ setToggleSidebar, toggleSidebar, auth }) => {
+    // const handleLogoutAdmin = () => {
+    //     Inertia.post("/admin/auth/admin/logout");
+    // };
     const handleLogout = () => {
-        Inertia.post("/admin/auth/logout");
+        if (auth?.admin != null) {
+            Inertia.post("/admin/auth/admin/logout");
+        }
+        if (auth?.guru != null) {
+            Inertia.post("/admin/auth/guru/logout");
+        }
     };
+
+    // console.log(auth?.guru == null);
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
             {/* Left navbar links */}
