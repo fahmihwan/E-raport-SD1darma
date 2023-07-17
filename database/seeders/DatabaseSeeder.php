@@ -107,15 +107,15 @@ class DatabaseSeeder extends Seeder
         }
 
         // Tahun_ajaran::factory(3)->create();
-        $tahun_ajarans = [
-            ['tahun_ajaran' => '2022/2023'],
-            ['tahun_ajaran' => '2021/2022'],
-            ['tahun_ajaran' => '2020/2021'],
-            ['tahun_ajaran' => '2019/2020'],
-        ];
-        foreach ($tahun_ajarans as $data) {
-            Tahun_ajaran::create($data);
-        }
+        // $tahun_ajarans = [
+        //     ['tahun_ajaran' => '2022/2023'],
+        //     ['tahun_ajaran' => '2021/2022'],
+        //     ['tahun_ajaran' => '2020/2021'],
+        //     ['tahun_ajaran' => '2019/2020'],
+        // ];
+        // foreach ($tahun_ajarans as $data) {
+        //     Tahun_ajaran::create($data);
+        // }
 
 
         // Murid::factory(5)->create();

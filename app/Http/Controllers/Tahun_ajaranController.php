@@ -11,7 +11,6 @@ class Tahun_ajaranController extends Controller
 {
     public function index()
     {
-
         $datas =  Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->paginate(10);
         return Inertia::render('Master/Tahun_ajaran/Index', [
             'datas' => $datas
@@ -21,7 +20,7 @@ class Tahun_ajaranController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tahun_ajaran' => 'required|unique:tahun_ajarans',
+            'tahun_ajaran' => 'required',
         ]);
 
         Tahun_ajaran::create($validated);

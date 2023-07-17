@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Tahun_ajaran;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ class AuthController extends Controller
 {
     public function index()
     {
+
         return Inertia::render('Auth/Login');
     }
 
@@ -30,6 +32,9 @@ class AuthController extends Controller
 
     public function authenticated_guru(Request $request)
     {
+        if (!Tahun_ajaran::exists()) {
+            return "mohon lengkapi data master tahun ajaran...";
+        }
         $validated = $this->validate($request, [
             'username'   => 'required',
             'password' => 'required'

@@ -13,15 +13,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
-        // session()->flush();
         // jumlah siswa terbanyak
+        $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->withTrashed()->first();
         return Inertia::render('Dashboard', [
             'stat' => [
                 'total_murid' => Murid::doesntHave('perpindahans')->count(),
                 'total_guru' => Guru::count(),
                 'total_mapel' => Mapel::count(),
-                'tahun_ajaran' => Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->withTrashed()->first()->tahun_ajaran,
+                'tahun_ajaran' => $tahun_ajaran  ? $tahun_ajaran->tahun_ajaran : 'belum tersedia',
             ],
             // 'jumlah murid terbanyak'
             // 'jumlah skor siswa terbanyak'

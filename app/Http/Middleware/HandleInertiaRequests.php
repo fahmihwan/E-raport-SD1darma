@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
 
+
         $auth_guru = [];
         $guru = Auth::guard('webguru')->user();
         if ($guru) {

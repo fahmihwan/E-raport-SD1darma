@@ -15,7 +15,10 @@ class MengikutiController extends Controller
 {
     public function index()
     {
-        $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->withTrashed()->get();
+        if (!Tahun_ajaran::exists()) {
+            return "mohon lengkapi data master tahun ajaran...";
+        }
+        $tahun_ajarans =  Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->get();
 
         return Inertia::render('Mengikuti/Index', [
             'tahun_ajarans' => $tahun_ajarans
