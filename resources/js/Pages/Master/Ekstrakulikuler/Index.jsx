@@ -24,7 +24,7 @@ const Index = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await post("/admin/master/kelas");
+        await post("/admin/master/ekstra");
         closeModalRef.current.click();
         setData("nama", "");
     };
@@ -32,14 +32,14 @@ const Index = () => {
     const handleDelete = (e, id) => {
         e.preventDefault();
         confirm("apakah anda yakin ingin menghapus?") &&
-            Inertia.delete("/admin/master/kelas/" + id);
+            Inertia.delete("/admin/master/ekstra/" + id);
     };
 
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
-                title="Kelas"
-                breadcrumbs={["Master", "List Kelas"]}
+                title="Ekstrakulikuler"
+                breadcrumbs={["Master", "List Ekstrakulikuler"]}
             />
             <div className="content">
                 <div className="container-fluid">
@@ -47,7 +47,9 @@ const Index = () => {
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <h3 className="card-title">List Kelas</h3>
+                                <h3 className="card-title">
+                                    List Ekstrakulikuler
+                                </h3>
                                 <ButtonModalComponent
                                     id="modal-default"
                                     title="tambah data"
@@ -56,14 +58,13 @@ const Index = () => {
 
                             <ModalLayout
                                 id="modal-default"
-                                title="Kelas"
+                                title="Ekstrakulikuler"
                                 closeModalRef={closeModalRef}
                             >
                                 <form onSubmit={handleSubmit}>
                                     <InputText
-                                        title="kelas"
+                                        title="ekstrakulikuler"
                                         name="nama"
-                                        placeholder="EX: KELAS_6"
                                         handleChange={handleChange}
                                         value={data.nama}
                                     />
@@ -83,7 +84,7 @@ const Index = () => {
                                 <thead>
                                     <tr>
                                         <th style={{ width: "10px" }}>#</th>
-                                        <th>Kelas</th>
+                                        <th>Ekstrakulikuler</th>
                                         <th>Created at</th>
                                         <th style={{ width: "40px" }}>
                                             Action

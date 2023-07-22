@@ -12,12 +12,15 @@ const Edit_nilai = ({ datas, mapel, semester, kelas, auth }) => {
     });
 
     useEffect(() => {
+        // console.log(datas[0].nilai_harian);
         let setMultipleData = datas?.map((d) => {
             return {
                 no_induk: d.mengikuti_ajaran.murid.no_induk,
                 nama: d.mengikuti_ajaran.murid.nama,
                 mengikuti_ajaran_id: d.mengikuti_ajaran_id,
-                nilai: d.nilai,
+                nilai_tugas: d?.nilai_tugas,
+                nilai_harian: d?.nilai_harian,
+                nilai_semester: d?.nilai_semester,
             };
         });
         setData("data", setMultipleData);
@@ -67,11 +70,15 @@ const Edit_nilai = ({ datas, mapel, semester, kelas, auth }) => {
                                             <th>#</th>
                                             <th>No Induk</th>
                                             <th>Nama</th>
-                                            <th>Action</th>
+                                            <th>Nilai Tugas</th>
+                                            <th>Nilai UH</th>
+                                            <th>
+                                                Nilai &nbsp;
+                                                {semester == 1 ? "UTS" : "UAS"}
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {/* {multipleInput?.map((d, i) => ( */}
                                         {data?.data?.map((d, i) => (
                                             <tr key={i}>
                                                 <td>{i + 1}</td>
@@ -80,14 +87,42 @@ const Edit_nilai = ({ datas, mapel, semester, kelas, auth }) => {
                                                 <td>
                                                     <input
                                                         required
-                                                        value={d?.nilai}
+                                                        value={d?.nilai_tugas}
                                                         onChange={(e) =>
                                                             handleChange(i, e)
                                                         }
                                                         className="form-control"
                                                         type="number"
                                                         placeholder="nilai"
-                                                        name="nilai"
+                                                        name="nilai_tugas"
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        required
+                                                        value={d?.nilai_harian}
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        className="form-control"
+                                                        type="number"
+                                                        placeholder="nilai"
+                                                        name="nilai_harian"
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        required
+                                                        value={
+                                                            d?.nilai_semester
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        className="form-control"
+                                                        type="number"
+                                                        placeholder="nilai"
+                                                        name="nilai_semester"
                                                     />
                                                 </td>
                                             </tr>

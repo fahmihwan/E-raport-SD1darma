@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Mapel;
+use App\Models\Ekstrakurikuler;
 use App\Models\Mengikuti_ajaran;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nilai_mapels', function (Blueprint $table) {
+        Schema::create('mengikuti_ajaran_ekstrakulikulers', function (Blueprint $table) {
             $table->id();
-            $table->enum('semester', ['1', '2']);
-            $table->foreignIdFor(Mapel::class);
             $table->foreignIdFor(Mengikuti_ajaran::class);
-            $table->integer('nilai_tugas');
-            $table->integer('nilai_harian');
-            $table->integer('nilai_semester');
+            $table->foreignIdFor(Ekstrakurikuler::class);
+            $table->enum('nilai', ['tidak mengikuti', 'A', 'B', 'C', 'D', 'E']);
+            $table->enum('semester', [1, 2]);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nilai_mapels');
+        Schema::dropIfExists('mengikuti_ajaran_ekstrakulikulers');
     }
 };

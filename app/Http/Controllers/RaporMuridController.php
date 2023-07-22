@@ -10,6 +10,7 @@ use App\Models\Nilai_kepribadian;
 use App\Models\Nilai_mapel;
 use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class RaporMuridController extends Controller
@@ -35,7 +36,6 @@ class RaporMuridController extends Controller
 
     public function detail_nilai_murid($mengikuti_ajaran_id, $semester)
     {
-
         $card = [
             'tahun_ajaran' =>  Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->tahun_ajaran,
             'data_murid' => Mengikuti_ajaran::with(['murid:id,nama,no_induk'])->where('id', $mengikuti_ajaran_id)->first(),
@@ -43,23 +43,60 @@ class RaporMuridController extends Controller
             'kelas' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->mengikuti_kelas->kelas->nama
         ];
 
-
         $nilai_kepribadian = Nilai_kepribadian::where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
             ['semester', '=', $semester],
         ])->first();
 
-        $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])->where([
-            ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
-            ['semester', '=', $semester],
-        ])->get();
 
+        $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])
+            ->select([
+                "id",
+                "semester",
+                "mapel_id",
+                "mengikuti_ajaran_id",
+                DB::raw('CAST((nilai_tugas+nilai_harian+nilai_semester)/3 AS UNSIGNED)  as nilai'),
+                "created_at",
+                "updated_at"
+            ])
+            ->where([
+                ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
+                ['semester', '=', $semester],
+            ])
+            ->get();
+
+
+
+
+
+
+        $totalnilai = Nilai_mapel::select([
+            DB::raw('CAST(SUM((nilai_tugas+nilai_harian+nilai_semester)/3) AS UNSIGNED) as nilai'),
+            'mengikuti_ajaran_id',
+        ])
+            ->with(['mengikuti_ajaran'])
+            ->where([
+                ['semester', '=', $semester]
+            ])
+            ->groupBy('mengikuti_ajaran_id')
+            ->orderBy('nilai', 'desc')
+            ->get();
+
+
+
+
+        $detail_perolehan = [
+            'jumlah' =>  Nilai_mapel::select([DB::raw('CAST(SUM((nilai_tugas+nilai_harian+nilai_semester)/3) AS UNSIGNED) as nilai')])->where([['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id], ['semester', '=', $semester]])->first()->nilai,
+            'rata_rata' =>  Nilai_mapel::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai')])->where([['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id], ['semester', '=', $semester]])->first()->nilai,
+            'peringkat' => 0,
+        ];
         return Inertia::render('RaporMurid/Detail_nilai_murid', [
             'var_get' => [
                 'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->id,
                 'murid_id' => $card['data_murid']->murid->id,
                 'semester' => $semester
             ],
+            'detail_perolehan' => $detail_perolehan,
             'nilai' => $nilai,
             'detailCard' => $card,
             'nilai_kepribadian' => $nilai_kepribadian

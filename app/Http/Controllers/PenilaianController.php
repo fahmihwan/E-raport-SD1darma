@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Mengajar_mapel;
 use App\Models\Mengikuti_ajaran;
+use App\Models\Mengikuti_ajaran_Ekstrakulikuler;
 use App\Models\Mengikuti_kelas;
 use App\Models\Nilai_mapel;
 use App\Models\Tahun_ajaran;
@@ -35,7 +36,6 @@ class PenilaianController extends Controller
 
     public function list_nilai($kelas_id, $mapel_id, $semester)
     {
-
         $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->first();
 
         $mengikuti_kelas_id = Mengikuti_kelas::where([
@@ -84,6 +84,7 @@ class PenilaianController extends Controller
             ])->first();
 
 
+
         return Inertia::render('Penilaian/Create_nilai', [
             'mengikuti_kelas' => $mengikuti_kelas,
             'mapel' => Mapel::where('id', $mapel_id)->first(),
@@ -113,7 +114,9 @@ class PenilaianController extends Controller
                     'semester' => $request->semester,
                     'mapel_id' => $request->mapel_id,
                     'mengikuti_ajaran_id' => $item['mengikuti_ajaran_id'],
-                    'nilai' => $item['nilai'],
+                    'nilai_tugas' => $item['nilai_tugas'],
+                    'nilai_harian' => $item['nilai_harian'],
+                    'nilai_semester' => $item['nilai_semester'],
                 ]);
             }
             DB::commit();
@@ -144,10 +147,10 @@ class PenilaianController extends Controller
             $q->where('mengikuti_kelas_id', $mengikuti_kelas_id);
         })->get();
 
-
         $kelas = Kelas::where('id', $kelas_id)->first();
-        // ====
 
+
+        // dd($datas);
         return Inertia::render('Penilaian/Edit_nilai', [
             'datas' => $datas,
             'mapel' => Mapel::where('id', $mapel_id)->first(),
@@ -173,7 +176,9 @@ class PenilaianController extends Controller
                     'semester' => $request->semester,
                     'mapel_id' => $request->mapel_id,
                 ])->update([
-                    'nilai' => $item['nilai'],
+                    'nilai_tugas' => $item['nilai_tugas'],
+                    'nilai_harian' => $item['nilai_harian'],
+                    'nilai_semester' => $item['nilai_semester'],
                 ]);
             }
             DB::commit();
@@ -183,7 +188,4 @@ class PenilaianController extends Controller
 
         return redirect("/guru/penilaian/{$request->kelas_id}/{$request->mapel_id}/{$request->semester}/list_nilai");
     }
-
-    // store
-
 }

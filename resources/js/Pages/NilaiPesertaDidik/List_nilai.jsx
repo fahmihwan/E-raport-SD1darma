@@ -42,7 +42,9 @@ const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
                         <div className="card-body">
                             <div className="row">
                                 <div className="d-flex align-items-center mb-2">
-                                    <span className="mr-3">Semester 1</span>
+                                    <span className="mr-3">
+                                        Semester {semester}
+                                    </span>
                                 </div>
                                 <table className="table table-bordered">
                                     <thead>
@@ -50,7 +52,12 @@ const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
                                             <th>#</th>
                                             <th>No Induk</th>
                                             <th>Nama</th>
-                                            <th>Nilai</th>
+                                            <th>Nilai Tugas</th>
+                                            <th>Nilai Harian</th>
+                                            <th>
+                                                Nilai &nbsp;
+                                                {semester == 1 ? "UTS" : "UAS"}
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,7 +76,9 @@ const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
                                                             .nama
                                                     }
                                                 </td>
-                                                <td>{d.nilai}</td>
+                                                <td>{d?.nilai_tugas}</td>
+                                                <td>{d?.nilai_harian}</td>
+                                                <td>{d?.nilai_semester}</td>
                                             </tr>
                                         ))}
                                     </tbody>

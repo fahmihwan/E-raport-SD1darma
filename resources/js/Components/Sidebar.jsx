@@ -79,8 +79,6 @@ export const Sidebar = ({ auth }) => {
                                             setToggleMaster(!toggleMaster)
                                         }
                                     >
-                                        {/* <i className="nav-icon fas fa-tachometer-alt" /> */}
-                                        {/* <i class="nav-icon far fa-lock"></i> */}
                                         <i className="nav-icon fas fa-lock"></i>
                                         <p>
                                             Master Data
@@ -125,6 +123,19 @@ export const Sidebar = ({ auth }) => {
                                             >
                                                 <i className="far fa-circle nav-icon" />
                                                 <p>Mapel</p>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link
+                                                href="/admin/master/ekstra"
+                                                className={`nav-link ${
+                                                    url ==
+                                                        "/admin/master/ekstra" &&
+                                                    "active"
+                                                }`}
+                                            >
+                                                <i className="far fa-circle nav-icon" />
+                                                <p>Ekstrakurikuler</p>
                                             </Link>
                                         </li>
                                     </ul>

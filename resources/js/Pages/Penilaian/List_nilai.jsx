@@ -23,7 +23,6 @@ const List_nilai = ({
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                {/* <h3 className="card-title">List</h3> */}
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">
                                         Tahun ajaran :{" "}
@@ -69,7 +68,12 @@ const List_nilai = ({
                                             <th>#</th>
                                             <th>No Induk</th>
                                             <th>Nama</th>
-                                            <th>Nilai</th>
+                                            <th>Nilai Tugas</th>
+                                            <th>Nilai Harian</th>
+                                            <th>
+                                                Nilai &nbsp;
+                                                {semester == 1 ? "UTS" : "UAS"}
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,17 +82,19 @@ const List_nilai = ({
                                                 <td>{i + 1}</td>
                                                 <td>
                                                     {
-                                                        d.mengikuti_ajaran.murid
-                                                            .no_induk
+                                                        d?.mengikuti_ajaran
+                                                            ?.murid?.no_induk
                                                     }
                                                 </td>
                                                 <td>
                                                     {
-                                                        d.mengikuti_ajaran.murid
-                                                            .nama
+                                                        d?.mengikuti_ajaran
+                                                            ?.murid?.nama
                                                     }
                                                 </td>
-                                                <td>{d.nilai}</td>
+                                                <td>{d?.nilai_tugas}</td>
+                                                <td>{d?.nilai_harian}</td>
+                                                <td>{d?.nilai_semester}</td>
                                             </tr>
                                         ))}
                                     </tbody>

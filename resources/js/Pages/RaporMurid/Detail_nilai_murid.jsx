@@ -10,8 +10,8 @@ const Detail_nilai_murid = ({
     nilai_kepribadian,
     auth,
     var_get,
+    detail_perolehan,
 }) => {
-    console.log(var_get);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
@@ -41,7 +41,6 @@ const Detail_nilai_murid = ({
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">Nilai Rapor </span>
-                                    {/* /export-rapor/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor */}
                                 </div>
                                 <button
                                     onClick={() =>
@@ -62,13 +61,13 @@ const Detail_nilai_murid = ({
                                 <div className="col-md-12">
                                     <table className="table table-bordered">
                                         <thead>
-                                            <tr>
+                                            <tr className="text-uppercase">
                                                 <th style={{ width: "20px" }}>
                                                     No
                                                 </th>
                                                 <th>Mata Pelajaran</th>
                                                 <th>KKM</th>
-                                                <th>Nilai Siswa</th>
+                                                <th>Nilai</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,6 +80,29 @@ const Detail_nilai_murid = ({
                                                 </tr>
                                             ))}
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colSpan={2}>JUMLAH</td>
+                                                <td></td>
+                                                <td>
+                                                    {detail_perolehan.jumlah}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={2}>RATA-RATA</td>
+                                                <td></td>
+                                                <td>
+                                                    {detail_perolehan.rata_rata}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={2}>Peringkat</td>
+                                                <td></td>
+                                                <td>
+                                                    {detail_perolehan.peringkat}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>

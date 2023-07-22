@@ -1,5 +1,5 @@
 import { Link, useForm } from "@inertiajs/inertia-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 import { InputText } from "../../Components/InputEL";
@@ -10,6 +10,8 @@ const Edit_nilai_kepribadian = ({
     mengikuti_ajaran_id,
     semester,
     nilai_kepribadian,
+    ekstrakulikulers,
+    mengikuti_ajaran_ekstrakurikuler,
 }) => {
     const { data, setData, put, processing, errors, reset } = useForm({
         mengikuti_ajaran_id: mengikuti_ajaran_id,
@@ -20,17 +22,51 @@ const Edit_nilai_kepribadian = ({
         sikap: nilai_kepribadian?.sikap,
         kerajinan: nilai_kepribadian?.kerajinan,
         kebersihan_dan_kerapian: nilai_kepribadian?.kebersihan_dan_kerapian,
+        data_nilai_ekstra: [],
     });
+
+    useEffect(() => {
+        let get_ekstrakurikuler = mengikuti_ajaran_ekstrakurikuler.map((d) => {
+            return {
+                ekstrakurikuler_id: d.ekstrakurikuler_id,
+                nilai: d.nilai,
+            };
+        });
+
+        let setMultipleData = ekstrakulikulers?.map((d) => {
+            return {
+                id: d.id,
+                nama: d.nama,
+                nilai: get_ekstrakurikuler?.filter(
+                    (e) => e?.ekstrakurikuler_id == d?.id
+                )[0]?.nilai
+                    ? get_ekstrakurikuler?.filter(
+                          (e) => e?.ekstrakurikuler_id == d?.id
+                      )[0]?.nilai
+                    : "tidak mengikuti",
+            };
+        });
+        setData("data_nilai_ekstra", setMultipleData);
+    }, []);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
+    const handleChangeDataNilaiEsktra = (i, e) => {
+        const { name, value } = e.target;
+        const list = [...data.data_nilai_ekstra];
+        list[i][name] = value;
+        setData("data_nilai_ekstra", list);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // console.log(data);
         put("/guru/nilai-kepribadian");
     };
 
     let data_kepribadian = ["A", "B", "C", "D", "E"];
+    let data_ekstra = ["tidak mengikuti", "A", "B", "C", "D", "E"];
+
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
@@ -186,6 +222,55 @@ const Edit_nilai_kepribadian = ({
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="row">
+                                        <div className="col-md-7">
+                                            <p>Nilai ekstrakurikuler : </p>
+                                            {data?.data_nilai_ekstra?.map(
+                                                (d, i) => (
+                                                    <div
+                                                        className="form-group"
+                                                        key={i}
+                                                    >
+                                                        <label
+                                                            htmlFor={
+                                                                "kerajinan"
+                                                            }
+                                                        >
+                                                            {d.nama}
+                                                        </label>
+                                                        <select
+                                                            className="custom-select"
+                                                            id="inputGroupSelect02"
+                                                            defaultValue={
+                                                                d.nilai
+                                                            }
+                                                            name="nilai"
+                                                            onChange={(e) =>
+                                                                handleChangeDataNilaiEsktra(
+                                                                    i,
+                                                                    e
+                                                                )
+                                                            }
+                                                        >
+                                                            {data_ekstra.map(
+                                                                (d) => (
+                                                                    <option
+                                                                        key={d}
+                                                                        value={
+                                                                            d
+                                                                        }
+                                                                    >
+                                                                        {d}
+                                                                    </option>
+                                                                )
+                                                            )}
+                                                        </select>
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
+                                    </div>
+
                                     <button
                                         className="btn btn-primary"
                                         type="submit"

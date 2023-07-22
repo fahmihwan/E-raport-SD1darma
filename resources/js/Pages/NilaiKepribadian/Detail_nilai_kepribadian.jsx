@@ -10,6 +10,7 @@ const Detail_nilai_kepribadian = ({
     mengikuti_ajaran_id,
     semester,
     nilai_kepribadian,
+    nilai_ekstrakurikulers,
 }) => {
     return (
         <AuthenticatedLayout auth={auth}>
@@ -117,6 +118,43 @@ const Detail_nilai_kepribadian = ({
                                 </div>
                             </div>
                         </div>
+                        <div className="card-body">
+                            <p>Nilai ekstrakurikuler : </p>
+                            <div className="row">
+                                <div
+                                    className="col-md-6 border"
+                                    style={{ height: "200px" }}
+                                >
+                                    <table className="">
+                                        <tbody>
+                                            {nilai_ekstrakurikulers
+                                                ?.filter(
+                                                    (d) =>
+                                                        d.nilai !=
+                                                        "tidak mengikuti"
+                                                )
+                                                ?.map((d, i) => (
+                                                    <tr
+                                                        key={i}
+                                                        className="text-lg"
+                                                    >
+                                                        <td className="pr-4">
+                                                            -{" "}
+                                                            {
+                                                                d
+                                                                    ?.ekstrakurikuler
+                                                                    ?.nama
+                                                            }
+                                                        </td>
+                                                        <td>{d?.nilai}</td>
+                                                    </tr>
+                                                ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* /.card-body */}
                         <div className="card-footer clearfix"></div>
                     </div>

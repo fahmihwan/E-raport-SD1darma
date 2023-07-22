@@ -23,7 +23,9 @@ const Create_nilai = ({
                 no_induk: d.murid.no_induk,
                 nama: d.murid.nama,
                 mengikuti_ajaran_id: d.id,
-                nilai: "",
+                nilai_tugas: "",
+                nilai_harian: "",
+                nilai_semester: "",
             };
         });
         setData("data", setMultipleData);
@@ -38,7 +40,6 @@ const Create_nilai = ({
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         post(`/guru/penilaian/store_nilai`);
     };
 
@@ -47,7 +48,6 @@ const Create_nilai = ({
             <HeaderLayout
                 title="Nilai Murid"
                 breadcrumbs={["Nilai mengajar", "List kelas", "Nilai murid"]}
-                // Nilai mengajar List kelas KELAS_6
             />
 
             <div className="content">
@@ -76,7 +76,12 @@ const Create_nilai = ({
                                             <th>#</th>
                                             <th>No Induk</th>
                                             <th>Nama</th>
-                                            <th>Action</th>
+                                            <th>Nilai Tugas</th>
+                                            <th>Nilai UH</th>
+                                            <th>
+                                                Nilai &nbsp;
+                                                {semester == 1 ? "UTS" : "UAS"}
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,14 +93,42 @@ const Create_nilai = ({
                                                 <td>
                                                     <input
                                                         required
-                                                        value={d?.nilai}
+                                                        value={d?.nilai_tugas}
                                                         onChange={(e) =>
                                                             handleChange(i, e)
                                                         }
                                                         className="form-control"
                                                         type="number"
                                                         placeholder="nilai"
-                                                        name="nilai"
+                                                        name="nilai_tugas"
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        required
+                                                        value={d?.nilai_harian}
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        className="form-control"
+                                                        type="number"
+                                                        placeholder="nilai"
+                                                        name="nilai_harian"
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        required
+                                                        value={
+                                                            d?.nilai_semester
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        className="form-control"
+                                                        type="number"
+                                                        placeholder="nilai"
+                                                        name="nilai_semester"
                                                     />
                                                 </td>
                                             </tr>

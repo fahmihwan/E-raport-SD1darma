@@ -5,9 +5,13 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Admin;
+use App\Models\Ekstrakurikuler;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
+use App\Models\Mengajar_mapel;
+use App\Models\Mengikuti_ajaran;
+use App\Models\Mengikuti_kelas;
 use App\Models\Murid;
 use App\Models\Tahun_ajaran;
 use Illuminate\Database\Seeder;
@@ -34,7 +38,39 @@ class DatabaseSeeder extends Seeder
             'username' => 'septiani',
             'password' => Hash::make('qweqwe123')
         ]);
-        Kelas::factory(6)->create();
+        $ekstrakulikulers = [
+            ['nama' => 'Pramuka'],
+            ['nama' => 'Drumpband'],
+        ];
+        foreach ($ekstrakulikulers as $data) {
+            Ekstrakurikuler::create($data);
+        }
+
+        $kelas = [
+            [
+                'nama' => 'KELAS 1',
+            ],
+            [
+                'nama' => 'KELAS 2',
+            ],
+            [
+                'nama' => 'KELAS 3',
+            ],
+            [
+                'nama' => 'KELAS 4',
+            ],
+            [
+                'nama' => 'KELAS 5',
+            ],
+            [
+                'nama' => 'KELAS 6',
+            ],
+        ];
+
+        foreach ($kelas as $data) {
+            Kelas::create($data);
+        }
+
         $mapels = [
             [
                 'nama' => 'BAHASA INDONESIA',
@@ -106,16 +142,17 @@ class DatabaseSeeder extends Seeder
             Mapel::create($data);
         }
 
-        // Tahun_ajaran::factory(3)->create();
-        // $tahun_ajarans = [
-        //     ['tahun_ajaran' => '2022/2023'],
-        //     ['tahun_ajaran' => '2021/2022'],
-        //     ['tahun_ajaran' => '2020/2021'],
-        //     ['tahun_ajaran' => '2019/2020'],
-        // ];
-        // foreach ($tahun_ajarans as $data) {
-        //     Tahun_ajaran::create($data);
-        // }
+
+        $tahun_ajarans = [
+            ['tahun_ajaran' => '2022/2023'],
+            // ['tahun_ajaran' => '2021/2022'],
+            // ['tahun_ajaran' => '2020/2021'],
+            // ['tahun_ajaran' => '2019/2020'],
+        ];
+        foreach ($tahun_ajarans as $data) {
+            Tahun_ajaran::create($data);
+        }
+
 
 
         // Murid::factory(5)->create();
@@ -287,6 +324,23 @@ class DatabaseSeeder extends Seeder
         foreach ($master_guru as $data) {
             Guru::create($data);
         }
+
+        Mengikuti_kelas::create([
+            'kelas_id' => '5',
+            'tahun_ajaran_id' => '1',
+            'guru_id' => '1',
+        ]);
+
+        Mengajar_mapel::create([
+            'kelas_id' => '5',
+            'guru_id' => '1',
+            'mapel_id' => '8',
+        ]);
+
+        Mengikuti_ajaran::create([
+            'mengikuti_kelas_id' => 1,
+            'murid_id' => 1
+        ]);
     }
 }
 

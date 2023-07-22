@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\ExportPdfController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
@@ -55,6 +57,10 @@ Route::middleware(['isLogin'])->group(function () {
     Route::get('/admin/master/mapel', [MapelController::class, 'index']);
     Route::post('/admin/master/mapel', [MapelController::class, 'store']);
     Route::delete('/admin/master/mapel/{id}', [MapelController::class, 'destroy']);
+
+    Route::get('/admin/master/ekstra', [EkstrakurikulerController::class, 'index']);
+    Route::post('/admin/master/ekstra', [EkstrakurikulerController::class, 'store']);
+    Route::delete('/admin/master/ekstra/{id}', [EkstrakurikulerController::class, 'destroy']);
 
     // guru
     Route::resource('/admin/guru', GuruController::class);

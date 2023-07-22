@@ -1,19 +1,16 @@
 import { Link, useForm } from "@inertiajs/inertia-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 import { InputText } from "../../Components/InputEL";
 
-// 'datas' => $datas,
-// 'tahun_ajaran' => $tahun_ajaran,
-// 'semester' => $semester,
-// 'guru' => $view_guru
 const Create_nilai_kepribadian = ({
     auth,
     detailCard,
     mengikuti_ajaran_id,
     semester,
     nilai_if_exist,
+    ekstrakulikulers,
 }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         mengikuti_ajaran_id: mengikuti_ajaran_id,
@@ -24,10 +21,29 @@ const Create_nilai_kepribadian = ({
         sikap: "",
         kerajinan: "",
         kebersihan_dan_kerapian: "",
+        data_nilai_ekstra: [],
     });
+
+    useEffect(() => {
+        let setMultipleData = ekstrakulikulers?.map((d) => {
+            return {
+                id: d.id,
+                nama: d.nama,
+                nilai: "",
+            };
+        });
+
+        setData("data_nilai_ekstra", setMultipleData);
+    }, []);
 
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
+    };
+    const handleChangeDataNilaiEsktra = (i, e) => {
+        const { name, value } = e.target;
+        const list = [...data.data_nilai_ekstra];
+        list[i][name] = value;
+        setData("data_nilai_ekstra", list);
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +51,7 @@ const Create_nilai_kepribadian = ({
     };
 
     let data_kepribadian = ["A", "B", "C", "D", "E"];
+    let data_ekstra = ["tidak mengikuti", "A", "B", "C", "D", "E"];
     return (
         <AuthenticatedLayout auth={auth}>
             {/* Nilai kepribadian
@@ -202,6 +219,55 @@ Detail nilai kepribadian */}
                                                     </select>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-md-7">
+                                            <h4>Ekstrakulikuler</h4>
+                                            {data?.data_nilai_ekstra?.map(
+                                                (d, i) => (
+                                                    <div
+                                                        className="form-group"
+                                                        key={i}
+                                                    >
+                                                        <label
+                                                            htmlFor={
+                                                                "kerajinan"
+                                                            }
+                                                        >
+                                                            {d.nama}
+                                                        </label>
+                                                        <select
+                                                            className="custom-select"
+                                                            id="inputGroupSelect02"
+                                                            defaultValue={
+                                                                "tidak mengikuti"
+                                                            }
+                                                            name="nilai"
+                                                            onChange={(e) =>
+                                                                handleChangeDataNilaiEsktra(
+                                                                    i,
+                                                                    e
+                                                                )
+                                                            }
+                                                        >
+                                                            {data_ekstra.map(
+                                                                (d) => (
+                                                                    <option
+                                                                        key={d}
+                                                                        value={
+                                                                            d
+                                                                        }
+                                                                    >
+                                                                        {d}
+                                                                    </option>
+                                                                )
+                                                            )}
+                                                        </select>
+                                                    </div>
+                                                )
+                                            )}
                                         </div>
                                     </div>
                                     <button
