@@ -55,11 +55,23 @@ const List_kelas = ({ auth, datas, tahun_ajaran }) => {
                                             </td>
                                             <td>
                                                 <Link
+                                                    href={`/admin/rapor-murid/${d?.mengikuti_kelas_id}/${d?.murid_id}/1/detail_rapor`}
+                                                    className="btn btn-info mr-2"
+                                                >
+                                                    semester 1
+                                                </Link>
+                                                <Link
+                                                    href={`/admin/rapor-murid/${d?.mengikuti_kelas_id}/${d?.murid_id}/2/detail_rapor`}
+                                                    className="btn btn-info"
+                                                >
+                                                    semester 2
+                                                </Link>
+                                                {/* <Link
                                                     href={`/admin/rapor-murid/${d?.mengikuti_kelas_id}/${d?.murid_id}/detail_rapor`}
                                                     className="btn btn-info"
                                                 >
                                                     Detail Rapor
-                                                </Link>
+                                                </Link> */}
                                             </td>
                                         </tr>
                                     ))}

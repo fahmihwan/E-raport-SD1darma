@@ -14,11 +14,19 @@ const Login = ({ flash }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await post(
-            data?.akses == "guru"
-                ? "/admin/auth/guru/login"
-                : "/admin/auth/admin/login"
-        );
+
+        let url = "";
+        if (data?.akses == "guru") {
+            url = "/admin/auth/guru/login";
+        } else if (data?.akses == "admin") {
+            url = "/admin/auth/admin/login";
+        } else if (data?.akses == "wali_kelas") {
+            url = "/admin/auth/wali_kelas/login";
+        } else {
+            alert("terjadi kesalahan");
+        }
+
+        await post(url);
     };
     return (
         <div className="hold-transition login-page">
@@ -78,6 +86,9 @@ const Login = ({ flash }) => {
                                 >
                                     <option value={"guru"}> Guru</option>
                                     <option value={"admin"}>Admin</option>
+                                    <option value={"wali_kelas"}>
+                                        Wali Kelas
+                                    </option>
                                 </select>
                                 <div className="input-group-append">
                                     <label

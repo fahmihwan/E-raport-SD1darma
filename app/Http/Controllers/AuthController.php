@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Mengikuti_kelas;
 use App\Models\Tahun_ajaran;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class AuthController extends Controller
 
     public function authenticated_admin(Request $request)
     {
+
         $validated = $this->validate($request, [
             'username'   => 'required',
             'password' => 'required'
@@ -31,6 +33,7 @@ class AuthController extends Controller
 
     public function authenticated_guru(Request $request)
     {
+        $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
         if (!Tahun_ajaran::exists()) {
             return "mohon lengkapi data master tahun ajaran...";
         }
@@ -38,6 +41,48 @@ class AuthController extends Controller
             'username'   => 'required',
             'password' => 'required'
         ]);
+        $guru = Guru::where(['username' => $validated['username']])->first();
+        if (!$guru) {
+            return redirect()->back()->with('error_message', 'username atau password salah');
+        }
+        $isWali = Mengikuti_kelas::where([
+            'guru_id' => $guru->id,
+            'tahun_ajaran_id' => $tahun_ajaran,
+        ])->exists();
+
+        if ($isWali) {
+            return redirect()->back()->with('error_message', 'username atau password salah');
+        }
+
+        if (Auth::guard('webguru')->attempt($validated)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/admin/dashboard');
+        }
+        return redirect()->back()->with('error_message', 'username atau password salah');
+    }
+
+    public function authenticated_wali(Request $request)
+    {
+        if (!Tahun_ajaran::exists()) {
+            return "mohon lengkapi data master tahun ajaran...";
+        }
+        $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
+        $validated = $this->validate($request, [
+            'username'   => 'required',
+            'password' => 'required'
+        ]);
+        $guru = Guru::where(['username' => $validated['username']])->first();
+        if (!$guru) {
+            return redirect()->back()->with('error_message', 'username atau password salah');
+        }
+        $isWali = Mengikuti_kelas::where([
+            'guru_id' => $guru->id,
+            'tahun_ajaran_id' => $tahun_ajaran,
+        ])->exists();
+
+        if (!$isWali) {
+            return redirect()->back()->with('error_message', 'username atau password salah');
+        }
         if (Auth::guard('webguru')->attempt($validated)) {
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');

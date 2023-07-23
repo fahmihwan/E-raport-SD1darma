@@ -56,11 +56,23 @@ const Detail = ({ auth, murid, datas }) => {
                                                 {d?.tahun_ajaran?.tahun_ajaran}
                                             </td>
                                             <td>
-                                                <Link
+                                                {/* <Link
                                                     href={`/admin/perpindahan/${d?.id}/${murid?.id}/detail_rapor`}
                                                     className="btn btn-info"
                                                 >
                                                     Detail Rapor
+                                                </Link> */}
+                                                <Link
+                                                    href={`/admin/perpindahan/${d?.id}/${murid?.id}/1/detail_rapor`}
+                                                    className="btn btn-info mr-2"
+                                                >
+                                                    semester 1
+                                                </Link>
+                                                <Link
+                                                    href={`/admin/perpindahan/${d?.id}/${murid?.id}/2/detail_rapor`}
+                                                    className="btn btn-info"
+                                                >
+                                                    semester 2
                                                 </Link>
                                             </td>
                                         </tr>

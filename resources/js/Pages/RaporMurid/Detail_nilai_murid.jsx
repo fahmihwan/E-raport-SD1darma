@@ -11,6 +11,7 @@ const Detail_nilai_murid = ({
     auth,
     var_get,
     detail_perolehan,
+    nilai_ekstrakurikulers,
 }) => {
     return (
         <AuthenticatedLayout auth={auth}>
@@ -95,13 +96,13 @@ const Detail_nilai_murid = ({
                                                     {detail_perolehan.rata_rata}
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            {/* <tr>
                                                 <td colSpan={2}>Peringkat</td>
                                                 <td></td>
                                                 <td>
                                                     {detail_perolehan.peringkat}
                                                 </td>
-                                            </tr>
+                                            </tr> */}
                                         </tfoot>
                                     </table>
                                 </div>
@@ -164,6 +165,43 @@ const Detail_nilai_murid = ({
                                 </div>
                             </div>
                         </div>
+                        <div className="card-body">
+                            <p>Nilai ekstrakurikuler : </p>
+                            <div className="row">
+                                <div
+                                    className="col-md-6 border"
+                                    style={{ height: "200px" }}
+                                >
+                                    <table className="">
+                                        <tbody>
+                                            {nilai_ekstrakurikulers
+                                                ?.filter(
+                                                    (d) =>
+                                                        d.nilai !=
+                                                        "tidak mengikuti"
+                                                )
+                                                ?.map((d, i) => (
+                                                    <tr
+                                                        key={i}
+                                                        className="text-lg"
+                                                    >
+                                                        <td className="pr-4">
+                                                            -{" "}
+                                                            {
+                                                                d
+                                                                    ?.ekstrakurikuler
+                                                                    ?.nama
+                                                            }
+                                                        </td>
+                                                        <td>{d?.nilai}</td>
+                                                    </tr>
+                                                ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* /.card-body */}
                         <div className="card-footer clearfix"></div>
                     </div>

@@ -37,6 +37,7 @@ Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::resource('/admin/akun', AdminController::class);
 Route::post('/admin/auth/guru/login', [AuthController::class, 'authenticated_guru']);
 Route::post('/admin/auth/admin/login', [AuthController::class, 'authenticated_admin']);
+Route::post('/admin/auth/wali_kelas/login', [AuthController::class, 'authenticated_wali']);
 
 // auth
 Route::middleware(['isLogin'])->group(function () {
@@ -93,14 +94,14 @@ Route::middleware(['isLogin'])->group(function () {
     // perpindahan
     Route::get('/admin/perpindahan', [PerpindahanController::class, 'index']);
     Route::get('/admin/perpindahan/{id}/detail', [PerpindahanController::class, 'detail']);
-    Route::get('/admin/perpindahan/{mengikuti_kelas_id}/{murid_id}/detail_rapor', [PerpindahanController::class, 'detail_rapor']);
+    Route::get('/admin/perpindahan/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor', [PerpindahanController::class, 'detail_rapor']);
     Route::get('/admin/perpindahan/create', [PerpindahanController::class, 'create']);
     Route::post('/admin/perpindahan', [PerpindahanController::class, 'store']);
     Route::delete('/admin/perpindahan/{id}', [PerpindahanController::class, 'destroy']);
 
     Route::get('/admin/rapor-murid', [RaporAdminController::class, 'index']);
     Route::get('/admin/raport-murid/detail', [RaporAdminController::class, 'detail']);
-    Route::get('/admin/rapor-murid/{mengikuti_kelas_id}/{murid_id}/detail_rapor', [RaporAdminController::class, 'detail_rapor']);
+    Route::get('/admin/rapor-murid/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor', [RaporAdminController::class, 'detail_rapor']);
 
     Route::get('/admin/rapor-murid/{murid_id}/detail', [RaporAdminController::class, 'search_detail_rapor']);
 
@@ -151,5 +152,6 @@ Route::get('/demo/create', function () {
     return view('demo.create');
 });
 
+// `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor` admin
 Route::get('/export-detail-nilai', [ExportPdfController::class, 'export_detail_nilai']);
 Route::get('/export-rapor/{mengikuti_kelas_id}/{murid_id}/{semester}/detail_rapor', [ExportPdfController::class, 'export_rapor']);

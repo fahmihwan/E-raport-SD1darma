@@ -3,14 +3,20 @@ import React from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 import { ExportBlob } from "../../Components/ExportBlob";
+
 const Detail_nilai_murid = ({
     nilai,
     detailCard,
     nilai_kepribadian,
     auth,
-    redirect_back,
     var_get,
+    detail_perolehan,
+    nilai_ekstrakurikulers,
 }) => {
+    console.log(
+        `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor`
+    );
+    console.log(nilai_kepribadian);
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
@@ -20,7 +26,8 @@ const Detail_nilai_murid = ({
             <div className="content">
                 <div className="container-fluid">
                     <Link
-                        href={`/admin/perpindahan/${redirect_back?.murid_id}/detail`}
+                    // admin/rapor-murid/1/detail
+                        href={`/admin/rapor-murid/${var_get?.murid_id}/detail`}
                         className="btn btn-primary mb-2  float-right"
                     >
                         kembali
@@ -38,58 +45,13 @@ const Detail_nilai_murid = ({
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex justify-content-between align-items-center">
-                                <div className="d-flex align-items-center ">
-                                    <span className="mr-2">Semester 1 </span>
-                                </div>
-                                <button
-                                    onClick={() =>
-                                        ExportBlob(
-                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/1/detail_rapor`,
-                                            "detail_rapor.pdf"
-                                        )
-                                    }
-                                    className="btn btn-primary"
-                                >
-                                    Export
-                                </button>
-                            </div>
-                        </div>
-                        {/* /.card-header */}
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <NilaiMapelsEl
-                                        nilai_mapel={nilai}
-                                        semester={1}
-                                    />
-                                </div>
-                            </div>
-                            <p>Nilai Kepribadian</p>
-                            <div className="row">
-                                {nilai_kepribadian
-                                    ?.filter((d) => d.semester == 1)
-                                    .map((d, i) => (
-                                        <NilaiKepribadiansEl
-                                            semester={1}
-                                            key={i}
-                                            nilai_kepribadian={d}
-                                        />
-                                    ))}
-                            </div>
-                        </div>
-                        {/* /.card-body */}
-                        <div className="card-footer clearfix"></div>
-                    </div>
-                    <div className="card mb-5">
-                        <div className="card-header">
-                            <div className="d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
-                                    <span className="mr-2">Semester 2</span>
+                                    <span className="mr-2">Nilai Rapor </span>
                                 </div>
                                 <button
                                     onClick={() =>
                                         ExportBlob(
-                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/2/detail_rapor`,
+                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor`,
                                             "detail_rapor.pdf"
                                         )
                                     }
@@ -103,25 +65,148 @@ const Detail_nilai_murid = ({
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <NilaiMapelsEl
-                                        nilai_mapel={nilai}
-                                        semester={2}
-                                    />
+                                    <table className="table table-bordered">
+                                        <thead>
+                                            <tr className="text-uppercase">
+                                                <th style={{ width: "20px" }}>
+                                                    No
+                                                </th>
+                                                <th>Mata Pelajaran</th>
+                                                <th>KKM</th>
+                                                <th>Nilai</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {nilai?.map((d, i) => (
+                                                <tr key={i}>
+                                                    <td>{i + 1}</td>
+                                                    <td>{d?.mapel?.nama}</td>
+                                                    <td>{d?.mapel?.kkm}</td>
+                                                    <td> {d?.nilai}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colSpan={2}>JUMLAH</td>
+                                                <td></td>
+                                                <td>
+                                                    {detail_perolehan.jumlah}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colSpan={2}>RATA-RATA</td>
+                                                <td></td>
+                                                <td>
+                                                    {detail_perolehan.rata_rata}
+                                                </td>
+                                            </tr>
+                                            {/* <tr>
+                                                <td colSpan={2}>Peringkat</td>
+                                                <td></td>
+                                                <td>
+                                                    {detail_perolehan.peringkat}
+                                                </td>
+                                            </tr> */}
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                             <p>Nilai Kepribadian</p>
                             <div className="row">
-                                {nilai_kepribadian
-                                    ?.filter((d) => d.semester == 2)
-                                    .map((d, i) => (
-                                        <NilaiKepribadiansEl
-                                            semester={2}
-                                            key={i}
-                                            nilai_kepribadian={d}
-                                        />
-                                    ))}
+                                <div className="col-md-6">
+                                    <table className="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td>Izin</td>
+                                                <td>
+                                                    {nilai_kepribadian?.izin}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sakit</td>
+                                                <td>
+                                                    {nilai_kepribadian?.sakit}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tanpa Keterangan</td>
+                                                <td>
+                                                    {
+                                                        nilai_kepribadian?.tanpa_keterangan
+                                                    }
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="col-md-6">
+                                    <table className="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td>Sikap</td>
+                                                <td>
+                                                    {nilai_kepribadian?.sikap}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kerajinan</td>
+                                                <td>
+                                                    {
+                                                        nilai_kepribadian?.kerajinan
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kebersihan dan kerapian</td>
+                                                <td>
+                                                    {
+                                                        nilai_kepribadian?.kebersihan_dan_kerapian
+                                                    }
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+                        <div className="card-body">
+                            <p>Nilai ekstrakurikuler : </p>
+                            <div className="row">
+                                <div
+                                    className="col-md-6 border"
+                                    style={{ height: "200px" }}
+                                >
+                                    <table className="">
+                                        <tbody>
+                                            {nilai_ekstrakurikulers
+                                                ?.filter(
+                                                    (d) =>
+                                                        d.nilai !=
+                                                        "tidak mengikuti"
+                                                )
+                                                ?.map((d, i) => (
+                                                    <tr
+                                                        key={i}
+                                                        className="text-lg"
+                                                    >
+                                                        <td className="pr-4">
+                                                            -{" "}
+                                                            {
+                                                                d
+                                                                    ?.ekstrakurikuler
+                                                                    ?.nama
+                                                            }
+                                                        </td>
+                                                        <td>{d?.nilai}</td>
+                                                    </tr>
+                                                ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* /.card-body */}
                         <div className="card-footer clearfix"></div>
                     </div>
@@ -133,78 +218,7 @@ const Detail_nilai_murid = ({
 
 export default Detail_nilai_murid;
 
-const NilaiMapelsEl = ({ nilai_mapel, semester }) => {
-    return (
-        <table className="table table-bordered">
-            <thead>
-                <tr>
-                    <th style={{ width: "20px" }}>No</th>
-                    <th>Mata Pelajaran</th>
-                    <th>KKM</th>
-                    <th>Nilai Siswa</th>
-                </tr>
-            </thead>
-            <tbody>
-                {nilai_mapel
-                    ?.filter((d) => d.semester == semester)
-                    .map((d, i) => (
-                        <tr key={i}>
-                            <td>{i + 1}</td>
-                            <td>{d?.mapel?.nama}</td>
-                            <td>{d?.mapel?.kkm}</td>
-                            <td> {d?.nilai}</td>
-                        </tr>
-                    ))}
-            </tbody>
-        </table>
-    );
-};
-const NilaiKepribadiansEl = ({ nilai_kepribadian }) => {
-    return (
-        <>
-            <div className="col-md-6">
-                <table className="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <td>Izin</td>
-                            <td>{nilai_kepribadian?.izin}</td>
-                        </tr>
-                        <tr>
-                            <td>Sakit</td>
-                            <td>{nilai_kepribadian?.sakit}</td>
-                        </tr>
-                        <tr>
-                            <td>Tanpa Keterangan</td>
-                            <td>{nilai_kepribadian?.tanpa_keterangan}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div className="col-md-6">
-                <table className="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <td>Sikap</td>
-                            <td>{nilai_kepribadian?.sikap}</td>
-                        </tr>
-                        <tr>
-                            <td>Kerajinan</td>
-                            <td>{nilai_kepribadian?.kerajinan}</td>
-                        </tr>
-                        <tr>
-                            <td>Kebersihan dan kerapian</td>
-                            <td>
-                                {nilai_kepribadian?.kebersihan_dan_kerapian}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </>
-    );
-};
-
-const CardDetail = ({ data_murid, kelas, tahun_ajaran }) => {
+const CardDetail = ({ data_murid, kelas, semester, tahun_ajaran }) => {
     return (
         <div className="card p-2">
             <div className="row">
@@ -230,6 +244,10 @@ const CardDetail = ({ data_murid, kelas, tahun_ajaran }) => {
                             <tr>
                                 <td style={{ width: "100px" }}>Tahun ajaran</td>
                                 <td>: {tahun_ajaran}</td>
+                            </tr>
+                            <tr>
+                                <td>Semester</td>
+                                <td>: {semester}</td>
                             </tr>
                             <tr>
                                 <td>Kelas</td>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ekstrakurikuler;
 use App\Models\Mapel;
 use App\Models\Mengajar_mapel;
 use App\Models\Mengikuti_ajaran;
+use App\Models\Mengikuti_ajaran_Ekstrakulikuler;
 use App\Models\Mengikuti_kelas;
 use App\Models\Nilai_kepribadian;
 use App\Models\Nilai_mapel;
@@ -65,25 +67,12 @@ class RaporMuridController extends Controller
             ])
             ->get();
 
-
-
-
-
-
-        $totalnilai = Nilai_mapel::select([
-            DB::raw('CAST(SUM((nilai_tugas+nilai_harian+nilai_semester)/3) AS UNSIGNED) as nilai'),
-            'mengikuti_ajaran_id',
-        ])
-            ->with(['mengikuti_ajaran'])
-            ->where([
-                ['semester', '=', $semester]
-            ])
-            ->groupBy('mengikuti_ajaran_id')
-            ->orderBy('nilai', 'desc')
-            ->get();
-
-
-
+        $nilai_ekstrakulikuler = Mengikuti_ajaran_Ekstrakulikuler::with([
+            'ekstrakurikuler'
+        ])->where([
+            ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
+            ['semester', '=', $semester],
+        ])->get();
 
         $detail_perolehan = [
             'jumlah' =>  Nilai_mapel::select([DB::raw('CAST(SUM((nilai_tugas+nilai_harian+nilai_semester)/3) AS UNSIGNED) as nilai')])->where([['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id], ['semester', '=', $semester]])->first()->nilai,
@@ -99,7 +88,9 @@ class RaporMuridController extends Controller
             'detail_perolehan' => $detail_perolehan,
             'nilai' => $nilai,
             'detailCard' => $card,
-            'nilai_kepribadian' => $nilai_kepribadian
+            'nilai_kepribadian' => $nilai_kepribadian,
+            'nilai_ekstrakurikulers' => $nilai_ekstrakulikuler
+
         ]);
     }
 }
