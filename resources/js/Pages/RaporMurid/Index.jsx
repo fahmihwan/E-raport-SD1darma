@@ -41,8 +41,8 @@ const Index = ({ auth, datas, tahun_ajaran }) => {
                                     {datas?.map((d, i) => (
                                         <tr key={i}>
                                             <td>{i + 1}</td>
-                                            <td>{d.murid.no_induk}</td>
-                                            <td>{d.murid.nama}</td>
+                                            <td>{d?.murid?.no_induk}</td>
+                                            <td>{d?.murid?.nama}</td>
                                             <td>
                                                 <Link
                                                     href={`/guru/rapor-murid/${d.id}/1/detail_nilai_murid`}

@@ -93,8 +93,36 @@ class PerpindahanController extends Controller
 
 
         if (!$mengikuti_ajaran_id || !$nilai_kepribadian || !$nilai) {
-            return 'false';
+            return 'beberapa guru belum melengkapi semua nilai rapor...';
         }
+        $current_tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
+        $sortRanking = Mengikuti_ajaran::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai'), 'mengikuti_ajaran_id'])
+            ->join('mengikuti_kelas', 'mengikuti_ajarans.mengikuti_kelas_id', '=', 'mengikuti_kelas.id')
+            ->join('nilai_mapels', 'mengikuti_ajarans.id', '=', 'nilai_mapels.mengikuti_ajaran_id')
+            ->groupBy('mengikuti_ajarans.id')
+            ->orderBy('nilai', 'desc')
+            ->where([
+                ['nilai_mapels.semester', '=', $semester],
+                ['tahun_ajaran_id', '=', $current_tahun_ajaran]
+            ])
+            ->get();
+
+        $list_ranking = [];
+        $i = 1;
+        foreach ($sortRanking as $d) {
+            $list_ranking[] = [
+                'rank' => $i++,
+                'nilai' => $d->nilai,
+                'mengikuti_ajaran_id' => $d->mengikuti_ajaran_id
+            ];
+        }
+        $get_ranking = 0;
+        foreach ($list_ranking as $d) {
+            if ($d['mengikuti_ajaran_id'] == $mengikuti_ajaran_id) {
+                $get_ranking = $d['rank'];
+            }
+        }
+
 
         $detail_perolehan = [
             'jumlah' =>  Nilai_mapel::select([DB::raw('CAST(SUM((nilai_tugas+nilai_harian+nilai_semester)/3) AS UNSIGNED) as nilai')])->where([['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id], ['semester', '=', $semester]])->first()->nilai,
@@ -116,17 +144,32 @@ class PerpindahanController extends Controller
         ])->get();
 
 
-        return Inertia::render('Perpindahan/Detail_nilai_murid', [
+        return Inertia::render('RaporComponent/Detail_nilai_murid', [
             'var_get' => [
                 'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->id,
                 'murid_id' => $card['data_murid']->murid->id,
                 'semester' => $semester
             ],
             'detail_perolehan' => $detail_perolehan,
+            'ranking' => $get_ranking,
             'nilai' => $nilai,
             'detailCard' => $card,
             'nilai_kepribadian' => $nilai_kepribadian,
-            'nilai_ekstrakurikulers' => $nilai_ekstrakulikuler
+            'nilai_ekstrakurikulers' => $nilai_ekstrakulikuler,
+            'menu' => 'perpindahan'
         ]);
+
+        // return Inertia::render('Perpindahan/Detail_nilai_murid', [
+        //     'var_get' => [
+        //         'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->id,
+        //         'murid_id' => $card['data_murid']->murid->id,
+        //         'semester' => $semester
+        //     ],
+        //     'detail_perolehan' => $detail_perolehan,
+        //     'nilai' => $nilai,
+        //     'detailCard' => $card,
+        //     'nilai_kepribadian' => $nilai_kepribadian,
+        //     'nilai_ekstrakurikulers' => $nilai_ekstrakulikuler
+        // ]);
     }
 }

@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/inertia-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { HeaderLayout } from "../../Components/ComponentLayout";
 import { AuthenticatedLayout } from "../../Layouts/AuthenticatedLayout";
 import { ExportBlob } from "../../Components/ExportBlob";
@@ -12,17 +12,34 @@ const Detail_nilai_murid = ({
     var_get,
     detail_perolehan,
     nilai_ekstrakurikulers,
+    ranking,
+    menu,
 }) => {
+    let navigationBack = "";
+    let breadcrumbs = [];
+    if (menu == "perpindahan") {
+        navigationBack = `/admin/perpindahan/${var_get?.murid_id}/detail`;
+        breadcrumbs = ["perpindahan", "detail murid", "detail nilai rapor"];
+    }
+    if (menu == "guru") {
+        navigationBack = "/guru/rapor-murid";
+        breadcrumbs = ["Rapor murid", "Detail nilai rapor"];
+    }
+    if (menu == "admin") {
+        navigationBack = `/admin/rapor-murid/${var_get?.murid_id}/detail`;
+        breadcrumbs = ["Rapor murid", "Detail nilai rapor"];
+    }
+
     return (
         <AuthenticatedLayout auth={auth}>
             <HeaderLayout
                 title={"Detail nilai rapor"}
-                breadcrumbs={["Rapor murid", "Detail nilai rapor"]}
+                breadcrumbs={breadcrumbs}
             />
             <div className="content">
                 <div className="container-fluid">
                     <Link
-                        href="/guru/rapor-murid"
+                        href={navigationBack}
                         className="btn btn-primary mb-2  float-right"
                     >
                         kembali
@@ -43,17 +60,18 @@ const Detail_nilai_murid = ({
                                 <div className="d-flex align-items-center">
                                     <span className="mr-2">Nilai Rapor </span>
                                 </div>
-                                <button
-                                    onClick={() =>
-                                        ExportBlob(
-                                            `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor`,
-                                            "detail_rapor.pdf"
-                                        )
-                                    }
+                                <a
+                                    href={`/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor`}
+                                    // onClick={() =>
+                                    //     ExportBlob(
+                                    //         `/export-rapor/${var_get?.mengikuti_kelas_id}/${var_get?.murid_id}/${var_get?.semester}/detail_rapor`,
+                                    //         "detail_rapor.pdf"
+                                    //     )
+                                    // }
                                     className="btn btn-primary"
                                 >
-                                    Export
-                                </button>
+                                    Print
+                                </a>
                             </div>
                         </div>
                         {/* /.card-header */}
@@ -96,13 +114,11 @@ const Detail_nilai_murid = ({
                                                     {detail_perolehan.rata_rata}
                                                 </td>
                                             </tr>
-                                            {/* <tr>
-                                                <td colSpan={2}>Peringkat</td>
+                                            <tr>
+                                                <td colSpan={2}>PERINGKAT</td>
                                                 <td></td>
-                                                <td>
-                                                    {detail_perolehan.peringkat}
-                                                </td>
-                                            </tr> */}
+                                                <td>{ranking}</td>
+                                            </tr>
                                         </tfoot>
                                     </table>
                                 </div>

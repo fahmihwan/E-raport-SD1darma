@@ -9,6 +9,10 @@
 </head>
 
 <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
     .header {
         display: flex;
         width: 100%;
@@ -73,8 +77,8 @@
             </tbody>
         </table>
     </div>
-    <div class="container">
-        <div class="nilai-mapel-content">
+    <div class="container" >
+        <div class="nilai-mapel-content" >
             <p>Nilai Mata pelajaran :</p>
             <table>
                 <thead>
@@ -112,13 +116,21 @@
                             {{ $detail_perolehan['rata_rata'] }}
                         </td>
                     </tr>
+                    <tr>
+                        <td colSpan={2}>PERINGKAT</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            {{ $ranking }}
+                        </td>
+                    </tr>
 
                 </tfoot>
             </table>
         </div>
-        <div class="nilai-kepribadian-content">
+        <div class="nilai-kepribadian-content" >
             <p>Nilai Kepribadian:</p>
-            <div class="nilai-kepribadian-table">
+            <div class="nilai-kepribadian-table" style="margin-bottom: 20px">
                 <div style="width: 100%; margin-right: 10px">
                     <table>
                         <tbody>
@@ -156,14 +168,14 @@
                     </table>
                 </div>
             </div>
-            <div className="">
+            <div class="">
                 <p>Nilai ekstrakurikuler : </p>
-                <div className="col-md-6 border" style="height: 100px">
-                    <table className="">
+                <div class="col-md-6 border" style="height: 100px">
+                    <table class="">
                         <tbody>
                             @foreach ($nilai_ekstrakulikuler as $d)
-                                <tr className="text-lg">
-                                    <td className="pr-4">
+                                <tr class="text-lg">
+                                    <td class="pr-4">
                                         {{ $d->ekstrakurikuler->nama }}
                                     </td>
                                     <td>{{ $d->nilai }}</td>
@@ -173,6 +185,19 @@
                     </table>
                 </div>
             </div>
+            @if ($detailCard['semester'] == 2)
+            <div style="margin-bottom: 100px;">
+                <p>Keputusan: </p>
+                <div style="border: 1px solid black; padding: 5px">
+                    <p>Berdasarkan hasil yang dicapai pada semester 1 dan 2. peserta didik ditetapkan </p>
+                    <br>
+                    <p>Naik ke kelas :............................................. </p>
+                    <br>
+                    <p>Tinggal dikelas :.............................................  </p>
+                </div>
+            </div>
+            @endif
+         
             <div>
                 <div style="display: flex; justify-content: space-evenly;">
                     <div style="margin-bottom: 100px">
@@ -252,6 +277,13 @@
             </div>
         </div>
     </div>
+    <script>
+      window.print();
+        window.onafterprint = function() {
+        window.history.back();
+      };
+
+    </script>
 </body>
 
 </html>
