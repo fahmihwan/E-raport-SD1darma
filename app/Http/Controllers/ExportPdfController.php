@@ -69,7 +69,7 @@ class ExportPdfController extends Controller
         $sortRanking = Mengikuti_ajaran::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai'), 'mengikuti_ajaran_id'])
             ->join('mengikuti_kelas', 'mengikuti_ajarans.mengikuti_kelas_id', '=', 'mengikuti_kelas.id')
             ->join('nilai_mapels', 'mengikuti_ajarans.id', '=', 'nilai_mapels.mengikuti_ajaran_id')
-            ->groupBy('mengikuti_ajarans.id')
+            ->groupBy('mengikuti_ajarans_id')
             ->orderBy('nilai', 'desc')
             ->where([
                 ['nilai_mapels.semester', '=', $semester],

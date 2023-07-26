@@ -98,6 +98,7 @@ class RaporMuridController extends Controller
                 ['tahun_ajaran_id', '=', $current_tahun_ajaran]
             ])
             ->get();
+        // return $sortRanking;
 
         $list_ranking = [];
         $i = 1;

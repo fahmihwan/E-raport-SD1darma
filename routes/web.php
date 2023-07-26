@@ -33,12 +33,13 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [AuthController::class, 'index'])->name('login');
-Route::resource('/admin/akun', AdminController::class);
-Route::post('/admin/auth/guru/login', [AuthController::class, 'authenticated_guru']);
-Route::post('/admin/auth/admin/login', [AuthController::class, 'authenticated_admin']);
-Route::post('/admin/auth/wali_kelas/login', [AuthController::class, 'authenticated_wali']);
-
+Route::middleware(['isNotLogin'])->group(function () {
+    Route::get('/', [AuthController::class, 'index'])->name('login');
+    Route::resource('/admin/akun', AdminController::class);
+    Route::post('/admin/auth/guru/login', [AuthController::class, 'authenticated_guru']);
+    Route::post('/admin/auth/admin/login', [AuthController::class, 'authenticated_admin']);
+    Route::post('/admin/auth/wali_kelas/login', [AuthController::class, 'authenticated_wali']);
+});
 // auth
 Route::middleware(['isLogin'])->group(function () {
 
@@ -127,8 +128,6 @@ Route::middleware(['isLogin'])->group(function () {
     Route::get('/guru/nilai-kepribadian/detail/{mengikuti_ajaran_id}/{semester}/detail_nilai_kepribadian', [NilaiKepribadianMuridController::class, 'detail_nilai_kepribadian']);
     Route::post('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 'store']);
     Route::put('/guru/nilai-kepribadian', [NilaiKepribadianMuridController::class, 'update']);
-
-
 
     //LAPORAN
     // nilai peserta didik

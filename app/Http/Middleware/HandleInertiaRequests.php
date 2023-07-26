@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
 
         $auth_guru = [];
         $guru = Auth::guard('webguru')->user();
+
         if ($guru) {
             $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
             $auth_guru = Guru::select([
