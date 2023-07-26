@@ -143,15 +143,15 @@ class DatabaseSeeder extends Seeder
         }
 
 
-        $tahun_ajarans = [
-            ['tahun_ajaran' => '2022/2023'],
-            // ['tahun_ajaran' => '2021/2022'],
-            // ['tahun_ajaran' => '2020/2021'],
-            // ['tahun_ajaran' => '2019/2020'],
-        ];
-        foreach ($tahun_ajarans as $data) {
-            Tahun_ajaran::create($data);
-        }
+        // $tahun_ajarans = [
+        //     ['tahun_ajaran' => '2022/2023'],
+        //     // ['tahun_ajaran' => '2021/2022'],
+        //     // ['tahun_ajaran' => '2020/2021'],
+        //     // ['tahun_ajaran' => '2019/2020'],
+        // ];
+        // foreach ($tahun_ajarans as $data) {
+        //     Tahun_ajaran::create($data);
+        // }
 
 
 
@@ -325,17 +325,17 @@ class DatabaseSeeder extends Seeder
             Guru::create($data);
         }
 
-        Mengikuti_kelas::create([
-            'kelas_id' => '5',
-            'tahun_ajaran_id' => '1',
-            'guru_id' => '1',
-        ]);
+        // Mengikuti_kelas::create([
+        //     'kelas_id' => '5',
+        //     'tahun_ajaran_id' => '1',
+        //     'guru_id' => '1',
+        // ]);
 
-        Mengajar_mapel::create([
-            'kelas_id' => '5',
-            'guru_id' => '1',
-            'mapel_id' => '8',
-        ]);
+        // Mengajar_mapel::create([
+        //     'kelas_id' => '5',
+        //     'guru_id' => '1',
+        //     'mapel_id' => '8',
+        // ]);
 
         // Mengikuti_ajaran::create([
         //     'mengikuti_kelas_id' => 1,

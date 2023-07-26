@@ -133,7 +133,7 @@ class RaporAdminController extends Controller
 
         return Inertia::render('RaporComponent/Detail_nilai_murid', [
             'var_get' => [
-                'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->with(['mengikuti_kelas.kelas'])->first()->id,
+                'mengikuti_kelas_id' => Mengikuti_ajaran::where('id', $mengikuti_ajaran_id)->first()->mengikuti_kelas_id,
                 'murid_id' => $card['data_murid']->murid->id,
                 'semester' => $semester
             ],

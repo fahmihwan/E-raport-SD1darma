@@ -10,6 +10,7 @@ use App\Models\Nilai_mapel;
 use App\Models\Tahun_ajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use PDF;
 
 class ExportPdfController extends Controller
@@ -21,8 +22,10 @@ class ExportPdfController extends Controller
     public function export_rapor($mengikuti_kelas_id, $murid_id, $semester)
     {
 
-
-
+        // return [
+        //     ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
+        //     ['murid_id', '=', $murid_id],
+        // ];
         $mengikuti_ajaran_id = Mengikuti_ajaran::with('mengikuti_kelas.tahun_ajaran')->where([
             ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
             ['murid_id', '=', $murid_id],
@@ -48,8 +51,11 @@ class ExportPdfController extends Controller
                 ['semester', '=', $semester],
             ])
             ->get();
+
         if (!$mengikuti_ajaran_id || !$nilai_kepribadian || !$nilai) {
-            return 'beberapa guru belum melengkapi semua nilai rapor...';
+            return 'tidak dapat di print, beberapa guru belum melengkapi semua nilai rapor... <script> setTimeout(() => {
+                window.history.back();
+            }, 3000); </script>';
         }
 
         $nilai_ekstrakulikuler = Mengikuti_ajaran_Ekstrakulikuler::with([
