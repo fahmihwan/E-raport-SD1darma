@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Bantuan\TesFileKu;
 use App\Models\Guru;
 use App\Models\Mengikuti_kelas;
+
 use App\Models\Tahun_ajaran;
+use Database\SeederCustome\SeederCustome;
+// use App\Utils\MyClass as UtilsMyClass;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
+
+// use SeederCustome;
+
+
 class AuthController extends Controller
 {
+
     public function index()
     {
         return Inertia::render('Auth/Login');
