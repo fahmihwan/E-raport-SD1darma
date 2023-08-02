@@ -25,8 +25,6 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-
-
         Admin::create([
             'nama' => 'Septiani',
             'username' => 'septiani',
