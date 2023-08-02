@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\DataDummy\CustomeSeeder;
 use App\Models\Admin;
 use App\Models\Ekstrakurikuler;
 use App\Models\Guru;
