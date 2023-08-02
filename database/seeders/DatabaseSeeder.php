@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\DataDummy\CustomeSeeder;
+use App\Helpers\CustomeSeeder as HelpersCustomeSeeder;
 use App\Models\Admin;
 use App\Models\Ekstrakurikuler;
 use App\Models\Guru;
@@ -160,12 +161,12 @@ class DatabaseSeeder extends Seeder
         // }
 
 
-        $murids = CustomeSeeder::dataMurid();
+        $murids = HelpersCustomeSeeder::dataMurid();
         foreach ($murids as $data) {
             Murid::create($data);
         };
 
-        $master_guru = CustomeSeeder::dataGuru();
+        $master_guru = HelpersCustomeSeeder::dataGuru();
         foreach ($master_guru as $data) {
             Guru::create($data);
         }

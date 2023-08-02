@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bantuan\TesFileKu;
+use App\Helpers\CustomeSeeder;
 use App\Models\Guru;
 use App\Models\Mengikuti_kelas;
 
@@ -23,6 +24,7 @@ class AuthController extends Controller
 
     public function index()
     {
+        // return count(CustomeSeeder::dataMurid());
         return Inertia::render('Auth/Login');
     }
 

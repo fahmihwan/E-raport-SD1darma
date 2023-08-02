@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataDummy;
+namespace App\Helpers;
 
 use Illuminate\Support\Facades\Hash;
 
