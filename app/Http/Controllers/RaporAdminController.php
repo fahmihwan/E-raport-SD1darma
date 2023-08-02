@@ -66,6 +66,8 @@ class RaporAdminController extends Controller
                 "id",
                 "semester",
                 "mapel_id",
+                "bantuan",
+                "penguasaan",
                 "mengikuti_ajaran_id",
                 DB::raw('CAST((nilai_tugas+nilai_harian+nilai_semester)/3 AS UNSIGNED)  as nilai'),
                 "created_at",

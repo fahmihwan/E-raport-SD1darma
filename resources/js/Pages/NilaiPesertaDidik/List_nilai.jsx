@@ -51,44 +51,27 @@ const List_nilai = ({ datas, tahun_ajaran, semester, guru, mapel, auth }) => {
                                         <tr>
                                             <th>#</th>
                                             <th>No Induk</th>
-                                            <th>Nama</th>
-                                            <th>Nilai Tugas</th>
-                                            <th>Nilai Harian</th>
-                                            <th>
+                                            <th style={{ width: "200px" }}>
+                                                Nama
+                                            </th>
+                                            <th style={{ width: "80px" }}>
+                                                Nilai Tugas
+                                            </th>
+                                            <th style={{ width: "80px" }}>
+                                                Nilai UH
+                                            </th>
+                                            <th style={{ width: "80px" }}>
                                                 Nilai &nbsp;
                                                 {semester == 1 ? "UTS" : "UAS"}
                                             </th>
+                                            <th>Capaian Kompetensi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {datas?.map((d, i) => (
-                                            <tr key={i}>
-                                                <td>{i + 1}</td>
-                                                <td>
-                                                    {
-                                                        d.mengikuti_ajaran.murid
-                                                            .no_induk
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        d.mengikuti_ajaran.murid
-                                                            .nama
-                                                    }
-                                                </td>
-                                                <td>{d?.nilai_tugas}</td>
-                                                <td>{d?.nilai_harian}</td>
-                                                <td>{d?.nilai_semester}</td>
-                                            </tr>
+                                            <ElTrValue key={i} d={d} i={i} />
                                         ))}
                                     </tbody>
-                                    {/* <tbody>
-                                        <tr>
-                                            <td>Jumlah</td>
-                                            <td>Jumlah</td>
-                                            <td>Jumlah</td>
-                                        </tr>
-                                    </tbody> */}
                                 </table>
                             </div>
                         </div>
@@ -143,5 +126,31 @@ const CardDetail = ({ guru, nip, mapel, tahun_ajaran, semester }) => {
                 </div>
             </div>
         </div>
+    );
+};
+
+const ElTrValue = ({ d, i }) => {
+    return (
+        <>
+            <tr>
+                <td rowSpan={2}>{i + 1}</td>
+                <td rowSpan={2}>{d?.mengikuti_ajaran?.murid?.no_induk}</td>
+
+                <td rowSpan={2}>{d?.mengikuti_ajaran?.murid?.nama}</td>
+                <td rowSpan={2}>{d?.nilai_tugas}</td>
+                <td rowSpan={2}>{d?.nilai_harian}</td>
+                <td rowSpan={2}>{d?.nilai_semester}</td>
+                <td className="p-1">
+                    <p className="p-0 m-0">Menunjukan penguasaan dalam : </p>
+                    <span className="font-weight-light">{d?.penguasaan}</span>
+                </td>
+            </tr>
+            <tr>
+                <td className="p-1">
+                    <p className="p-0 m-0">Perlu bantuan dalam: </p>
+                    <span className="font-weight-light">{d?.bantuan}</span>
+                </td>
+            </tr>
+        </>
     );
 };

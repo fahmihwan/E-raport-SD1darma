@@ -59,22 +59,6 @@ const Index = ({ auth, datas, tahun_ajaran }) => {
                                             </td>
                                         </tr>
                                     ))}
-
-                                    {/* {datas.data?.map((d, i) => (
-                                        <tr key={i}>
-                                            <td>{i + datas.from}</td>
-                                            <td>{d.tahun_ajaran}</td>
-                                            <td>{d.created_at}</td>
-                                            <td>
-                                                <Link
-                                                    href={`/admin/mengajar/${d.id}`}
-                                                    className="btn btn-info"
-                                                >
-                                                    kelola
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                    ))} */}
                                 </tbody>
                             </table>
                         </div>

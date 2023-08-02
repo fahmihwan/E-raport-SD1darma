@@ -21,6 +21,8 @@ const Edit_nilai = ({ datas, mapel, semester, kelas, auth }) => {
                 nilai_tugas: d?.nilai_tugas,
                 nilai_harian: d?.nilai_harian,
                 nilai_semester: d?.nilai_semester,
+                penguasaan: d?.penguasaan,
+                bantuan: d?.bantuan,
             };
         });
         setData("data", setMultipleData);
@@ -76,6 +78,9 @@ const Edit_nilai = ({ datas, mapel, semester, kelas, auth }) => {
                                                 Nilai &nbsp;
                                                 {semester == 1 ? "UTS" : "UAS"}
                                             </th>
+                                            <th style={{ width: "400px" }}>
+                                                Capaian Kompetensi
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,6 +129,43 @@ const Edit_nilai = ({ datas, mapel, semester, kelas, auth }) => {
                                                         placeholder="nilai"
                                                         name="nilai_semester"
                                                     />
+                                                </td>
+                                                <td>
+                                                    <label
+                                                        htmlFor={
+                                                            "penguasaan-" + i
+                                                        }
+                                                    >
+                                                        Menunjukan penguasaan
+                                                        dalam :{" "}
+                                                    </label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        value={d?.penguasaan}
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        name="penguasaan"
+                                                        id={"penguasaan-" + i}
+                                                        cols="30"
+                                                        rows="2"
+                                                    ></textarea>
+                                                    <label
+                                                        htmlFor={"bantuan-" + i}
+                                                    >
+                                                        Perlu bantuan dalam :{" "}
+                                                    </label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        value={d?.bantuan}
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        name="bantuan"
+                                                        id={"bantuan-" + i}
+                                                        cols="30"
+                                                        rows="2"
+                                                    ></textarea>
                                                 </td>
                                             </tr>
                                         ))}

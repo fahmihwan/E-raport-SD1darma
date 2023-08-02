@@ -35,7 +35,6 @@ class NilaiPesertaDidikController extends Controller
     {
 
         $view_guru = Guru::select(['nip', 'nama'])->where('id', $guru_id)->first();
-
         $tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'DESC')->first();
 
         // kelas, tahun ajaran, wali kelas
@@ -44,12 +43,9 @@ class NilaiPesertaDidikController extends Controller
             ['tahun_ajaran_id', '=', $tahun_ajaran->id]
         ])->first();
 
-
-
         if (!$mengikuti_kelas_id) {
             return redirect()->back()->with('error_message', 'murid tidak tersedia');
         }
-
 
         // semester,  mapel, mengikuti_ajaran
         $datas = Nilai_mapel::with([

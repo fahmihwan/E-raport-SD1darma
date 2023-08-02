@@ -83,8 +83,6 @@ class PenilaianController extends Controller
                 ['tahun_ajaran_id', '=', $tahun_ajaran_id]
             ])->first();
 
-
-
         return Inertia::render('Penilaian/Create_nilai', [
             'mengikuti_kelas' => $mengikuti_kelas,
             'mapel' => Mapel::where('id', $mapel_id)->first(),
@@ -100,11 +98,14 @@ class PenilaianController extends Controller
 
     public function store_nilai(Request $request)
     {
+        // return $request;
         $validated =   $request->validate([
             'data' => 'required',
             'semester' => 'required',
             'mapel_id' => 'required',
         ]);
+
+        // return $validated['data'];
 
 
         try {
@@ -117,6 +118,8 @@ class PenilaianController extends Controller
                     'nilai_tugas' => $item['nilai_tugas'],
                     'nilai_harian' => $item['nilai_harian'],
                     'nilai_semester' => $item['nilai_semester'],
+                    'penguasaan' => $item['penguasaan'],
+                    'bantuan' => $item['bantuan'],
                 ]);
             }
             DB::commit();
@@ -179,6 +182,8 @@ class PenilaianController extends Controller
                     'nilai_tugas' => $item['nilai_tugas'],
                     'nilai_harian' => $item['nilai_harian'],
                     'nilai_semester' => $item['nilai_semester'],
+                    'penguasaan' => $item['penguasaan'],
+                    'bantuan' => $item['bantuan'],
                 ]);
             }
             DB::commit();

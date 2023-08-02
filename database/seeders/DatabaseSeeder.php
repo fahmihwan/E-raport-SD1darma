@@ -339,6 +339,10 @@ class DatabaseSeeder extends Seeder
             'mengikuti_kelas_id' => 1,
             'murid_id' => 1
         ]);
+        Mengikuti_ajaran::create([
+            'mengikuti_kelas_id' => 1,
+            'murid_id' => 2
+        ]);
     }
 }
 

@@ -87,16 +87,12 @@ const Detail_nilai_murid = ({
                                                 <th>Mata Pelajaran</th>
                                                 <th>KKM</th>
                                                 <th>Nilai</th>
+                                                <th>Capaian Kompetensi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {nilai?.map((d, i) => (
-                                                <tr key={i}>
-                                                    <td>{i + 1}</td>
-                                                    <td>{d?.mapel?.nama}</td>
-                                                    <td>{d?.mapel?.kkm}</td>
-                                                    <td> {d?.nilai}</td>
-                                                </tr>
+                                                <ElTrValue d={d} i={i} />
                                             ))}
                                         </tbody>
                                         <tfoot>
@@ -106,6 +102,7 @@ const Detail_nilai_murid = ({
                                                 <td>
                                                     {detail_perolehan.jumlah}
                                                 </td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td colSpan={2}>RATA-RATA</td>
@@ -113,11 +110,13 @@ const Detail_nilai_murid = ({
                                                 <td>
                                                     {detail_perolehan.rata_rata}
                                                 </td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td colSpan={2}>PERINGKAT</td>
                                                 <td></td>
                                                 <td>{ranking}</td>
+                                                <td></td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -228,6 +227,29 @@ const Detail_nilai_murid = ({
 };
 
 export default Detail_nilai_murid;
+
+const ElTrValue = ({ d, i }) => {
+    return (
+        <>
+            <tr key={i}>
+                <td rowSpan={2}>{i + 1}</td>
+                <td rowSpan={2}>{d?.mapel?.nama}</td>
+                <td rowSpan={2}>{d?.mapel?.kkm}</td>
+                <td rowSpan={2}> {d?.nilai}</td>
+                <td className="p-1">
+                    <p className="p-0 m-0">Menunjukan penguasaan dalam : </p>
+                    <span className="font-weight-light">{d?.penguasaan}</span>
+                </td>
+            </tr>
+            <tr>
+                <td className="p-1">
+                    <p className="p-0 m-0">Perlu bantuan dalam: </p>
+                    <span className="font-weight-light">{d?.bantuan}</span>
+                </td>
+            </tr>
+        </>
+    );
+};
 
 const CardDetail = ({ data_murid, kelas, semester, tahun_ajaran }) => {
     return (

@@ -73,13 +73,16 @@ class PerpindahanController extends Controller
         $nilai_kepribadian = Nilai_kepribadian::where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
             ['semester', '=', $semester],
-        ])->get();
+        ])->first();
+        // return $nilai_kepribadian;
 
         $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])
             ->select([
                 "id",
                 "semester",
                 "mapel_id",
+                "bantuan",
+                "penguasaan",
                 "mengikuti_ajaran_id",
                 DB::raw('CAST((nilai_tugas+nilai_harian+nilai_semester)/3 AS UNSIGNED)  as nilai'),
                 "created_at",
@@ -129,7 +132,7 @@ class PerpindahanController extends Controller
             'rata_rata' =>  Nilai_mapel::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai')])->where([['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id], ['semester', '=', $semester]])->first()->nilai,
             'peringkat' => 0,
         ];
-
+        // return $detail_perolehan;
         $card = [
             'tahun_ajaran' =>  Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->tahun_ajaran,
             'data_murid' => Mengikuti_ajaran::with(['murid:id,nama,no_induk'])->where('id', $mengikuti_ajaran_id)->first(),
@@ -142,6 +145,7 @@ class PerpindahanController extends Controller
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
             ['semester', '=', $semester],
         ])->get();
+
 
 
         return Inertia::render('RaporComponent/Detail_nilai_murid', [

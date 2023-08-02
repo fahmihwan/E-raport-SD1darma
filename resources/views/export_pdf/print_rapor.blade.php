@@ -87,42 +87,56 @@
                         <th>Mata Pelajaran</th>
                         <th>KKM</th>
                         <th>Nilai Siswa</th>
+                        <th>Capaian Kompetensi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($nilai as $d)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $d->mapel->nama }}</td>
-                            <td>{{ $d->mapel->kkm }}</td>
-                            <td>{{ $d->nilai }}</td>
+                            <td rowspan="2">{{ $loop->iteration }}</td>
+                            <td rowspan="2">{{ $d->mapel->nama }}</td>
+                            <td rowspan="2">{{ $d->mapel->kkm }}</td>
+                            <td rowspan="2">{{ $d->nilai }}</td>
+                            <td style="padding: 1px">
+                                <p style="padding: 0; margin: 0;">Menunjukan penguasaan dalam : </p>
+                                <span style="font-weight: 400">{{$d->penguasaan}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1px">
+                                <p style="padding: 0; margin: 0;">Perlu bantuan dalam: </p>
+                                <span style="font-weight: 400">{{$d->bantuan}}</span>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan={2}>JUMLAH</td>
                         <td></td>
+                        <td colSpan={2}>JUMLAH</td>
                         <td></td>
                         <td>
                             {{ $detail_perolehan['jumlah'] }}
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td colSpan={2}>RATA-RATA</td>
                         <td></td>
+                        <td colSpan={2}>RATA-RATA</td>
                         <td></td>
                         <td>
                             {{ $detail_perolehan['rata_rata'] }}
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td colSpan={2}>PERINGKAT</td>
                         <td></td>
+                        <td colSpan={2}>PERINGKAT</td>
                         <td></td>
                         <td>
                             {{ $ranking }}
                         </td>
+                        <td></td>
                     </tr>
 
                 </tfoot>

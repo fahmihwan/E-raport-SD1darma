@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('nilai_tugas');
             $table->integer('nilai_harian');
             $table->integer('nilai_semester');
+            $table->text('penguasaan')->nullable();
+            $table->text('bantuan')->nullable();
             $table->timestamps();
         });
     }

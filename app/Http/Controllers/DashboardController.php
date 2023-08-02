@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ekstrakurikuler;
 use App\Models\Guru;
 use App\Models\Mapel;
 use App\Models\Murid;
@@ -21,6 +22,7 @@ class DashboardController extends Controller
                 'total_guru' => Guru::count(),
                 'total_mapel' => Mapel::count(),
                 'tahun_ajaran' => $tahun_ajaran  ? $tahun_ajaran->tahun_ajaran : 'belum tersedia',
+                'tahun_ekstrakurikuler' => Ekstrakurikuler::count(),
             ],
             // 'jumlah murid terbanyak'
             // 'jumlah skor siswa terbanyak'

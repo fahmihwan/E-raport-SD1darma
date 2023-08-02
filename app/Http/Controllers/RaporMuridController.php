@@ -75,6 +75,8 @@ class RaporMuridController extends Controller
                 "id",
                 "semester",
                 "mapel_id",
+                "bantuan",
+                "penguasaan",
                 "mengikuti_ajaran_id",
                 DB::raw('CAST((nilai_tugas+nilai_harian+nilai_semester)/3 AS UNSIGNED)  as nilai'),
                 "created_at",
@@ -85,6 +87,7 @@ class RaporMuridController extends Controller
                 ['semester', '=', $semester],
             ])
             ->get();
+        // return $nilai;
 
         $current_tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
 
@@ -128,6 +131,7 @@ class RaporMuridController extends Controller
             'rata_rata' =>  Nilai_mapel::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai')])->where([['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id], ['semester', '=', $semester]])->first()->nilai,
             'peringkat' => 0,
         ];
+
 
         return Inertia::render('RaporComponent/Detail_nilai_murid', [
             'var_get' => [

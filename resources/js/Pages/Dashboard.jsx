@@ -11,7 +11,7 @@ const Dashboard = ({ auth, stat, tahun_ajaran }) => {
             <div className="content">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-lg-3 col-6 ">
+                        <div className="col-lg-6 col-6 ">
                             {/* small box */}
                             <div className="small-box bg-danger">
                                 <div className="inner">
@@ -24,7 +24,7 @@ const Dashboard = ({ auth, stat, tahun_ajaran }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3 col-6">
+                        <div className="col-lg-6 col-6">
                             {/* small box */}
                             <div className="small-box bg-info">
                                 <div className="inner">
@@ -39,7 +39,7 @@ const Dashboard = ({ auth, stat, tahun_ajaran }) => {
                             </div>
                         </div>
                         {/* ./col */}
-                        <div className="col-lg-3 col-6">
+                        <div className="col-lg-6 col-6">
                             {/* small box */}
                             <div className="small-box bg-success">
                                 <div className="inner">
@@ -52,12 +52,25 @@ const Dashboard = ({ auth, stat, tahun_ajaran }) => {
                             </div>
                         </div>
                         {/* ./col */}
-                        <div className="col-lg-3 col-6">
+                        <div className="col-lg-6 col-6">
                             {/* small box */}
                             <div className="small-box bg-warning">
                                 <div className="inner">
                                     <h3>{stat?.total_mapel}</h3>
                                     <p>Total Mapel</p>
+                                </div>
+                                <div className="icon">
+                                    {/* <i className="ion ion-person-add" /> */}
+                                    <i className="fas fa-book-open"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6 col-6">
+                            {/* small box */}
+                            <div className="small-box bg-primary">
+                                <div className="inner">
+                                    <h3>{stat?.tahun_ekstrakurikuler}</h3>
+                                    <p>Total Ekstrakurikuler</p>
                                 </div>
                                 <div className="icon">
                                     {/* <i className="ion ion-person-add" /> */}

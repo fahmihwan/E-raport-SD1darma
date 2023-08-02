@@ -26,6 +26,8 @@ const Create_nilai = ({
                 nilai_tugas: "",
                 nilai_harian: "",
                 nilai_semester: "",
+                penguasaan: "",
+                bantuan: "",
             };
         });
         setData("data", setMultipleData);
@@ -75,12 +77,17 @@ const Create_nilai = ({
                                         <tr>
                                             <th>#</th>
                                             <th>No Induk</th>
-                                            <th>Nama</th>
+                                            <th style={{ width: "200px" }}>
+                                                Nama
+                                            </th>
                                             <th>Nilai Tugas</th>
                                             <th>Nilai UH</th>
                                             <th>
                                                 Nilai &nbsp;
                                                 {semester == 1 ? "UTS" : "UAS"}
+                                            </th>
+                                            <th style={{ width: "400px" }}>
+                                                Capaian Kompetensi
                                             </th>
                                         </tr>
                                     </thead>
@@ -130,6 +137,43 @@ const Create_nilai = ({
                                                         placeholder="nilai"
                                                         name="nilai_semester"
                                                     />
+                                                </td>
+                                                <td>
+                                                    <label
+                                                        htmlFor={
+                                                            "penguasaan-" + i
+                                                        }
+                                                    >
+                                                        Menunjukan penguasaan
+                                                        dalam :{" "}
+                                                    </label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        value={d?.penguasaan}
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        name="penguasaan"
+                                                        id={"penguasaan-" + i}
+                                                        cols="30"
+                                                        rows="2"
+                                                    ></textarea>
+                                                    <label
+                                                        htmlFor={"bantuan-" + i}
+                                                    >
+                                                        Perlu bantuan dalam :{" "}
+                                                    </label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        value={d?.bantuan}
+                                                        onChange={(e) =>
+                                                            handleChange(i, e)
+                                                        }
+                                                        name="bantuan"
+                                                        id={"bantuan-" + i}
+                                                        cols="30"
+                                                        rows="2"
+                                                    ></textarea>
                                                 </td>
                                             </tr>
                                         ))}
