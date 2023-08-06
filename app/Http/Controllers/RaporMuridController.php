@@ -57,6 +57,8 @@ class RaporMuridController extends Controller
 
     public function detail_nilai_murid($mengikuti_ajaran_id, $semester)
     {
+
+
         $card = [
             'tahun_ajaran' =>  Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->tahun_ajaran,
             'data_murid' => Mengikuti_ajaran::with(['murid:id,nama,no_induk'])->where('id', $mengikuti_ajaran_id)->first(),
@@ -87,21 +89,23 @@ class RaporMuridController extends Controller
                 ['semester', '=', $semester],
             ])
             ->get();
-        // return $nilai;
 
         $current_tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
 
         $sortRanking = Mengikuti_ajaran::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai'), 'mengikuti_ajaran_id'])
+            ->join('murids', 'mengikuti_ajarans.murid_id', '=', 'murids.id')
             ->join('mengikuti_kelas', 'mengikuti_ajarans.mengikuti_kelas_id', '=', 'mengikuti_kelas.id')
             ->join('nilai_mapels', 'mengikuti_ajarans.id', '=', 'nilai_mapels.mengikuti_ajaran_id')
             ->groupBy('mengikuti_ajaran_id')
             ->orderBy('nilai', 'desc')
             ->where([
+                ['mengikuti_kelas_id', '=', $card['data_murid']["mengikuti_kelas_id"]],
                 ['nilai_mapels.semester', '=', $semester],
                 ['tahun_ajaran_id', '=', $current_tahun_ajaran]
             ])
             ->get();
-        // return $sortRanking;
+
+
 
         $list_ranking = [];
         $i = 1;
@@ -112,6 +116,7 @@ class RaporMuridController extends Controller
                 'mengikuti_ajaran_id' => $d->mengikuti_ajaran_id
             ];
         }
+
         $get_ranking = 0;
         foreach ($list_ranking as $d) {
             if ($d['mengikuti_ajaran_id'] == $mengikuti_ajaran_id) {

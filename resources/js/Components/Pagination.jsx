@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 
 export const Pagination = ({ links, totals }) => {
-    console.log(totals);
+
     return (
         <div className="d-flex justify-content-between align-items-center">
             <span>total : {totals}</span>

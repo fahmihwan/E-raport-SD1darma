@@ -40,7 +40,7 @@ export const ButtonModalComponent = ({ id, title }) => {
     return (
         <button
             type="button"
-            className="btn  btn-primary"
+            className="btn btn-primary"
             data-toggle="modal"
             data-target={"#" + id}
         >

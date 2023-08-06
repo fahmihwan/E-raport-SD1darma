@@ -17,11 +17,6 @@ class RaporAdminController extends Controller
 {
     public function index()
     {
-        // Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get() //before
-
-
-        // return        Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get();
-        // Murid::doesntHave('perpindahans')->select(['id', 'nama', 'no_induk'])->get();
         return Inertia::render('RaporAdmin/Index', [
             'murid' => Murid::select(['id', 'nama', 'no_induk'])->withTrashed()->get()
         ]);
@@ -45,21 +40,18 @@ class RaporAdminController extends Controller
     public function detail_rapor($mengikuti_kelas_id, $murid_id, $semester)
     {
 
-
         $mengikuti_ajaran_id = Mengikuti_ajaran::with('mengikuti_kelas.tahun_ajaran')->where([
             ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
             ['murid_id', '=', $murid_id],
         ])->first()->id;
-        // return [
-        //     $mengikuti_ajaran_id,
-        //     $semester
-        // ];
+
+
 
         $nilai_kepribadian = Nilai_kepribadian::where([
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
             ['semester', '=', $semester],
         ])->first();
-
+        // return $nilai_kepribadian;
 
         $nilai = Nilai_mapel::with(['mapel:id,nama,kkm'])
             ->select([
@@ -79,21 +71,25 @@ class RaporAdminController extends Controller
             ])
             ->get();
 
+
         if (!$mengikuti_ajaran_id || !$nilai_kepribadian || !$nilai) {
             return 'beberapa guru belum melengkapi semua nilai rapor...';
         }
+        $current_tahun_ajaran =   Mengikuti_kelas::where('id', $mengikuti_kelas_id)->first()->tahun_ajaran_id;
 
-        $current_tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
+        // return $current_tahun_ajaran;
         $sortRanking = Mengikuti_ajaran::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai'), 'mengikuti_ajaran_id'])
             ->join('mengikuti_kelas', 'mengikuti_ajarans.mengikuti_kelas_id', '=', 'mengikuti_kelas.id')
             ->join('nilai_mapels', 'mengikuti_ajarans.id', '=', 'nilai_mapels.mengikuti_ajaran_id')
             ->groupBy('mengikuti_ajaran_id')
             ->orderBy('nilai', 'desc')
             ->where([
+                ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
                 ['nilai_mapels.semester', '=', $semester],
                 ['tahun_ajaran_id', '=', $current_tahun_ajaran]
             ])
             ->get();
+
 
         $list_ranking = [];
         $i = 1;
@@ -110,6 +106,7 @@ class RaporAdminController extends Controller
                 $get_ranking = $d['rank'];
             }
         }
+        // return $list_ranking;
 
 
         $detail_perolehan = [

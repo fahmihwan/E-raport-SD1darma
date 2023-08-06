@@ -67,13 +67,14 @@ class ExportPdfController extends Controller
             ['mengikuti_ajaran_id', '=', $mengikuti_ajaran_id],
             ['semester', '=', $semester],
         ])->get();
-        $current_tahun_ajaran = Tahun_ajaran::orderBy('tahun_ajaran', 'desc')->first()->id;
+        $current_tahun_ajaran = Mengikuti_kelas::where('id', $mengikuti_kelas_id)->first()->tahun_ajaran_id;
         $sortRanking = Mengikuti_ajaran::select([DB::raw('ROUND(AVG((nilai_tugas+nilai_harian+nilai_semester)/3),2) as nilai'), 'mengikuti_ajaran_id'])
             ->join('mengikuti_kelas', 'mengikuti_ajarans.mengikuti_kelas_id', '=', 'mengikuti_kelas.id')
             ->join('nilai_mapels', 'mengikuti_ajarans.id', '=', 'nilai_mapels.mengikuti_ajaran_id')
             ->groupBy('mengikuti_ajaran_id')
             ->orderBy('nilai', 'desc')
             ->where([
+                ['mengikuti_kelas_id', '=', $mengikuti_kelas_id],
                 ['nilai_mapels.semester', '=', $semester],
                 ['tahun_ajaran_id', '=', $current_tahun_ajaran]
             ])
