@@ -43,7 +43,7 @@ const Index = ({ kelas, auth, flash }) => {
                                 <tbody>
                                     {kelas?.map((d, i) => (
                                         <tr key={i}>
-                                            <td>1</td>
+                                            <td>{i + 1}</td>
                                             <td>{d.kelas.nama}</td>
                                             <td>{d.mapel.nama}</td>
                                             <td>

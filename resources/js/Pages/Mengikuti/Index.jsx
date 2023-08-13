@@ -82,7 +82,7 @@ const Index = ({ tahun_ajarans, auth }) => {
                                         href="/admin/mengikuti/create_kelas_tahun_ajaran_baru"
                                         className="btn btn-primary"
                                     >
-                                        Tamabh Data
+                                        Tambah Data
                                     </Link>
                                 </div>
                             </div>
