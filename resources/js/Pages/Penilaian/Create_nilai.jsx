@@ -206,7 +206,7 @@ const HeaderInfoEl = ({ mengikuti_kelas, mapel, semester }) => {
                     <table style={{ width: "100%" }}>
                         <tbody>
                             <tr>
-                                <td className="text-warning">Guru </td>
+                                <td className="text-warning">Wali Kelas </td>
                                 <td>: {mengikuti_kelas?.guru?.nama}</td>
                             </tr>
                             <tr>
